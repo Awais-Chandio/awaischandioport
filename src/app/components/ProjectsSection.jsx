@@ -47,8 +47,8 @@ const projectsData = [
     description: "Flutter Medical Mobile Application",
     image: "/images/projects/5.png",
     tag: ["All", "Mobile Applications"],
-    gitUrl: "https://github.com/Awais-Chandio/COVID19-Application",
-    previewUrl: "https://github.com/Awais-Chandio/COVID19-Application",
+    gitUrl: "https://github.com/Awais-Chandio/MadProject",
+    previewUrl: "https://github.com/Awais-Chandio/MadProject",
   },
   {
     id: 6,
@@ -56,8 +56,8 @@ const projectsData = [
     description: "Flutter Medical Mobile Application",
     image: "/images/projects/6.png",
     tag: ["All", "Mobile Applications"],
-    gitUrl: "https://github.com/Awais-Chandio/COVID19-Application",
-    previewUrl: "https://github.com/Awais-Chandio/COVID19-Application",
+    gitUrl: "https://github.com/Awais-Chandio/MadProject",
+    previewUrl: "https://github.com/Awais-Chandio/MadProject",
   },
   {
     id: 7,
@@ -97,12 +97,12 @@ const projectsData = [
   },
   {
     id: 11,
-    title: "Go Map App",
-    description: "Go Map Application Made on Flutter",
-    image: "/images/projects/11.jpeg",
+    title: "Covid-19-Tracker-App",
+    description: "Covid-19-Tracker-App Made on Flutter",
+    image: "C:\Users\it\Pictures\Covid-19-Tracker-App.jpg",
     tag: ["All", "Mobile Applications"],
-    gitUrl: "https://github.com/Awais-Chandio/Login-Page",
-    previewUrl: "https://github.com/Awais-Chandio/Login-Page",
+    gitUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
+    previewUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
   },
 ];
 
