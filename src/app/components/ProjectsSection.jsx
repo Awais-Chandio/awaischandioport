@@ -99,7 +99,7 @@ const projectsData = [
     id: 11,
     title: "Covid-19-Tracker-App",
     description: "Covid-19-Tracker-App Made on Flutter",
-    image: "c:/Users/it/AppData/Local/Packages/5319275A.WhatsAppDesktop_cv1g1gvanyjgm/TempState/D2ED45A52BC0EDFA11C2064E9EDEE8BF/WhatsApp Image 2024-12-30 at 19.18.28_4524e3eb.jpg",
+    image: "c:\Users\it\Pictures\Covid-19-Tracker-App.jpg",
     tag: ["All", "Mobile Applications"],
     gitUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
     previewUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
