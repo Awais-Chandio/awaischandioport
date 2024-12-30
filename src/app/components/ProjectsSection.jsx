@@ -95,15 +95,15 @@ const projectsData = [
     gitUrl: "https://github.com/Awais-Chandio/Workout-Application",
     previewUrl: "https://github.com/Awais-Chandio/Workout-Application",
   },
-  {
-    id: 11,
-    title: "Covid-19-Tracker-App",
-    description: "Covid-19-Tracker-App Made on Flutter",
-    image: "Covid-19-Tracker-App.jpg",
-    tag: ["All", "Mobile Applications"],
-    gitUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
-    previewUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
-  },
+  // {
+  //   id: 11,
+  //   title: "Covid-19-Tracker-App",
+  //   description: "Covid-19-Tracker-App Made on Flutter",
+  //   image: "Covid-19-Tracker-App.jpg",
+  //   tag: ["All", "Mobile Applications"],
+  //   gitUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
+  //   previewUrl: "https://github.com/Awais-Chandio/Flutter-Covid-19-Tracker-App",
+  // },
 ];
 
 const ProjectsSection = () => {
