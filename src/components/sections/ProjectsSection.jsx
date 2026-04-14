@@ -25,9 +25,9 @@ const ProjectsSection = () => {
   return (
     <section className="section-spacing space-y-10" id="projects">
       <SectionIntro
-        eyebrow="Selected Work"
-        title="Projects designed to feel sharp, usable, and production-ready."
-        description="I trimmed the portfolio into focused case studies and added filtering so the work reads more like a professional showcase instead of a loose image gallery."
+        eyebrow="Projects"
+        title="Selected mobile work presented with stronger visual depth and cleaner hierarchy."
+        description="A curated selection of mobile projects that reflect product thinking, interface quality, and hands-on experience across cross-platform app development."
         align="center"
       />
 
@@ -42,13 +42,13 @@ const ProjectsSection = () => {
         ))}
       </div>
 
-      <div className={`grid gap-6 md:grid-cols-2 ${isPending ? "opacity-80" : ""}`}>
+      <div className={`grid gap-6 lg:grid-cols-2 ${isPending ? "opacity-80" : ""}`}>
         {visibleProjects.map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.45, delay: index * 0.08 }}
           >
             <ProjectCard project={project} />

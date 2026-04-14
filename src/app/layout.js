@@ -1,9 +1,9 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Muhammad Awais | Flutter Developer Portfolio",
+  title: "Muhammad Awais | Software Engineer (React Native)",
   description:
-    "Responsive portfolio of Muhammad Awais, a Flutter developer focused on scalable mobile apps, Firebase integrations, and polished user experiences.",
+    "Premium developer portfolio of Muhammad Awais, a Software Engineer focused on React Native, cross-platform mobile applications, polished UI development, and scalable product delivery.",
 };
 
 export default function RootLayout({ children }) {

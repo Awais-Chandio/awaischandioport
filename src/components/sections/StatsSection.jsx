@@ -1,44 +1,20 @@
-"use client";
-
-import dynamic from "next/dynamic";
-import { stats } from "@/data/portfolio";
-
-const AnimatedNumbers = dynamic(() => import("react-animated-numbers"), {
-  ssr: false,
-});
+import Reveal from "@/components/ui/Reveal";
+import { professionalHighlights } from "@/data/portfolio";
 
 const StatsSection = () => {
   return (
     <section className="section-spacing">
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {stats.map((item) => (
-          <div
-            key={item.label}
-            className="panel relative overflow-hidden p-6"
-          >
-            <div className="absolute right-0 top-0 h-24 w-24 rounded-full bg-brand/10 blur-2xl" />
-            <div className="relative space-y-3">
-              <div className="flex items-end gap-1 text-4xl font-semibold text-white">
-                {item.prefix ? <span>{item.prefix}</span> : null}
-                <AnimatedNumbers
-                  includeComma
-                  animateToNumber={item.value}
-                  locale="en-US"
-                  className="text-4xl font-semibold"
-                  configs={(_, index) => ({
-                    mass: 1,
-                    friction: 90,
-                    tension: 160 * (index + 1),
-                  })}
-                />
-                {item.suffix ? <span>{item.suffix}</span> : null}
-              </div>
-              <p className="text-lg font-medium text-white">{item.label}</p>
-              <p className="text-sm leading-6 text-muted">{item.description}</p>
+      <Reveal className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {professionalHighlights.map((item) => (
+          <div key={item.title} className="panel group relative overflow-hidden p-6">
+            <div className="absolute -right-8 top-0 h-28 w-28 rounded-full bg-sky-400/10 blur-3xl transition duration-500 group-hover:bg-sky-400/20" />
+            <div className="relative">
+              <p className="text-lg font-semibold text-white">{item.title}</p>
+              <p className="mt-3 text-sm leading-7 text-slate-400">{item.description}</p>
             </div>
           </div>
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 };

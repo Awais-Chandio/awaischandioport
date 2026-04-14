@@ -1,9 +1,10 @@
 export const personalInfo = {
   name: "Muhammad Awais",
   shortName: "Awais",
-  role: "Flutter Developer",
+  role: "Software Engineer",
+  specialization: "React Native",
   location: "Jamshoro, Pakistan",
-  availability: "Open for freelance and full-time opportunities",
+  availability: "Open to product-focused roles, freelance work, and strong collaborations.",
   email: "awaischandio827@gmail.com",
   phone: "+92 3163461656",
   resumeUrl: "/cv.pdf",
@@ -11,141 +12,176 @@ export const personalInfo = {
   linkedinUrl: "https://www.linkedin.com/in/muhammad-awais45",
   heroImage: "/images/hero-image.jpeg",
   aboutImage: "/images/about-image.png",
+  currentCompany: "Verge Systems",
+  degree: "BE in Software Engineering",
+  university: "Mehran University of Engineering and Technology",
+  headline: "Software Engineer building premium cross-platform mobile experiences with React Native.",
+  subheadline:
+    "I design and develop polished mobile applications with strong UI quality, maintainable architecture, and production-minded execution.",
   intro:
-    "I build clean, high-performing Flutter products with thoughtful UI, solid Firebase architecture, and delivery that stays focused on user outcomes.",
+    "Currently working as a Software Engineer (React Native) at Verge Systems, with additional Flutter experience and a software engineering background that keeps product decisions grounded in clean implementation.",
 };
 
 export const navLinks = [
+  { title: "Home", path: "#home" },
   { title: "About", path: "#about" },
+  { title: "Skills", path: "#skills" },
+  { title: "Experience", path: "#experience" },
   { title: "Projects", path: "#projects" },
   { title: "Contact", path: "#contact" },
 ];
 
 export const heroHighlights = [
-  "Cross-platform mobile apps",
-  "Firebase and REST API integrations",
-  "Responsive UI with production-ready polish",
+  "React Native specialization for high-quality mobile delivery",
+  "Cross-platform architecture, UI systems, and responsive interaction design",
+  "API integration, Firebase workflows, and performance-focused engineering",
 ];
 
-export const stats = [
+export const heroSpotlights = [
   {
-    value: 25,
-    suffix: "+",
-    label: "Projects shipped",
-    description: "Portfolio, mobile commerce, medical and fitness products.",
+    label: "Current Role",
+    value: "Software Engineer",
+    detail: "React Native at Verge Systems",
   },
   {
-    value: 1000,
-    prefix: "~",
-    suffix: "+",
-    label: "Users reached",
-    description: "Apps built with focus on usability and repeat engagement.",
-  },
-  {
-    value: 5,
-    suffix: "+",
-    label: "Awards and wins",
-    description: "Academic and internship milestones across software work.",
-  },
-  {
-    value: 2,
-    suffix: "+",
-    label: "Years building",
-    description: "Hands-on Flutter, Firebase, UI implementation, and delivery.",
-  },
-];
-
-export const expertiseCards = [
-  {
-    title: "Mobile UI systems",
-    description: "Pixel-aware interfaces that stay smooth on both Android and iOS.",
-  },
-  {
-    title: "Backend connectivity",
-    description: "Firebase auth, realtime data, REST APIs, and practical app flows.",
-  },
-  {
-    title: "Shipping mindset",
-    description: "Fast iteration, clean structure, and a strong eye for delivery quality.",
-  },
-];
-
-export const aboutTabs = [
-  {
-    id: "skills",
-    label: "Skills",
-    items: [
-      "Flutter",
-      "Dart",
-      "FlutterFlow",
-      "Firebase",
-      "REST API integration",
-      "HTML, CSS, JavaScript",
-      "WordPress",
-      "Content writing",
-      "MS Office",
-      "Canva",
-      "Java",
-      "C++",
-      "Database systems",
-    ],
-  },
-  {
-    id: "education",
     label: "Education",
-    entries: [
-      {
-        title: "Bachelor of Software Engineering",
-        subtitle: "Mehran University, Jamshoro",
-        meta: "GPA 3.1 / 4.0",
-      },
-      {
-        title: "Intermediate in Pre-Engineering",
-        subtitle: "UB Degree College, Dadu",
-        meta: "Grade A, 2018 to 2020",
-      },
+    value: "BE in Software Engineering",
+    detail: "Mehran University of Engineering and Technology",
+  },
+  {
+    label: "Additional Experience",
+    value: "Flutter Development",
+    detail: "Cross-platform product work beyond React Native",
+  },
+];
+
+export const professionalHighlights = [
+  {
+    title: "React Native Focus",
+    description:
+      "Building cross-platform mobile applications with production-ready UI, smooth navigation, and scalable feature delivery.",
+  },
+  {
+    title: "Engineering Discipline",
+    description:
+      "Structured implementation shaped by a BE in Software Engineering and a maintainable, reusable code mindset.",
+  },
+  {
+    title: "Mobile Product Thinking",
+    description:
+      "Balancing visual polish, practical architecture, integration quality, and performance across real product requirements.",
+  },
+  {
+    title: "Expanded Cross-Platform Experience",
+    description:
+      "Additional Flutter experience strengthens my understanding of mobile patterns, app workflows, and delivery tradeoffs.",
+  },
+];
+
+export const aboutParagraphs = [
+  "I am a Software Engineer focused on React Native and mobile application development. My work is centered on building cross-platform products that feel polished, reliable, and thoughtful in everyday use.",
+  "At Verge Systems, I contribute as a Software Engineer (React Native), creating mobile experiences with clean UI implementation, maintainable code structure, and integration-ready workflows. Alongside React Native, I have also worked with Flutter, which broadens my perspective on mobile engineering and product delivery.",
+];
+
+export const aboutPoints = [
+  "Focused on shipping polished mobile interfaces with strong usability.",
+  "Comfortable with API integration, Firebase services, and state-driven application flows.",
+  "Grounded in software engineering fundamentals through a BE in Software Engineering.",
+];
+
+export const skillGroups = [
+  {
+    title: "React Native Core",
+    description:
+      "The core layer of my current work, centered on modern mobile delivery and cross-platform execution.",
+    skills: [
+      "React Native",
+      "JavaScript",
+      "Mobile App Development",
+      "Cross-Platform Development",
+      "Navigation",
+      "Performance Optimization",
     ],
   },
   {
-    id: "experience",
-    label: "Experience",
-    entries: [
-      {
-        title: "Flutter Developer Intern",
-        subtitle: "Internship Alerts",
-        meta: "Nov 2022 to Dec 2022",
-        description:
-          "Built frontends for mobile applications and led work on a complete learning management system experience for students.",
-      },
-      {
-        title: "Content Writer Intern",
-        subtitle: "National Freelancing Program, Jamshoro",
-        meta: "May 2022 to Jul 2022",
-        description:
-          "Worked in a collaborative setting, refined content execution, and improved adaptability for fast-changing project requirements.",
-      },
-      {
-        title: "Flutter Developer",
-        subtitle: "BidBuy Startup",
-        meta: "Jun 2021 to Jul 2021",
-        description:
-          "Created a cross-platform bidding app with Flutter, Firebase-backed realtime features, and responsive mobile UI patterns.",
-      },
+    title: "UI Engineering",
+    description:
+      "Building interfaces that feel intentional, responsive, and consistent across screen sizes and product states.",
+    skills: [
+      "UI Development",
+      "Responsive Design",
+      "State Management",
+      "Component Architecture",
+      "Interaction Design",
+    ],
+  },
+  {
+    title: "Integrations and Data Flow",
+    description:
+      "Connecting applications to backend services and real product workflows without sacrificing maintainability.",
+    skills: [
+      "API Integration",
+      "REST APIs",
+      "Firebase",
+      "Async Data Handling",
+      "App Connectivity",
+    ],
+  },
+  {
+    title: "Tools and Additional Experience",
+    description:
+      "Supporting technologies and workflow practices that strengthen development quality and collaboration.",
+    skills: ["Flutter", "Git / GitHub", "Testing Mindset", "Debugging", "Collaboration"],
+  },
+];
+
+export const experience = [
+  {
+    title: "Software Engineer (React Native)",
+    company: "Verge Systems",
+    period: "Current Role",
+    summary:
+      "Focused on building and improving cross-platform mobile applications with attention to UI quality, maintainable architecture, and smooth product experiences.",
+    bullets: [
+      "Developing React Native application features with a strong emphasis on clean and reusable implementation.",
+      "Working on mobile UI flows, navigation patterns, and API-connected functionality for production use cases.",
+      "Contributing to app quality through thoughtful structure, responsiveness, and performance-minded decisions.",
+    ],
+  },
+  {
+    title: "Flutter Development Experience",
+    company: "Additional Mobile App Work",
+    period: "Previous Experience",
+    summary:
+      "Worked with Flutter across mobile product concepts and app interfaces, building practical experience in cross-platform delivery beyond React Native.",
+    bullets: [
+      "Built mobile interfaces and user flows for commerce, healthcare, auction, and fitness-oriented projects.",
+      "Applied Firebase-backed workflows and cross-platform UI practices in Flutter-based implementations.",
+      "Strengthened understanding of reusable mobile patterns, delivery speed, and product-focused engineering.",
     ],
   },
 ];
 
-export const projectCategories = ["All", "Flutter", "Firebase", "UI/UX"];
+export const education = [
+  {
+    degree: "BE in Software Engineering",
+    institution: "Mehran University of Engineering and Technology",
+    description:
+      "Academic foundation in software engineering, application development, and structured problem solving.",
+  },
+];
+
+export const projectCategories = ["All", "Mobile Apps", "Flutter", "Firebase", "UI Systems"];
 
 export const projects = [
   {
     id: 1,
     title: "ShopEase Commerce",
     description:
-      "An e-commerce mobile app focused on smooth browsing, product discovery, and conversion-driven purchase flows.",
+      "A commerce-focused mobile app with streamlined browsing, product discovery, and purchase-oriented UI flows.",
     image: "/images/projects/1.png",
-    categories: ["All", "Flutter", "Firebase", "UI/UX"],
-    stack: ["Flutter", "Firebase", "Commerce"],
+    categories: ["All", "Mobile Apps", "Flutter", "Firebase", "UI Systems"],
+    stack: ["Flutter", "Firebase", "Commerce UI"],
     gitUrl: "https://github.com/Awais-Chandio/ShopEase",
     liveUrl: "https://github.com/Awais-Chandio/ShopEase",
   },
@@ -153,10 +189,10 @@ export const projects = [
     id: 2,
     title: "Medical Care App",
     description:
-      "A healthcare interface with practical navigation, mobile-first layouts, and user-friendly feature access.",
+      "A healthcare application interface designed around clarity, structured navigation, and mobile-first accessibility.",
     image: "/images/projects/5.png",
-    categories: ["All", "Flutter", "UI/UX"],
-    stack: ["Flutter", "Healthcare", "UX"],
+    categories: ["All", "Mobile Apps", "Flutter", "UI Systems"],
+    stack: ["Flutter", "Healthcare", "Mobile UX"],
     gitUrl: "https://github.com/Awais-Chandio/MadProject",
     liveUrl: "https://github.com/Awais-Chandio/MadProject",
   },
@@ -164,9 +200,9 @@ export const projects = [
     id: 3,
     title: "BidBuyy Auction",
     description:
-      "A realtime bidding platform built for digital auctions with scalable Flutter UI and Firebase-backed interactions.",
+      "A realtime auction experience built around bidding interactions, dynamic product states, and Firebase-backed updates.",
     image: "/images/projects/7.jpeg",
-    categories: ["All", "Flutter", "Firebase"],
+    categories: ["All", "Mobile Apps", "Flutter", "Firebase"],
     stack: ["Flutter", "Firebase", "Realtime"],
     gitUrl: "https://github.com/Awais-Chandio/BidBuyy",
     liveUrl: "https://github.com/Awais-Chandio/BidBuyy",
@@ -175,10 +211,10 @@ export const projects = [
     id: 4,
     title: "Workout Companion",
     description:
-      "A fitness app designed around workout flows, daily progress, and a clear mobile interaction model.",
+      "A fitness-oriented mobile product concept with structured workout flows, progress-oriented screens, and clear interaction patterns.",
     image: "/images/projects/9.jpeg",
-    categories: ["All", "Flutter", "UI/UX"],
-    stack: ["Flutter", "Fitness", "Mobile UI"],
+    categories: ["All", "Mobile Apps", "Flutter", "UI Systems"],
+    stack: ["Flutter", "Fitness", "Product UI"],
     gitUrl: "https://github.com/Awais-Chandio/Workout-Application",
     liveUrl: "https://github.com/Awais-Chandio/Workout-Application",
   },
