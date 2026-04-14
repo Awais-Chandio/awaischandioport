@@ -17,6 +17,7 @@
   --accent: #2dd4bf;
   --accent-soft: #fbbf24;
   --line: rgba(148, 163, 184, 0.16);
+
 }
 
 html {
@@ -50,10 +51,12 @@ a {
 }
 
 @keyframes drift {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
+
   50% {
     transform: translate3d(24px, -24px, 0) scale(1.06);
   }
@@ -63,19 +66,23 @@ a {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-8px);
   }

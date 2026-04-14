@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Muhammad Awais",
-  shortName: "Awais",
+  shortName: "Owais",
   role: "Software Engineer",
   specialization: "React Native",
   location: "Jamshoro, Pakistan",
