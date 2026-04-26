@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   EnvelopeIcon,
   MapPinIcon,
@@ -21,7 +22,7 @@ const ContactSection = () => {
     const email = formData.get("email");
     const subject = formData.get("subject");
     const message = formData.get("message");
-    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A${message}`;
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
 
     window.location.href = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
       subject
@@ -32,7 +33,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="section-spacing grid gap-8 lg:grid-cols-[0.9fr_1.1fr]" id="contact">
+    <section className="section-spacing grid min-w-0 gap-8 overflow-hidden lg:grid-cols-[0.9fr_1.1fr]" id="contact">
       <Reveal className="space-y-6">
         <SectionIntro
           eyebrow="Contact"
@@ -44,7 +45,7 @@ const ContactSection = () => {
           <div className="relative space-y-5">
             <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
               <p className="text-sm uppercase tracking-[0.28em] text-sky-200">Availability</p>
-              <p className="mt-3 text-2xl font-semibold text-white">
+              <p className="mt-3 text-xl font-semibold leading-snug text-white sm:text-2xl">
                 {personalInfo.availability}
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-400">
@@ -55,15 +56,15 @@ const ContactSection = () => {
             <div className="grid gap-4 sm:grid-cols-2">
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="rounded-[24px] border border-white/10 bg-white/5 p-5 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40"
+                className="min-w-0 rounded-[24px] border border-white/10 bg-white/5 p-5 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40"
               >
                 <EnvelopeIcon className="h-5 w-5 text-sky-300" />
                 <p className="mt-4 text-sm text-slate-400">Email</p>
-                <p className="mt-2 font-medium text-white">{personalInfo.email}</p>
+                <p className="mt-2 break-words font-medium text-white">{personalInfo.email}</p>
               </a>
               <a
                 href={`tel:${personalInfo.phone.replace(/\s+/g, "")}`}
-                className="rounded-[24px] border border-white/10 bg-white/5 p-5 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40"
+                className="min-w-0 rounded-[24px] border border-white/10 bg-white/5 p-5 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40"
               >
                 <PhoneIcon className="h-5 w-5 text-sky-300" />
                 <p className="mt-4 text-sm text-slate-400">Phone</p>
@@ -94,8 +95,13 @@ const ContactSection = () => {
         </div>
       </Reveal>
 
-      <Reveal delay={0.08} className="panel p-6 sm:p-8">
-        <form className="space-y-5" onSubmit={handleSubmit}>
+      <Reveal delay={0.08} className="panel relative overflow-hidden p-6 sm:p-8">
+        <motion.div
+          className="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full bg-cyan-300/10 blur-3xl"
+          animate={{ scale: [1, 1.06, 1], opacity: [0.45, 0.7, 0.45] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <form className="relative space-y-5" onSubmit={handleSubmit}>
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.32em] text-slate-400">
@@ -152,7 +158,7 @@ const ContactSection = () => {
             />
           </label>
 
-          <button type="submit" className="button-primary">
+          <button type="submit" className="button-primary magnetic">
             Draft Email Message
           </button>
 

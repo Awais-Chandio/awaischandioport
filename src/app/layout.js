@@ -1,4 +1,5 @@
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata = {
   title: "Muhammad Awais | Software Engineer (React Native)",
@@ -8,8 +9,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className="overflow-x-hidden">
+      <body className="overflow-x-hidden">
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }

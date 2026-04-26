@@ -23,7 +23,7 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section className="section-spacing space-y-10" id="projects">
+    <section className="section-spacing min-w-0 space-y-10 overflow-hidden" id="projects">
       <SectionIntro
         eyebrow="Projects"
         title="Selected mobile work presented with stronger visual depth and cleaner hierarchy."
@@ -42,7 +42,7 @@ const ProjectsSection = () => {
         ))}
       </div>
 
-      <div className={`grid gap-6 lg:grid-cols-2 ${isPending ? "opacity-80" : ""}`}>
+      <div className={`grid min-w-0 gap-6 lg:grid-cols-2 ${isPending ? "opacity-80" : ""}`}>
         {visibleProjects.map((project, index) => (
           <motion.div
             key={project.id}

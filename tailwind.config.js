@@ -8,12 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        canvas: "#07111f",
-        surface: "#0f1b2d",
-        surfaceAlt: "#15243a",
+        canvas: "#132744",
+        surface: "#1a3558",
+        surfaceAlt: "#244a75",
         outline: "#23314a",
         muted: "#95a3b8",
-        brand: "#f59e0b",
+        brand: "#67e8f9",
         accent: "#22d3ee",
         success: "#34d399",
       },
