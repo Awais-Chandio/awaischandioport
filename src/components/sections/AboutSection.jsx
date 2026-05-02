@@ -14,7 +14,7 @@ const AboutSection = () => {
     >
       <Reveal className="order-2 space-y-5 lg:order-1">
         <div className="panel overflow-hidden p-3 sm:p-6">
-          <div className="relative aspect-[5/4] overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/70 sm:rounded-[28px] lg:aspect-[4/5]">
+          <div className="relative aspect-square overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/70 sm:rounded-[28px] md:aspect-[5/4] lg:aspect-[4/5]">
             <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(45,212,191,0.12),transparent_50%,rgba(56,189,248,0.16))]" />
             <Image
               src={personalInfo.aboutImage}
@@ -22,7 +22,7 @@ const AboutSection = () => {
               width={900}
               height={900}
               sizes="(max-width: 1024px) 100vw, 42vw"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover object-center"
             />
           </div>
         </div>
