@@ -1,137 +1,96 @@
 export const personalInfo = {
   name: "Muhammad Awais",
-  shortName: "Owais",
+  shortName: "Awais",
   role: "Software Engineer",
   specialization: "React Native",
-  location: "Jamshoro, Pakistan",
-  availability: "Open to product-focused roles, freelance work, and strong collaborations.",
+  location: "Hyderabad, Pakistan",
+  availability:
+    "Open to React Native roles, mobile app work, and strong software engineering collaborations.",
   email: "awaischandio827@gmail.com",
   phone: "+92 3163461656",
   resumeUrl: "/cv.pdf",
   githubUrl: "https://github.com/Awais-Chandio",
   linkedinUrl: "https://www.linkedin.com/in/muhammad-awais45",
-  heroImage: "/images/hero-image.jpeg",
-  aboutImage: "/images/about-image.png",
+  heroImage: "/images/profile2.webp",
+  aboutImage: "/images/profile2.webp",
   currentCompany: "Verge Systems",
   degree: "BE in Software Engineering",
   university: "Mehran University of Engineering and Technology",
-  headline: "Software Engineer building premium cross-platform mobile experiences with React Native.",
+  headline: "Software Engineer building cross-platform mobile applications with React Native.",
   subheadline:
-    "I design and develop polished mobile applications with strong UI quality, maintainable architecture, and production-minded execution.",
+    "I build React Native mobile features with clean UI, API-connected flows, and maintainable code.",
   intro:
-    "Currently working as a Software Engineer (React Native) at Verge Systems, with additional Flutter experience and a software engineering background that keeps product decisions grounded in clean implementation.",
+    "My focus is React Native mobile development, with additional Flutter experience and practical work across Supabase, Firebase, SQLite local storage, and FCM notifications.",
 };
 
 export const navLinks = [
   { title: "Home", path: "#home" },
   { title: "About", path: "#about" },
   { title: "Skills", path: "#skills" },
-  { title: "Experience", path: "#experience" },
   { title: "Projects", path: "#projects" },
+  { title: "Journey", path: "#experience" },
   { title: "Contact", path: "#contact" },
 ];
 
 export const heroHighlights = [
-  "React Native specialization for high-quality mobile delivery",
-  "Cross-platform architecture, UI systems, and responsive interaction design",
-  "API integration, Firebase workflows, and performance-focused engineering",
+  "React Native mobile app features with clean component structure.",
+  "Cross-platform mobile UI, navigation flows, and practical app screens.",
+  "Supabase, Firebase, SQLite local database, and Firebase FCM integrations.",
 ];
 
 export const heroSpotlights = [
   {
     label: "Current Role",
     value: "Software Engineer",
-    detail: "React Native at Verge Systems",
+    detail: "React Native focused mobile application work.",
   },
   {
-    label: "Education",
-    value: "BE in Software Engineering",
-    detail: "Mehran University of Engineering and Technology",
+    label: "Core Focus",
+    value: "React Native",
+    detail: "Mobile screens, navigation, integrations, and UI quality.",
   },
   {
-    label: "Additional Experience",
-    value: "Flutter Development",
-    detail: "Cross-platform product work beyond React Native",
-  },
-];
-
-export const professionalHighlights = [
-  {
-    title: "React Native Focus",
-    description:
-      "Building cross-platform mobile applications with production-ready UI, smooth navigation, and scalable feature delivery.",
-  },
-  {
-    title: "Engineering Discipline",
-    description:
-      "Structured implementation shaped by a BE in Software Engineering and a maintainable, reusable code mindset.",
-  },
-  {
-    title: "Mobile Product Thinking",
-    description:
-      "Balancing visual polish, practical architecture, integration quality, and performance across real product requirements.",
-  },
-  {
-    title: "Expanded Cross-Platform Experience",
-    description:
-      "Additional Flutter experience strengthens my understanding of mobile patterns, app workflows, and delivery tradeoffs.",
+    label: "Additional",
+    value: "Flutter",
+    detail: "Extra cross-platform experience from practical mobile projects.",
   },
 ];
 
 export const aboutParagraphs = [
-  "I am a Software Engineer focused on React Native and mobile application development. My work is centered on building cross-platform products that feel polished, reliable, and thoughtful in everyday use.",
-  "At Verge Systems, I contribute as a Software Engineer (React Native), creating mobile experiences with clean UI implementation, maintainable code structure, and integration-ready workflows. Alongside React Native, I have also worked with Flutter, which broadens my perspective on mobile engineering and product delivery.",
+  "I am a Software Engineer focused on React Native mobile application development. I enjoy building app screens and features that are clean, usable, and organized in code.",
+  "Alongside React Native, I have additional Flutter experience from practical mobile projects. My work includes mobile UI flows, API integration, Supabase, Firebase, SQLite local database usage, Firebase FCM, and steady improvement through real product work.",
 ];
 
 export const aboutPoints = [
-  "Focused on shipping polished mobile interfaces with strong usability.",
-  "Comfortable with API integration, Firebase services, and state-driven application flows.",
-  "Grounded in software engineering fundamentals through a BE in Software Engineering.",
+  "Core focus: React Native mobile app development.",
+  "Additional experience: Flutter mobile interfaces and cross-platform workflows.",
+  "Comfortable with Supabase, Firebase, SQLite local database, Firebase FCM, APIs, auth, and app data handling.",
 ];
 
 export const skillGroups = [
   {
     title: "React Native Core",
     description:
-      "The core layer of my current work, centered on modern mobile delivery and cross-platform execution.",
-    skills: [
-      "React Native",
-      "JavaScript",
-      "Mobile App Development",
-      "Cross-Platform Development",
-      "Navigation",
-      "Performance Optimization",
-    ],
+      "The main stack I use for mobile application screens, features, and reusable structure.",
+    skills: ["React Native", "JavaScript", "TypeScript", "Components", "Navigation"],
   },
   {
-    title: "UI Engineering",
+    title: "Mobile Development",
     description:
-      "Building interfaces that feel intentional, responsive, and consistent across screen sizes and product states.",
-    skills: [
-      "UI Development",
-      "Responsive Design",
-      "State Management",
-      "Component Architecture",
-      "Interaction Design",
-    ],
+      "Mobile-first skills for clear app flows and cross-platform product interfaces.",
+    skills: ["Mobile UI", "Cross-platform", "App Screens", "State Handling", "Responsive Layouts"],
   },
   {
-    title: "Integrations and Data Flow",
+    title: "Backend / Data",
     description:
-      "Connecting applications to backend services and real product workflows without sacrificing maintainability.",
-    skills: [
-      "API Integration",
-      "REST APIs",
-      "Firebase",
-      "Async Data Handling",
-      "App Connectivity",
-    ],
+      "Backend-connected and local-data skills used in real mobile product flows.",
+    skills: ["Supabase", "Firebase", "SQLite", "Firebase FCM", "APIs", "Auth"],
   },
   {
-    title: "Tools and Additional Experience",
+    title: "Tools & Additional",
     description:
-      "Supporting technologies and workflow practices that strengthen development quality and collaboration.",
-    skills: ["Flutter", "Git / GitHub", "Testing Mindset", "Debugging", "Collaboration"],
+      "Workflow tools and additional cross-platform experience that support mobile delivery.",
+    skills: ["Flutter", "Git", "GitHub", "VS Code", "Debugging"],
   },
 ];
 
@@ -141,23 +100,23 @@ export const experience = [
     company: "Verge Systems",
     period: "Current Role",
     summary:
-      "Focused on building and improving cross-platform mobile applications with attention to UI quality, maintainable architecture, and smooth product experiences.",
+      "Working on React Native application features with attention to clean UI implementation, connected app flows, and maintainable code structure.",
     bullets: [
-      "Developing React Native application features with a strong emphasis on clean and reusable implementation.",
-      "Working on mobile UI flows, navigation patterns, and API-connected functionality for production use cases.",
-      "Contributing to app quality through thoughtful structure, responsiveness, and performance-minded decisions.",
+      "Building and improving mobile screens, navigation flows, and reusable UI pieces.",
+      "Connecting app features with APIs and practical product workflows.",
+      "Strengthening code quality through debugging, responsive layouts, and clear component structure.",
     ],
   },
   {
-    title: "Flutter Development Experience",
-    company: "Additional Mobile App Work",
-    period: "Previous Experience",
+    title: "Learning & Building Journey",
+    company: "Personal Projects and Practice",
+    period: "Ongoing",
     summary:
-      "Worked with Flutter across mobile product concepts and app interfaces, building practical experience in cross-platform delivery beyond React Native.",
+      "Growing through hands-on mobile projects across app UI, APIs, authentication, Supabase, Firebase, SQLite, FCM, and cross-platform workflows.",
     bullets: [
-      "Built mobile interfaces and user flows for commerce, healthcare, auction, and fitness-oriented projects.",
-      "Applied Firebase-backed workflows and cross-platform UI practices in Flutter-based implementations.",
-      "Strengthened understanding of reusable mobile patterns, delivery speed, and product-focused engineering.",
+      "Built commerce, healthcare, auction, and fitness-oriented mobile interfaces.",
+      "Practiced React Native concepts, Flutter development, Supabase, Firebase, SQLite local data, and API-connected app features.",
+      "Currently focused on stronger React Native architecture, auth flows, FCM notifications, APIs, and polished mobile UI.",
     ],
   },
 ];
@@ -171,52 +130,72 @@ export const education = [
   },
 ];
 
-export const projectCategories = ["All", "Mobile Apps", "Flutter", "Firebase", "UI Systems"];
+export const projectCategories = ["All", "Mobile Apps", "Flutter", "Firebase", "Data / Auth", "UI"];
 
 export const projects = [
   {
     id: 1,
     title: "ShopEase Commerce",
     description:
-      "A commerce-focused mobile app with streamlined browsing, product discovery, and purchase-oriented UI flows.",
+      "A commerce-focused mobile app with product browsing, clear purchase-oriented screens, and Firebase-backed app flows.",
     image: "/images/projects/1.png",
-    categories: ["All", "Mobile Apps", "Flutter", "Firebase", "UI Systems"],
+    categories: ["All", "Mobile Apps", "Flutter", "Firebase", "Data / Auth", "UI"],
     stack: ["Flutter", "Firebase", "Commerce UI"],
+    features: [
+      "Product browsing flow",
+      "Mobile-first commerce screens",
+      "Firebase data integration",
+    ],
     gitUrl: "https://github.com/Awais-Chandio/ShopEase",
-    liveUrl: "https://github.com/Awais-Chandio/ShopEase",
+    liveUrl: "",
   },
   {
     id: 2,
-    title: "Medical Care App",
+    title: "BidBuyy Auction",
     description:
-      "A healthcare application interface designed around clarity, structured navigation, and mobile-first accessibility.",
-    image: "/images/projects/5.png",
-    categories: ["All", "Mobile Apps", "Flutter", "UI Systems"],
-    stack: ["Flutter", "Healthcare", "Mobile UX"],
-    gitUrl: "https://github.com/Awais-Chandio/MadProject",
-    liveUrl: "https://github.com/Awais-Chandio/MadProject",
+      "A mobile auction app concept focused on bidding interactions, dynamic product states, and realtime update patterns.",
+    image: "/images/projects/7.jpeg",
+    categories: ["All", "Mobile Apps", "Flutter", "Firebase", "Data / Auth"],
+    stack: ["Flutter", "Firebase", "Realtime"],
+    features: [
+      "Auction listing screens",
+      "Realtime bidding states",
+      "Firebase-backed updates",
+    ],
+    gitUrl: "https://github.com/Awais-Chandio/BidBuyy",
+    liveUrl: "",
   },
   {
     id: 3,
-    title: "BidBuyy Auction",
+    title: "Medical Care App",
     description:
-      "A realtime auction experience built around bidding interactions, dynamic product states, and Firebase-backed updates.",
-    image: "/images/projects/7.jpeg",
-    categories: ["All", "Mobile Apps", "Flutter", "Firebase"],
-    stack: ["Flutter", "Firebase", "Realtime"],
-    gitUrl: "https://github.com/Awais-Chandio/BidBuyy",
-    liveUrl: "https://github.com/Awais-Chandio/BidBuyy",
+      "A healthcare mobile interface designed around readable content, structured navigation, and accessible appointment-style flows.",
+    image: "/images/projects/5.png",
+    categories: ["All", "Mobile Apps", "Flutter", "UI"],
+    stack: ["Flutter", "Healthcare", "Mobile UX"],
+    features: [
+      "Healthcare service screens",
+      "Simple navigation structure",
+      "Readable mobile UI",
+    ],
+    gitUrl: "https://github.com/Awais-Chandio/MadProject",
+    liveUrl: "",
   },
   {
     id: 4,
     title: "Workout Companion",
     description:
-      "A fitness-oriented mobile product concept with structured workout flows, progress-oriented screens, and clear interaction patterns.",
+      "A fitness-oriented mobile product concept with workout screens, progress-oriented flows, and clear interaction patterns.",
     image: "/images/projects/9.jpeg",
-    categories: ["All", "Mobile Apps", "Flutter", "UI Systems"],
+    categories: ["All", "Mobile Apps", "Flutter", "UI"],
     stack: ["Flutter", "Fitness", "Product UI"],
+    features: [
+      "Workout flow screens",
+      "Progress-focused interface",
+      "Mobile product layout",
+    ],
     gitUrl: "https://github.com/Awais-Chandio/Workout-Application",
-    liveUrl: "https://github.com/Awais-Chandio/Workout-Application",
+    liveUrl: "",
   },
 ];
 

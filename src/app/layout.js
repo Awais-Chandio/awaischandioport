@@ -4,7 +4,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 export const metadata = {
   title: "Muhammad Awais | Software Engineer (React Native)",
   description:
-    "Premium developer portfolio of Muhammad Awais, a Software Engineer focused on React Native, cross-platform mobile applications, polished UI development, and scalable product delivery.",
+    "Portfolio of Muhammad Awais, a Software Engineer focused on React Native mobile application development, Flutter experience, APIs, Firebase, auth, and practical app features.",
 };
 
 export default function RootLayout({ children }) {

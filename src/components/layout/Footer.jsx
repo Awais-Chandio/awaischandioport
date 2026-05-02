@@ -17,10 +17,10 @@ const Footer = () => {
             Muhammad Awais
           </p>
           <p className="mt-3 text-2xl font-semibold text-white">
-            Software Engineer focused on React Native and polished mobile experiences.
+            Software Engineer focused on React Native mobile applications.
           </p>
           <p className="mt-3 max-w-xl leading-7 text-slate-400">
-            Building cross-platform applications with thoughtful UI, reliable engineering, and a product mindset shaped by real mobile delivery work.
+            Building mobile app features with clean UI, API-connected flows, and additional Flutter experience from practical cross-platform projects.
           </p>
         </motion.div>
 

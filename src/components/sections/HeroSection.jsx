@@ -1,24 +1,26 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { TypeAnimation } from "react-type-animation";
 import {
   ArrowDownTrayIcon,
   ArrowUpRightIcon,
-  BriefcaseIcon,
   CodeBracketSquareIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
-import { heroHighlights, heroSpotlights, personalInfo } from "@/data/portfolio";
+import {
+  heroHighlights,
+  heroSpotlights,
+  personalInfo,
+  socials,
+} from "@/data/portfolio";
 
 const ThreeScene = dynamic(() => import("@/components/ThreeScene"), {
   ssr: false,
   loading: () => (
-    <div className="flex h-[18rem] items-center justify-center text-xs uppercase tracking-[0.28em] text-cyan-100 sm:h-[24rem] lg:h-[30rem]">
+    <div className="flex h-[16.5rem] items-center justify-center text-xs uppercase tracking-[0.28em] text-cyan-100 sm:h-[23rem] lg:h-[27rem]">
       Loading
     </div>
   ),
@@ -37,63 +39,52 @@ const HeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="section-spacing grid min-w-0 gap-10 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.92fr)] lg:items-center lg:gap-12"
+      className="section-spacing grid min-w-0 gap-8 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.92fr)] lg:items-center lg:gap-12"
       id="home"
     >
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="w-full min-w-0 max-w-full space-y-7 overflow-hidden"
+        className="w-full min-w-0 max-w-full space-y-5 overflow-hidden text-center sm:space-y-7 lg:text-left"
       >
-        <div className="section-kicker">
+        <div className="section-kicker mx-auto lg:mx-0">
           <SparklesIcon className="h-4 w-4" />
-          Premium Interactive Portfolio
+          Portfolio
         </div>
 
-        <div className="space-y-6">
-          <div className="flex flex-wrap gap-3 text-sm text-slate-300">
-            <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-wrap justify-center gap-2 text-xs text-slate-300 sm:gap-3 sm:text-sm lg:justify-start">
+            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 sm:px-4 sm:py-2">
               Software Engineer
             </span>
-            <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-cyan-100">
-              React Native Specialist
+            <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-cyan-100 sm:px-4 sm:py-2">
+              React Native
             </span>
-            <span className="rounded-full border border-teal-300/20 bg-teal-300/10 px-4 py-2 text-teal-100">
-              Flutter Experience
+            <span className="rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1.5 text-teal-100 sm:px-4 sm:py-2">
+              Flutter
             </span>
           </div>
 
-          <h1 className="section-title w-full max-w-[21rem] overflow-hidden text-[clamp(1.75rem,7vw,4rem)] font-semibold leading-[1.08] text-white sm:max-w-4xl sm:text-[clamp(2.85rem,5.8vw,4rem)]">
-            <span className="block sm:inline">Software</span>
-            <span className="block sm:inline"> Engineer</span>
-            <span className="block">building</span>
-            <span className="text-gradient block min-h-[1.08em] break-words pt-1 text-[0.9em]">
-              <TypeAnimation
-                sequence={[
-                  "mobile apps.",
-                  2400,
-                  "React Native.",
-                  2400,
-                  "polished UI.",
-                  2400,
-                ]}
-                speed={22}
-                repeat={Infinity}
-              />
-            </span>
-          </h1>
+          <div className="mx-auto max-w-[22rem] space-y-3 sm:max-w-4xl sm:space-y-4 lg:mx-0">
+            <h1 className="section-title text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+              {personalInfo.name}
+            </h1>
+            <p className="text-lg font-semibold leading-tight text-slate-100 sm:text-2xl lg:text-3xl">
+              <span className="text-gradient block break-words">Software Engineer</span>
+            </p>
+          </div>
 
-          <p className="max-w-[21rem] text-lg leading-8 text-slate-300 sm:max-w-2xl sm:text-xl">
+          <p className="mx-auto max-w-[22rem] text-sm leading-7 text-slate-300 sm:max-w-2xl sm:text-lg sm:leading-8 lg:mx-0">
             {personalInfo.subheadline}
           </p>
 
-          <p className="max-w-[21rem] text-base leading-8 text-slate-400 sm:max-w-2xl">
+          <p className="mx-auto hidden max-w-2xl text-sm leading-7 text-slate-400 sm:block sm:text-base sm:leading-8 lg:mx-0">
             {personalInfo.intro}
           </p>
         </div>
 
-        <div className="grid max-w-[21rem] gap-3 sm:max-w-2xl">
+        <div className="hidden max-w-[21rem] gap-3 sm:grid sm:max-w-2xl">
           {heroHighlights.map((item) => (
             <motion.div
               key={item}
@@ -106,18 +97,32 @@ const HeroSection = () => {
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="#projects" className="button-primary magnetic">
+        <div className="mx-auto flex max-w-[22rem] flex-col gap-3 sm:max-w-2xl sm:flex-row sm:flex-wrap lg:mx-0">
+          <Link href="#projects" className="button-primary magnetic w-full sm:w-auto">
             View Projects
             <ArrowUpRightIcon className="h-4 w-4" />
           </Link>
-          <Link href="#contact" className="button-secondary magnetic">
-            Book a Conversation
+          <Link href="#contact" className="button-secondary magnetic w-full sm:w-auto">
+            Contact Me
           </Link>
-          <a href={personalInfo.resumeUrl} className="button-ghost magnetic">
+          <a href={personalInfo.resumeUrl} className="button-ghost magnetic hidden w-full sm:inline-flex sm:w-auto">
             <ArrowDownTrayIcon className="h-4 w-4" />
             Download CV
           </a>
+        </div>
+
+        <div className="hidden flex-wrap items-center gap-3 text-sm text-slate-300 sm:flex">
+          {socials.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 transition hover:border-cyan-300/40 hover:text-white"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
       </motion.div>
 
@@ -137,39 +142,9 @@ const HeroSection = () => {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(125,211,252,0.18),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(45,212,191,0.12),transparent_30%),linear-gradient(135deg,rgba(168,85,247,0.08),transparent_42%)]" />
           <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/55">
             <ThreeScene />
-          </div>
-
-          <motion.div
-            whileHover={{ y: -3 }}
-            className="absolute left-4 top-4 max-w-[calc(100%-2rem)] rounded-[22px] border border-white/10 bg-slate-950/78 px-4 py-3 shadow-soft backdrop-blur-2xl sm:left-6 sm:top-6"
-          >
-            <p className="text-xs uppercase tracking-[0.26em] text-slate-400">Current Role</p>
-            <p className="mt-2 text-lg font-semibold text-white">Verge Systems</p>
-            <p className="mt-1 text-sm text-cyan-100">Software Engineer - React Native</p>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -3 }}
-            className="absolute bottom-4 left-4 right-4 rounded-[22px] border border-white/10 bg-slate-950/82 p-4 shadow-soft backdrop-blur-2xl sm:bottom-6 sm:left-6 sm:right-auto sm:max-w-[17rem]"
-          >
-            <div className="flex items-center gap-2 text-white">
-              <BriefcaseIcon className="h-5 w-5 text-teal-300" />
-              <span className="text-sm font-medium">Cross-platform mobile delivery</span>
+            <div className="pointer-events-none absolute left-4 top-4 rounded-full border border-cyan-100/15 bg-slate-950/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-100 shadow-soft backdrop-blur-xl">
+              Mobile Stack
             </div>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Clean UI systems, scalable feature work, and product-aware engineering across modern mobile apps.
-            </p>
-          </motion.div>
-
-          <div className="absolute bottom-5 right-5 hidden overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-1 shadow-soft backdrop-blur-xl md:block">
-            <Image
-              src={personalInfo.heroImage}
-              alt={personalInfo.name}
-              width={120}
-              height={120}
-              className="h-24 w-24 rounded-[22px] object-cover"
-              priority
-            />
           </div>
         </motion.div>
 

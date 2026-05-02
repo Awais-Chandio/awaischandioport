@@ -16,29 +16,29 @@ const Navbar = () => {
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45 }}
-        className="mx-auto flex w-full max-w-7xl items-center justify-between rounded-full border border-white/10 bg-slate-950/62 px-4 py-3 shadow-soft backdrop-blur-2xl sm:px-6"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950/62 px-4 py-3 shadow-soft backdrop-blur-2xl sm:px-6"
       >
-        <Link href="#home" className="flex min-w-0 items-center gap-3">
+        <Link href="#home" className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 lg:flex-none">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#67e8f9,#14b8a6,#6366f1)] text-sm font-bold text-slate-950 shadow-[0_10px_30px_rgba(34,211,238,0.32)] sm:h-11 sm:w-11">
             MA
           </span>
-          <div className="hidden min-w-0 sm:block">
-            <p className="truncate text-[10px] font-semibold uppercase tracking-[0.26em] text-slate-400 sm:text-[11px] sm:tracking-[0.34em]">
+          <div className="block min-w-0">
+            <p className="truncate text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400 sm:text-[11px] sm:tracking-[0.3em]">
               Muhammad Awais
             </p>
-            <p className="hidden truncate text-sm font-medium text-white sm:block">
-              {personalInfo.role} - {personalInfo.specialization}
+            <p className="truncate text-xs font-medium text-white sm:text-sm">
+              {personalInfo.role}
             </p>
           </div>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <NavLink key={link.path} href={link.path} title={link.title} />
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <a href={personalInfo.resumeUrl} className="button-secondary magnetic px-5 py-2.5">
             Download CV
           </a>
@@ -50,15 +50,20 @@ const Navbar = () => {
         <button
           type="button"
           onClick={() => setIsOpen((current) => !current)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10 md:hidden"
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition hover:bg-white/10 lg:hidden"
           aria-label="Toggle navigation menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
           {isOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
         </button>
       </motion.nav>
 
       {isOpen ? (
-        <div className="mx-auto mt-3 w-full max-w-7xl rounded-[28px] border border-white/10 bg-slate-950/90 p-4 shadow-soft backdrop-blur-2xl md:hidden">
+        <div
+          id="mobile-navigation"
+          className="mx-auto mt-3 w-full max-w-7xl rounded-[28px] border border-white/10 bg-slate-950/90 p-4 shadow-soft backdrop-blur-2xl lg:hidden"
+        >
           <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <NavLink

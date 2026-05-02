@@ -12,8 +12,8 @@ const EducationSection = () => {
       <Reveal>
         <SectionIntro
           eyebrow="Education"
-          title="Academic background presented as a clear part of the overall engineering profile."
-          description="A BE in Software Engineering supports the way I approach application structure, problem solving, and long-term maintainability in mobile development."
+          title="Academic foundation in software engineering."
+          description="My degree supports the way I approach application structure, problem solving, and maintainable mobile app development."
         />
       </Reveal>
 

@@ -37,26 +37,26 @@ const ContactSection = () => {
       <Reveal className="space-y-6">
         <SectionIntro
           eyebrow="Contact"
-          title="Open to meaningful product work, mobile opportunities, and strong engineering conversations."
-          description="If you are hiring for a mobile role, reviewing candidates, or planning a new application, I would be glad to discuss the scope and how I can contribute."
+          title="Have a role, project, or collaboration in mind?"
+          description="Reach out for React Native roles, mobile app work, or software engineering collaboration. I am available by email, LinkedIn, and GitHub."
         />
 
-        <div className="panel-strong overflow-hidden p-6 sm:p-7">
+        <div className="panel-strong overflow-hidden p-5 sm:p-7">
           <div className="relative space-y-5">
-            <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+            <div className="rounded-[20px] border border-white/10 bg-white/5 p-4 sm:rounded-[24px] sm:p-5">
               <p className="text-sm uppercase tracking-[0.28em] text-sky-200">Availability</p>
               <p className="mt-3 text-xl font-semibold leading-snug text-white sm:text-2xl">
                 {personalInfo.availability}
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-400">
-                Based in {personalInfo.location}. Comfortable working with teams that value clean delivery, strong communication, and polished mobile products.
+                Based in {personalInfo.location}. Comfortable working with teams that value clear communication, practical delivery, and polished mobile app interfaces.
               </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="min-w-0 rounded-[24px] border border-white/10 bg-white/5 p-5 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40"
+                className="min-w-0 rounded-[20px] border border-white/10 bg-white/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40 sm:rounded-[24px] sm:p-5"
               >
                 <EnvelopeIcon className="h-5 w-5 text-sky-300" />
                 <p className="mt-4 text-sm text-slate-400">Email</p>
@@ -64,7 +64,7 @@ const ContactSection = () => {
               </a>
               <a
                 href={`tel:${personalInfo.phone.replace(/\s+/g, "")}`}
-                className="min-w-0 rounded-[24px] border border-white/10 bg-white/5 p-5 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40"
+                className="min-w-0 rounded-[20px] border border-white/10 bg-white/5 p-4 transition duration-300 hover:-translate-y-1 hover:border-sky-300/40 sm:rounded-[24px] sm:p-5"
               >
                 <PhoneIcon className="h-5 w-5 text-sky-300" />
                 <p className="mt-4 text-sm text-slate-400">Phone</p>
@@ -72,7 +72,7 @@ const ContactSection = () => {
               </a>
             </div>
 
-            <div className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+            <div className="rounded-[20px] border border-white/10 bg-white/5 p-4 sm:rounded-[24px] sm:p-5">
               <div className="flex items-center gap-2 text-white">
                 <MapPinIcon className="h-5 w-5 text-teal-300" />
                 <span>{personalInfo.location}</span>
@@ -95,7 +95,7 @@ const ContactSection = () => {
         </div>
       </Reveal>
 
-      <Reveal delay={0.08} className="panel relative overflow-hidden p-6 sm:p-8">
+      <Reveal delay={0.08} className="panel relative overflow-hidden p-5 sm:p-8">
         <motion.div
           className="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full bg-cyan-300/10 blur-3xl"
           animate={{ scale: [1, 1.06, 1], opacity: [0.45, 0.7, 0.45] }}
@@ -107,7 +107,7 @@ const ContactSection = () => {
               <p className="text-[11px] uppercase tracking-[0.32em] text-slate-400">
                 Start a conversation
               </p>
-              <p className="mt-2 text-2xl font-semibold text-white">
+              <p className="mt-2 text-xl font-semibold text-white sm:text-2xl">
                 Tell me about the product, role, or collaboration.
               </p>
             </div>
@@ -158,7 +158,7 @@ const ContactSection = () => {
             />
           </label>
 
-          <button type="submit" className="button-primary magnetic">
+          <button type="submit" className="button-primary magnetic w-full sm:w-auto">
             Draft Email Message
           </button>
 

@@ -10,9 +10,9 @@ const ExperienceSection = () => {
   return (
     <section className="section-spacing min-w-0 space-y-10 overflow-hidden" id="experience">
       <SectionIntro
-        eyebrow="Experience"
-        title="Professional experience positioned around current React Native work and broader mobile delivery."
-        description="My current role at Verge Systems is complemented by broader cross-platform experience, giving me a practical understanding of building and refining mobile applications."
+        eyebrow="Experience / Journey"
+        title="Current work and the learning path behind it."
+        description="My experience combines React Native feature work with hands-on mobile project building across Flutter, APIs, authentication, Firebase, and app UI flows."
       />
 
       <div className="relative space-y-6">
@@ -37,7 +37,7 @@ const ExperienceSection = () => {
                 </motion.div>
               </div>
 
-              <motion.div whileHover={{ y: -4 }} className="panel min-w-0 p-6 sm:p-7">
+              <motion.div whileHover={{ y: -4 }} className="panel min-w-0 p-5 sm:p-7">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
@@ -54,7 +54,7 @@ const ExperienceSection = () => {
                   {item.bullets.map((bullet) => (
                     <div
                       key={bullet}
-                      className="rounded-[22px] border border-white/10 bg-white/5 px-4 py-4 text-sm leading-7 text-slate-300"
+                      className="rounded-[20px] border border-white/10 bg-white/5 px-4 py-3 text-sm leading-7 text-slate-300 sm:rounded-[22px] sm:py-4"
                     >
                       {bullet}
                     </div>

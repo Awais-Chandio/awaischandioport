@@ -99,14 +99,14 @@ const SkillCloud = ({ groups }) => {
       ),
     [groups]
   );
-  const visibleLabels = skills.slice(0, 12);
+  const visibleLabels = skills.slice(0, 10);
 
   return (
-    <div className="relative min-h-[24rem] overflow-hidden rounded-[28px] border border-white/10 bg-slate-950/45 p-4 shadow-soft backdrop-blur-2xl sm:min-h-[30rem] sm:p-6 lg:min-h-[34rem]">
+    <div className="relative min-h-[28rem] overflow-hidden rounded-[28px] border border-white/10 bg-slate-950/45 p-5 shadow-soft backdrop-blur-2xl xl:min-h-[32rem]">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_22%,rgba(34,211,238,0.2),transparent_32%),radial-gradient(circle_at_78%_72%,rgba(139,92,246,0.13),transparent_28%),linear-gradient(135deg,rgba(20,184,166,0.08),transparent_42%)]" />
       <div className="pointer-events-none absolute inset-x-8 top-10 h-24 rounded-full bg-cyan-300/10 blur-3xl" />
 
-      <div className="relative h-[22rem] overflow-hidden rounded-[24px] border border-white/10 bg-slate-950/35 sm:h-[28rem] lg:h-[31rem]">
+      <div className="relative h-[24rem] overflow-hidden rounded-[24px] border border-white/10 bg-slate-950/35 xl:h-[28rem]">
         <Canvas
           camera={{ position: [0, 0.18, 5.45], fov: 42 }}
           dpr={[1, 1.5]}
@@ -159,9 +159,9 @@ const SkillCloud = ({ groups }) => {
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="relative mt-4 grid gap-3 sm:grid-cols-3"
+        className="relative mt-4 grid gap-3 xl:grid-cols-2"
       >
-        {groups.slice(0, 3).map((group) => (
+        {groups.map((group) => (
           <div
             key={group.title}
             className="rounded-[22px] border border-white/10 bg-white/[0.06] p-4"

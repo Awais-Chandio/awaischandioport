@@ -26,12 +26,12 @@ const ProjectsSection = () => {
     <section className="section-spacing min-w-0 space-y-10 overflow-hidden" id="projects">
       <SectionIntro
         eyebrow="Projects"
-        title="Selected mobile work presented with stronger visual depth and cleaner hierarchy."
-        description="A curated selection of mobile projects that reflect product thinking, interface quality, and hands-on experience across cross-platform app development."
+        title="Selected mobile projects with clear purpose, stack, and features."
+        description="A short list of mobile projects that show practical app screens, Flutter experience, Firebase usage, and connected feature work."
         align="center"
       />
 
-      <div className="flex flex-wrap justify-center gap-3">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
         {projectCategories.map((category) => (
           <ProjectFilter
             key={category}
@@ -42,7 +42,7 @@ const ProjectsSection = () => {
         ))}
       </div>
 
-      <div className={`grid min-w-0 gap-6 lg:grid-cols-2 ${isPending ? "opacity-80" : ""}`}>
+      <div className={`grid min-w-0 gap-6 md:grid-cols-2 xl:grid-cols-3 ${isPending ? "opacity-80" : ""}`}>
         {visibleProjects.map((project, index) => (
           <motion.div
             key={project.id}

@@ -8,8 +8,9 @@ const SmoothScroll = () => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+    const isSmallScreen = window.matchMedia("(max-width: 767px)").matches;
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || isSmallScreen) {
       return undefined;
     }
 

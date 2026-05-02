@@ -8,7 +8,6 @@ import ExperienceSection from "@/components/sections/ExperienceSection";
 import HeroSection from "@/components/sections/HeroSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
-import StatsSection from "@/components/sections/StatsSection";
 
 export default function Home() {
   return (
@@ -16,14 +15,13 @@ export default function Home() {
       <AnimatedBackground />
       <Navbar />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-20 px-4 pb-20 pt-28 sm:px-6 md:gap-24 lg:gap-28 lg:px-8 lg:pt-32">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-14 px-4 pb-16 pt-24 sm:gap-20 sm:px-6 sm:pb-20 md:gap-24 lg:gap-28 lg:px-8 lg:pt-32">
         <HeroSection />
-        <StatsSection />
         <AboutSection />
         <SkillsSection />
+        <ProjectsSection />
         <ExperienceSection />
         <EducationSection />
-        <ProjectsSection />
         <ContactSection />
       </div>
 
