@@ -26,8 +26,8 @@ const ProjectsSection = () => {
     <section className="section-spacing min-w-0 space-y-10 overflow-hidden" id="projects">
       <SectionIntro
         eyebrow="Projects"
-        title="Selected mobile projects with clear purpose, stack, and features."
-        description="A short list of mobile projects that show practical app screens, Flutter experience, Firebase usage, and connected feature work."
+        title="Selected projects with clear purpose, stack, and user flow."
+        description="A short list of builds that show product thinking, data-backed behavior, and practical interface decisions."
         align="center"
       />
 

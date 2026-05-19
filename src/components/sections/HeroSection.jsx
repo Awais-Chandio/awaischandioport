@@ -56,13 +56,13 @@ const HeroSection = () => {
         <div className="space-y-4 sm:space-y-6">
           <div className="flex flex-wrap justify-center gap-2 text-xs text-slate-300 sm:gap-3 sm:text-sm lg:justify-start">
             <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 sm:px-4 sm:py-2">
-              Software Engineer
+              Mobile Products
             </span>
             <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-cyan-100 sm:px-4 sm:py-2">
               React Native
             </span>
             <span className="rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1.5 text-teal-100 sm:px-4 sm:py-2">
-              Flutter
+              Backend-connected UI
             </span>
           </div>
 
@@ -71,7 +71,7 @@ const HeroSection = () => {
               {personalInfo.name}
             </h1>
             <p className="text-lg font-semibold leading-tight text-slate-100 sm:text-2xl lg:text-3xl">
-              <span className="text-gradient block break-words">Software Engineer</span>
+              <span className="text-gradient block break-words">{personalInfo.role}</span>
             </p>
           </div>
 

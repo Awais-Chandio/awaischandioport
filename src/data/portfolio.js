@@ -1,11 +1,11 @@
 export const personalInfo = {
   name: "Muhammad Awais",
   shortName: "Awais",
-  role: "Software Engineer",
+  role: "Mobile App Engineer",
   specialization: "React Native",
   location: "Hyderabad, Pakistan",
   availability:
-    "Open to React Native roles, mobile app work, and strong software engineering collaborations.",
+    "Open to mobile product teams, React Native roles, and focused app feature work.",
   email: "awaischandio827@gmail.com",
   phone: "+92 3163461656",
   resumeUrl: "/cv.pdf",
@@ -16,11 +16,11 @@ export const personalInfo = {
   currentCompany: "Verge Systems",
   degree: "BE in Software Engineering",
   university: "Mehran University of Engineering and Technology",
-  headline: "Software Engineer building cross-platform mobile applications with React Native.",
+  headline: "Mobile App Engineer building practical cross-platform products.",
   subheadline:
-    "I build React Native mobile features with clean UI, API-connected flows, and maintainable code.",
+    "I turn product ideas into polished app flows, reliable integrations, and maintainable interfaces.",
   intro:
-    "My focus is React Native mobile development, with additional Flutter experience and practical work across Supabase, Firebase, SQLite local storage, and FCM notifications.",
+    "My toolkit includes React Native, Flutter, Supabase, Firebase, SQLite, API work, and push notifications.",
 };
 
 export const navLinks = [
@@ -33,78 +33,78 @@ export const navLinks = [
 ];
 
 export const heroHighlights = [
-  "React Native mobile app features with clean component structure.",
-  "Cross-platform mobile UI, navigation flows, and practical app screens.",
-  "Supabase, Firebase, SQLite local database, and Firebase FCM integrations.",
+  "Reusable app screens with clear state, navigation, and component structure.",
+  "API-connected flows for auth, data handling, and product actions.",
+  "Local storage, backend services, and notification-ready implementations.",
 ];
 
 export const heroSpotlights = [
   {
-    label: "Current Role",
-    value: "Software Engineer",
-    detail: "React Native focused mobile application work.",
+    label: "Delivery",
+    value: "Screens to flows",
+    detail: "Turning product requirements into navigable, testable app experiences.",
   },
   {
-    label: "Core Focus",
-    value: "React Native",
-    detail: "Mobile screens, navigation, integrations, and UI quality.",
+    label: "Integration",
+    value: "Data + auth",
+    detail: "Connecting APIs, Firebase, Supabase, local persistence, and notifications.",
   },
   {
-    label: "Additional",
-    value: "Flutter",
-    detail: "Extra cross-platform experience from practical mobile projects.",
+    label: "Quality",
+    value: "Clean UI",
+    detail: "Keeping layouts responsive, readable, and easy to maintain.",
   },
 ];
 
 export const aboutParagraphs = [
-  "I am a Software Engineer focused on React Native mobile application development. I enjoy building app screens and features that are clean, usable, and organized in code.",
-  "Alongside React Native, I have additional Flutter experience from practical mobile projects. My work includes mobile UI flows, API integration, Supabase, Firebase, SQLite local database usage, Firebase FCM, and steady improvement through real product work.",
+  "I build mobile product interfaces with an eye for structure, usability, and steady delivery. I like turning rough feature ideas into screens that feel clear and work reliably.",
+  "My background combines current product work at Verge Systems with hands-on projects across commerce, healthcare, auctions, and fitness. I am comfortable with APIs, auth, local storage, notifications, and backend-connected app features.",
 ];
 
 export const aboutPoints = [
-  "Core focus: React Native mobile app development.",
-  "Additional experience: Flutter mobile interfaces and cross-platform workflows.",
-  "Comfortable with Supabase, Firebase, SQLite local database, Firebase FCM, APIs, auth, and app data handling.",
+  "Shipping clear navigation, reusable UI pieces, and product-ready feature flows.",
+  "Handling auth, API responses, local data, cloud services, and notification paths.",
+  "Improving interface polish through debugging, responsive layouts, and simpler component structure.",
 ];
 
 export const skillGroups = [
   {
-    title: "React Native Core",
+    title: "App Architecture",
     description:
-      "The main stack I use for mobile application screens, features, and reusable structure.",
+      "The foundation I use to organize screens, state, navigation, and reusable building blocks.",
     skills: ["React Native", "JavaScript", "TypeScript", "Components", "Navigation"],
   },
   {
-    title: "Mobile Development",
+    title: "Interface Craft",
     description:
-      "Mobile-first skills for clear app flows and cross-platform product interfaces.",
+      "Practical UI skills for readable layouts, smooth flows, and consistent product behavior.",
     skills: ["Mobile UI", "Cross-platform", "App Screens", "State Handling", "Responsive Layouts"],
   },
   {
-    title: "Backend / Data",
+    title: "Data & Services",
     description:
-      "Backend-connected and local-data skills used in real mobile product flows.",
+      "Service integration skills for sign-in, synced data, persistence, and user updates.",
     skills: ["Supabase", "Firebase", "SQLite", "Firebase FCM", "APIs", "Auth"],
   },
   {
-    title: "Tools & Additional",
+    title: "Delivery Tools",
     description:
-      "Workflow tools and additional cross-platform experience that support mobile delivery.",
+      "Daily tooling and extra cross-platform practice that help move features from idea to handoff.",
     skills: ["Flutter", "Git", "GitHub", "VS Code", "Debugging"],
   },
 ];
 
 export const experience = [
   {
-    title: "Software Engineer (React Native)",
+    title: "Mobile App Engineer",
     company: "Verge Systems",
-    period: "Current Role",
+    period: "Current",
     summary:
-      "Working on React Native application features with attention to clean UI implementation, connected app flows, and maintainable code structure.",
+      "Building product features with attention to usable interfaces, connected workflows, and code that stays easy to work with.",
     bullets: [
-      "Building and improving mobile screens, navigation flows, and reusable UI pieces.",
-      "Connecting app features with APIs and practical product workflows.",
-      "Strengthening code quality through debugging, responsive layouts, and clear component structure.",
+      "Translating requirements into organized screens, interactions, and reusable pieces.",
+      "Wiring product behavior to APIs and real application data.",
+      "Polishing layouts, fixing edge cases, and simplifying components during implementation.",
     ],
   },
   {
@@ -112,11 +112,11 @@ export const experience = [
     company: "Personal Projects and Practice",
     period: "Ongoing",
     summary:
-      "Growing through hands-on mobile projects across app UI, APIs, authentication, Supabase, Firebase, SQLite, FCM, and cross-platform workflows.",
+      "Growing through hands-on products that cover commerce, healthcare, auction, and fitness use cases.",
     bullets: [
-      "Built commerce, healthcare, auction, and fitness-oriented mobile interfaces.",
-      "Practiced React Native concepts, Flutter development, Supabase, Firebase, SQLite local data, and API-connected app features.",
-      "Currently focused on stronger React Native architecture, auth flows, FCM notifications, APIs, and polished mobile UI.",
+      "Built feature sets around product browsing, bidding states, appointments, and workout progress.",
+      "Practiced service-backed data flows, authentication, persistence, and notification behavior.",
+      "Currently improving architecture decisions, screen polish, and reliability in app workflows.",
     ],
   },
 ];

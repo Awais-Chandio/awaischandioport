@@ -12,7 +12,7 @@ const ExperienceSection = () => {
       <SectionIntro
         eyebrow="Experience / Journey"
         title="Current work and the learning path behind it."
-        description="My experience combines React Native feature work with hands-on mobile project building across Flutter, APIs, authentication, Firebase, and app UI flows."
+        description="A practical mix of product delivery, service integration, interface work, and continuous improvement through shipped features and personal builds."
       />
 
       <div className="relative space-y-6">

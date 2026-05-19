@@ -40,8 +40,8 @@ const SkillsSection = () => {
     <section className="section-spacing min-w-0 space-y-10 overflow-hidden" id="skills">
       <SectionIntro
         eyebrow="Skills"
-        title="Mobile engineering skills grouped by how I use them."
-        description="A focused set of React Native, mobile UI, integration, tooling, and additional Flutter skills for building practical app features."
+        title="Skills grouped by the job they do in a real product."
+        description="From screen structure to service integration, these are the areas I use most when taking a feature from idea to working flow."
       />
 
       <div className="grid min-w-0 gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">

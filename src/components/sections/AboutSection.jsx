@@ -32,19 +32,19 @@ const AboutSection = () => {
             <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
               Title
             </p>
-            <p className="mt-3 text-lg font-semibold text-white">Software Engineer</p>
+            <p className="mt-3 text-lg font-semibold text-white">{personalInfo.role}</p>
           </div>
           <div className="panel p-4 sm:p-5">
             <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
-              Focus
+              Strength
             </p>
-            <p className="mt-3 text-lg font-semibold text-white">React Native</p>
+            <p className="mt-3 text-lg font-semibold text-white">Feature Flow</p>
           </div>
           <div className="panel p-4 sm:p-5">
             <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
-              Additional
+              Toolkit
             </p>
-            <p className="mt-3 text-lg font-semibold text-white">Flutter</p>
+            <p className="mt-3 text-lg font-semibold text-white">APIs + Data</p>
           </div>
         </div>
       </Reveal>
@@ -52,8 +52,8 @@ const AboutSection = () => {
       <Reveal delay={0.08} className="order-1 space-y-8 lg:order-2">
         <SectionIntro
           eyebrow="About"
-          title="A Software Engineer focused on React Native mobile apps."
-          description="I work on mobile screens, app features, API-connected flows, and maintainable React Native code, with additional Flutter experience."
+          title="I build app experiences that are clear, connected, and easy to maintain."
+          description="My work sits between interface polish, product logic, and reliable integration with the services behind the app."
         />
 
         <div className="panel p-5 sm:p-8">

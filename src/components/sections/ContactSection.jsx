@@ -38,7 +38,7 @@ const ContactSection = () => {
         <SectionIntro
           eyebrow="Contact"
           title="Have a role, project, or collaboration in mind?"
-          description="Reach out for React Native roles, mobile app work, or software engineering collaboration. I am available by email, LinkedIn, and GitHub."
+          description="Reach out for product work, app feature delivery, or collaboration. I am available by email, LinkedIn, and GitHub."
         />
 
         <div className="panel-strong overflow-hidden p-5 sm:p-7">
@@ -49,7 +49,7 @@ const ContactSection = () => {
                 {personalInfo.availability}
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-400">
-                Based in {personalInfo.location}. Comfortable working with teams that value clear communication, practical delivery, and polished mobile app interfaces.
+                Based in {personalInfo.location}. Comfortable working with teams that value clear communication, practical delivery, and polished interfaces.
               </p>
             </div>
 
