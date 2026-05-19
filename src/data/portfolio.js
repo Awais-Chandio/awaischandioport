@@ -130,23 +130,44 @@ export const education = [
   },
 ];
 
-export const projectCategories = ["All", "Mobile Apps", "Flutter", "Firebase", "Data / Auth", "UI"];
+export const projectCategories = [
+  "All",
+  "Mobile Apps",
+  "Flutter",
+  "Firebase",
+  "Data / Auth",
+  "Admin",
+  "UI",
+];
 
 export const projects = [
   {
     id: 1,
-    title: "ShopEase Commerce",
+    title: "Food Delivery App",
     description:
-      "A commerce-focused mobile app with product browsing, clear purchase-oriented screens, and Firebase-backed app flows.",
-    image: "/images/projects/1.png",
-    categories: ["All", "Mobile Apps", "Flutter", "Firebase", "Data / Auth", "UI"],
-    stack: ["Flutter", "Firebase", "Commerce UI"],
-    features: [
-      "Product browsing flow",
-      "Mobile-first commerce screens",
-      "Firebase data integration",
+      "A polished restaurant ordering app with customer browsing, cart checkout, authentication, and admin screens for managing restaurant and menu data.",
+    image: "/images/projects/foodapp/01-home.png",
+    previewLabel: "User + Admin Flow",
+    screenshots: [
+      "/images/projects/foodapp/01-home.png",
+      "/images/projects/foodapp/03-restaurant-detail.png",
+      "/images/projects/foodapp/05-cart.png",
+      "/images/projects/foodapp/02-search.png",
+      "/images/projects/foodapp/04-menu.png",
+      "/images/projects/foodapp/06-login.png",
+      "/images/projects/foodapp/07-register.png",
+      "/images/projects/foodapp/08-admin-add-resturant.png",
+      "/images/projects/foodapp/09-admin-edit-item.png",
+      "/images/projects/foodapp/00-current.png",
     ],
-    gitUrl: "https://github.com/Awais-Chandio/ShopEase",
+    categories: ["All", "Mobile Apps", "Data / Auth", "Admin", "UI"],
+    stack: ["React Native", "Role-based UI", "Food Ordering"],
+    features: [
+      "Customer home, search, restaurant detail, menu, cart, login, and register flows",
+      "Admin add restaurant and edit menu item screens",
+      "Consistent orange food-ordering design system with clean mobile hierarchy",
+    ],
+    gitUrl: "",
     liveUrl: "",
   },
   {

@@ -11,6 +11,13 @@ import {
 
 const ProjectCard = ({ project }) => {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+  const screenDeck = project.screenshots?.slice(0, 3) ?? [];
+  const hasScreenDeck = screenDeck.length > 1;
+  const screenDeckClasses = [
+    "left-[7%] w-[34%] rotate-[-8deg] opacity-90",
+    "left-1/2 z-20 w-[40%] -translate-x-1/2 rotate-[2deg]",
+    "right-[7%] w-[34%] rotate-[8deg] opacity-90",
+  ];
 
   const handleMove = (event) => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
@@ -36,25 +43,64 @@ const ProjectCard = ({ project }) => {
       className="panel group flex h-full min-w-0 flex-col overflow-hidden [transform-style:preserve-3d]"
     >
       <div className="relative h-52 overflow-hidden border-b border-white/10 sm:h-60">
-        <Image
-          src={project.image}
-          alt={`${project.title} project screenshot`}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-          className="object-cover transition duration-700 group-hover:scale-[1.08]"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.06),rgba(2,6,23,0.18),rgba(2,6,23,0.9))]" />
-        <div className="absolute inset-0 translate-y-full bg-[linear-gradient(135deg,rgba(34,211,238,0.24),rgba(20,184,166,0.14),rgba(168,85,247,0.16))] opacity-0 backdrop-blur-[2px] transition duration-500 group-hover:translate-y-0 group-hover:opacity-100" />
-        <div className="absolute left-5 right-5 top-5 flex justify-end">
-          <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
-            Project
-          </span>
-        </div>
+        {hasScreenDeck ? (
+          <>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(251,146,60,0.42),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(34,211,238,0.26),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.95),rgba(25,55,89,0.88)_46%,rgba(125,49,23,0.72))]" />
+            <div className="absolute inset-x-5 top-5 flex items-center justify-between">
+              <span className="rounded-full border border-orange-200/25 bg-orange-300/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-orange-50">
+                {project.previewLabel ?? "Mobile App"}
+              </span>
+              <span className="rounded-full border border-white/10 bg-slate-950/55 px-3 py-1 text-xs font-semibold text-white backdrop-blur-xl">
+                {project.screenshots.length} screens
+              </span>
+            </div>
+            <div className="absolute inset-x-0 bottom-[-42px] top-14">
+              {screenDeck.map((src, index) => (
+                <div
+                  key={src}
+                  className={`absolute bottom-0 overflow-hidden rounded-[1.45rem] border border-white/20 bg-slate-950 shadow-[0_24px_60px_rgba(2,6,23,0.45)] transition duration-700 group-hover:translate-y-[-8px] ${screenDeckClasses[index]}`}
+                >
+                  <div className="relative aspect-[9/19.5] w-full">
+                    <Image
+                      src={src}
+                      alt={`${project.title} screen ${index + 1}`}
+                      fill
+                      sizes="(max-width: 768px) 32vw, (max-width: 1280px) 17vw, 12vw"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(2,6,23,0.22)_70%,rgba(2,6,23,0.78))]" />
+            <div className="absolute bottom-5 left-5 flex translate-y-3 items-center gap-2 rounded-full border border-white/10 bg-slate-950/75 px-4 py-2 text-sm font-medium text-white opacity-0 shadow-soft backdrop-blur-xl transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+              <EyeIcon className="h-4 w-4 text-orange-200" />
+              Full app flow preview
+            </div>
+          </>
+        ) : (
+          <>
+            <Image
+              src={project.image}
+              alt={`${project.title} project screenshot`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              className="object-cover transition duration-700 group-hover:scale-[1.08]"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.06),rgba(2,6,23,0.18),rgba(2,6,23,0.9))]" />
+            <div className="absolute inset-0 translate-y-full bg-[linear-gradient(135deg,rgba(34,211,238,0.24),rgba(20,184,166,0.14),rgba(168,85,247,0.16))] opacity-0 backdrop-blur-[2px] transition duration-500 group-hover:translate-y-0 group-hover:opacity-100" />
+            <div className="absolute left-5 right-5 top-5 flex justify-end">
+              <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
+                Project
+              </span>
+            </div>
 
-        <div className="absolute bottom-5 left-5 flex translate-y-3 items-center gap-2 rounded-full border border-white/10 bg-slate-950/75 px-4 py-2 text-sm font-medium text-white opacity-0 shadow-soft backdrop-blur-xl transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-          <EyeIcon className="h-4 w-4 text-cyan-200" />
-          Project preview
-        </div>
+            <div className="absolute bottom-5 left-5 flex translate-y-3 items-center gap-2 rounded-full border border-white/10 bg-slate-950/75 px-4 py-2 text-sm font-medium text-white opacity-0 shadow-soft backdrop-blur-xl transition duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+              <EyeIcon className="h-4 w-4 text-cyan-200" />
+              Project preview
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col space-y-5 p-5 sm:p-6">
