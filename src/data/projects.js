@@ -74,6 +74,68 @@ export const projects = [
     accent: "from-orange-400 via-rose-400 to-amber-300",
   },
   {
+    id: "safco-e-credit",
+    title: "SAFCO E-Credit App",
+    status: "Live",
+    categoryLabel: "Microfinance App",
+    description:
+      "A live React Native customer microfinance app on Google Play for digital loan services, redesigned with a simplified two-screen E-Credit application flow, auto-filled customer details, loan submission, repayment options, and profile management.",
+    image: "/images/projects/safco/02-dashboard.jpeg",
+    screenshots: [
+      "/images/projects/safco/02-dashboard.jpeg",
+      "/images/projects/safco/03-personal-details.jpeg",
+      "/images/projects/safco/04-work-loan-details.jpeg",
+      "/images/projects/safco/05-payment-methods.jpeg",
+      "/images/projects/safco/06-profile.jpeg",
+      "/images/projects/safco/07-dashboard-photo.jpeg",
+      "/images/projects/safco/01-splash.jpeg",
+    ],
+    screenLabels: [
+      "Dashboard",
+      "Personal details",
+      "Work and loan",
+      "Payment methods",
+      "Profile",
+      "Dashboard photo",
+      "Splash",
+    ],
+    categories: ["All", "Mobile Apps", "Admin", "UI"],
+    stack: ["React Native", "Redux", "REST APIs", "Axios", "AsyncStorage"],
+    features: [
+      "Simplified E-Credit application from a longer form into two guided screens",
+      "Auto-filled personal details with editable address input for accurate customer data",
+      "Loan submission routed directly to Branch Manager and connected to the normal E-Appraisal workflow",
+      "Dashboard for active loan status, loan history, new loan, repayment, and support access",
+      "Repayment method selection for JazzCash, EasyPaisa, HBL Connect, and PayPro",
+      "Profile view and profile picture update flow with customer CNIC, mobile, and gender details",
+      "Published on Google Play as Safco eCredit for existing SAFCO customers",
+    ],
+    stats: [
+      { label: "Screens", value: 7, suffix: "+" },
+      { label: "Loan Steps", value: 2, suffix: "" },
+      { label: "Payments", value: 4, suffix: "" },
+    ],
+    problem:
+      "Customers needed a faster and clearer way to apply for E-Credit loans without filling unnecessary repeated information, while the backend still needed clean routing into the Branch Manager and E-Appraisal process.",
+    architecture:
+      "The app uses React Native screens with Redux-managed state, REST API integrations through Axios, and local session persistence through AsyncStorage. The New Loan flow starts with a backend loan inquiry to auto-fill customer data, validates the two-step form, then submits the application payload into the Branch Manager and E-Appraisal workflow.",
+    challenges: [
+      "Reducing the E-Credit application to only the essential customer inputs",
+      "Keeping auto-filled personal data readable while allowing address edits",
+      "Maintaining backend routing for Branch Manager review and normal E-Appraisal processing",
+    ],
+    optimizations: [
+      "Two-step form flow for faster completion",
+      "Auto-fill behavior to reduce manual entry and user mistakes",
+      "Clear mobile cards, large actions, and focused input sections",
+    ],
+    responsiveness:
+      "Built for Android and iOS customers with mobile-first screens, large tap targets, clear form spacing, and dashboard actions optimized for quick loan and repayment access.",
+    gitUrl: "",
+    liveUrl: "https://play.google.com/store/apps/details?id=com.vergesystems.safco_e_banking",
+    accent: "from-emerald-300 via-cyan-300 to-indigo-400",
+  },
+  {
     id: "queueless",
     title: "QueueLess Appointment App",
     status: "In Progress",
