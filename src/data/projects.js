@@ -102,7 +102,7 @@ export const projects = [
       "/images/projects/safco/05-payment-methods.jpeg",
       "/images/projects/safco/06-profile.jpeg",
       "/images/projects/safco/07-dashboard-photo.jpeg",
-      "/images/projects/safco/01-splash.jpeg",
+      "/images/projects/safco/08-login.jpeg",
     ],
     screenLabels: [
       "Dashboard",
@@ -111,7 +111,7 @@ export const projects = [
       "Payment methods",
       "Profile",
       "Dashboard photo",
-      "Splash",
+      "Login",
     ],
     categories: ["All", "Mobile Apps", "Full Stack", "Fintech", "Admin", "UI"],
     stack: [
