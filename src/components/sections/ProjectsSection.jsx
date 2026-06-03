@@ -78,9 +78,8 @@ const ProjectsSection = () => {
 
       <motion.div
         variants={sectionReveal}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.18 }}
+        initial="visible"
+        animate="visible"
         className="space-y-8"
       >
         <div className="mx-auto max-w-4xl text-center">
