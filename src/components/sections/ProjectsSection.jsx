@@ -1,33 +1,32 @@
 "use client";
 
-import { useDeferredValue, useMemo, useState, useTransition } from "react";
-import { AnimatePresence, motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import InteractiveProjectCard from "@/components/projects/InteractiveProjectCard";
+import { useDeferredValue, useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { AnimatePresence } from "framer-motion";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ProjectRow from "@/components/projects/ProjectRow";
 import ProjectDetailsModal from "@/components/projects/ProjectDetailsModal";
 import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
-import { sectionReveal, staggerContainer } from "@/components/projects/animations";
 import ProjectFilter from "@/components/ui/ProjectFilter";
+import Badge from "@/components/ui/Badge";
+import Card from "@/components/ui/Card";
 import { projectCategories, projects } from "@/data/projects";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
   const [isPending, startTransition] = useTransition();
   const deferredCategory = useDeferredValue(activeCategory);
-  const cursorX = useMotionValue(50);
-  const cursorY = useMotionValue(20);
-  const cursorGlow = useMotionTemplate`radial-gradient(circle at ${cursorX}% ${cursorY}%, rgba(103,232,249,0.18), transparent 34%)`;
+  const listRef = useRef(null);
+  const hasRevealedRef = useRef(false);
 
   const visibleProjects = useMemo(
     () => projects.filter((project) => project.categories.includes(deferredCategory)),
     [deferredCategory]
   );
-
-  const featuredStats = [
-    { label: "Featured Builds", value: `${projects.length}` },
-    { label: "Mobile + Web", value: "2 Platforms" },
-    { label: "Depth", value: "Case Studies" },
-  ];
 
   const handleCategoryChange = (nextCategory) => {
     startTransition(() => {
@@ -35,125 +34,102 @@ const ProjectsSection = () => {
     });
   };
 
-  const handlePointerMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    cursorX.set(((event.clientX - rect.left) / rect.width) * 100);
-    cursorY.set(((event.clientY - rect.top) / rect.height) * 100);
-  };
+  // Scroll reveal: rows fade/slide in the first time the list enters the viewport.
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const rows = gsap.utils.toArray("[data-project-row]", listRef.current);
+      if (!rows.length) return undefined;
+
+      if (reduceMotion) {
+        gsap.set(rows, { opacity: 1, y: 0 });
+        hasRevealedRef.current = true;
+        return undefined;
+      }
+
+      gsap.set(rows, { opacity: 0, y: 36 });
+
+      const triggers = ScrollTrigger.batch(rows, {
+        start: "top 88%",
+        once: true,
+        onEnter: (batchTargets) =>
+          gsap.to(batchTargets, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.12,
+          }),
+      });
+      hasRevealedRef.current = true;
+
+      return () => triggers.forEach((trigger) => trigger.kill());
+    },
+    { scope: listRef, dependencies: [] }
+  );
+
+  // Filter changes: the section is already in view, so a direct stagger-in is enough (no scroll trigger needed).
+  useEffect(() => {
+    if (!hasRevealedRef.current || isPending) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const rows = gsap.utils.toArray("[data-project-row]", listRef.current);
+    if (!rows.length || reduceMotion) return;
+
+    gsap.fromTo(
+      rows,
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.06 }
+    );
+  }, [visibleProjects, isPending]);
 
   return (
-    <section
-      className="section-spacing relative min-w-0 overflow-hidden py-4"
-      id="projects"
-      onPointerMove={handlePointerMove}
-    >
-      <motion.div
-        aria-hidden="true"
-        style={{ background: cursorGlow }}
-        className="pointer-events-none absolute inset-0 -z-10"
-      />
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        {Array.from({ length: 14 }).map((_, index) => (
-          <motion.span
-            key={index}
-            animate={{
-              y: [0, -18, 0],
-              opacity: [0.18, 0.5, 0.18],
-              scale: [1, 1.18, 1],
-            }}
-            transition={{
-              duration: 5 + (index % 4),
-              repeat: Infinity,
-              delay: index * 0.28,
-              ease: "easeInOut",
-            }}
-            className="absolute h-1 w-1 rounded-full bg-cyan-100/70 shadow-[0_0_18px_rgba(125,211,252,0.76)]"
-            style={{
-              left: `${(index * 19) % 96}%`,
-              top: `${12 + ((index * 17) % 72)}%`,
-            }}
+    <section className="section-spacing relative min-w-0" id="projects">
+      <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
+        <Badge variant="accent" className="mx-auto lg:mx-0">
+          Projects
+        </Badge>
+        <h2 className="text-balance mt-5 font-display text-3xl font-medium leading-tight text-fg sm:text-5xl">
+          Selected work
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-fg-muted sm:text-lg sm:leading-8 lg:mx-0">
+          {projects.length} builds spanning mobile products, backend integrations, and
+          product-minded interfaces.
+        </p>
+      </div>
+
+      <div className="mt-10 flex gap-2 overflow-x-auto pb-2 sm:mt-12 sm:flex-wrap sm:justify-center sm:overflow-visible lg:justify-start">
+        {projectCategories.map((category) => (
+          <ProjectFilter
+            key={category}
+            label={category}
+            active={activeCategory === category}
+            onClick={handleCategoryChange}
           />
         ))}
       </div>
 
-      <motion.div
-        variants={sectionReveal}
-        initial="visible"
-        animate="visible"
-        className="space-y-8"
-      >
-        <div className="mx-auto max-w-4xl text-center">
-          <p className="section-kicker mx-auto">Projects</p>
-          <h2 className="section-title mt-5 text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-            Interactive builds designed to feel polished, useful, and production-minded.
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-lg sm:leading-8">
-            A premium project showcase with real app flows, architecture notes, screenshots,
-            performance thinking, and recruiter-friendly details.
-          </p>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-3">
-          {featuredStats.map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-[24px] border border-white/10 bg-white/[0.055] p-5 text-center shadow-soft backdrop-blur-2xl"
-            >
-              <p className="text-2xl font-bold text-white">{stat.value}</p>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible">
-          {projectCategories.map((category) => (
-            <ProjectFilter
-              key={category}
-              label={category}
-              active={activeCategory === category}
-              onClick={handleCategoryChange}
+      <div ref={listRef} className="mt-4 min-w-0 sm:mt-6">
+        {isPending ? (
+          Array.from({ length: 3 }).map((_, index) => <ProjectSkeleton key={index} />)
+        ) : visibleProjects.length ? (
+          visibleProjects.map((project, index) => (
+            <ProjectRow
+              key={project.id}
+              project={project}
+              index={index}
+              onOpen={setSelectedProject}
             />
-          ))}
-        </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={deferredCategory}
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0, y: 16, transition: { duration: 0.18 } }}
-            className="min-w-0"
-          >
-            {isPending ? (
-              <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <ProjectSkeleton key={index} />
-                ))}
-              </div>
-            ) : visibleProjects.length ? (
-              <div className="grid min-w-0 gap-6 md:grid-cols-2 xl:grid-cols-3">
-                {visibleProjects.map((project) => (
-                  <InteractiveProjectCard
-                    key={project.id}
-                    project={project}
-                    onOpen={setSelectedProject}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="panel mx-auto max-w-2xl p-8 text-center">
-                <p className="text-2xl font-bold text-white">No projects in this filter yet.</p>
-                <p className="mt-3 text-sm leading-7 text-slate-400">
-                  Try another category to explore the full project library.
-                </p>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </motion.div>
+          ))
+        ) : (
+          <Card className="mx-auto max-w-2xl p-8 text-center">
+            <p className="text-2xl font-bold text-fg">No projects in this filter yet.</p>
+            <p className="mt-3 text-sm leading-7 text-fg-muted">
+              Try another category to explore the full project library.
+            </p>
+          </Card>
+        )}
+      </div>
 
       <AnimatePresence>
         {selectedProject ? (

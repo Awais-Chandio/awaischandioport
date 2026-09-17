@@ -1,83 +1,101 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionIntro from "@/components/ui/SectionIntro";
-import Reveal from "@/components/ui/Reveal";
 import { aboutParagraphs, aboutPoints, personalInfo } from "@/data/portfolio";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const AboutSection = () => {
+  const sectionRef = useRef(null);
+
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const targets = gsap.utils.toArray("[data-about-reveal]", sectionRef.current);
+      if (!targets.length) return undefined;
+
+      if (reduceMotion) {
+        gsap.set(targets, { opacity: 1, y: 0 });
+        return undefined;
+      }
+
+      gsap.set(targets, { opacity: 0, y: 32 });
+
+      const trigger = ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 82%",
+        once: true,
+        onEnter: () =>
+          gsap.to(targets, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.12,
+          }),
+      });
+
+      return () => trigger.kill();
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
-      className="section-spacing grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-start"
+      ref={sectionRef}
+      className="section-spacing grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start lg:gap-16"
       id="about"
     >
-      <Reveal className="order-2 space-y-5 lg:order-1">
-        <div className="panel overflow-hidden p-3 sm:p-6">
-          <div className="relative aspect-square overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/70 sm:rounded-[28px] md:aspect-[5/4] lg:aspect-[4/5]">
-            <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(45,212,191,0.12),transparent_50%,rgba(56,189,248,0.16))]" />
-            <Image
-              src={personalInfo.aboutImage}
-              alt={`Portrait of ${personalInfo.name}`}
-              width={900}
-              height={900}
-              sizes="(max-width: 1024px) 100vw, 42vw"
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
+      <div data-about-reveal className="order-2 min-w-0 lg:order-1">
+        <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-line/10 bg-canvas-soft">
+          <Image
+            src={personalInfo.aboutImage}
+            alt={`Portrait of ${personalInfo.name}`}
+            fill
+            sizes="(max-width: 1024px) 100vw, 40vw"
+            className="object-cover object-center"
+          />
+        </div>
+        <p className="mt-5 text-sm leading-7 text-fg-muted">
+          {personalInfo.role} &middot; {personalInfo.location}
+          <br />
+          Currently at {personalInfo.currentCompany}
+        </p>
+      </div>
+
+      <div className="order-1 min-w-0 lg:order-2">
+        <div data-about-reveal>
+          <SectionIntro
+            eyebrow="About"
+            title="I build app experiences that are clear, connected, and easy to maintain."
+            description="My work sits between interface polish, product logic, and reliable integration with the services behind the app."
+          />
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-          <div className="panel p-4 sm:p-5">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
-              Title
+        <div data-about-reveal className="mt-8 space-y-5">
+          {aboutParagraphs.map((paragraph) => (
+            <p key={paragraph} className="text-base leading-8 text-fg-muted sm:text-lg">
+              {paragraph}
             </p>
-            <p className="mt-3 text-lg font-semibold text-white">{personalInfo.role}</p>
-          </div>
-          <div className="panel p-4 sm:p-5">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
-              Strength
-            </p>
-            <p className="mt-3 text-lg font-semibold text-white">Feature Flow</p>
-          </div>
-          <div className="panel p-4 sm:p-5">
-            <p className="text-[11px] uppercase tracking-[0.28em] text-slate-400">
-              Toolkit
-            </p>
-            <p className="mt-3 text-lg font-semibold text-white">APIs + Data</p>
-          </div>
+          ))}
         </div>
-      </Reveal>
 
-      <Reveal delay={0.08} className="order-1 space-y-8 lg:order-2">
-        <SectionIntro
-          eyebrow="About"
-          title="I build app experiences that are clear, connected, and easy to maintain."
-          description="My work sits between interface polish, product logic, and reliable integration with the services behind the app."
-        />
-
-        <div className="panel p-5 sm:p-8">
-          <div className="space-y-5">
-            {aboutParagraphs.map((paragraph) => (
-              <p key={paragraph} className="text-base leading-8 text-slate-300 sm:text-lg">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="mt-8 grid gap-4">
-            {aboutPoints.map((item) => (
-              <div
-                key={item}
-                className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/5 px-4 py-4 sm:rounded-[24px]"
-              >
-                <CheckCircleIcon className="mt-0.5 h-5 w-5 shrink-0 text-sky-300" />
-                <p className="text-sm leading-7 text-slate-300">{item}</p>
-              </div>
-            ))}
-          </div>
+        <div data-about-reveal className="mt-10 border-t border-line/10">
+          {aboutPoints.map((item, index) => (
+            <div key={item} className="flex items-start gap-5 border-b border-line/10 py-5">
+              <span className="shrink-0 font-display text-sm text-fg-dim/50 tabular-nums">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <p className="text-sm leading-7 text-fg-muted sm:text-base">{item}</p>
+            </div>
+          ))}
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 };

@@ -11,11 +11,11 @@ import SkillsSection from "@/components/sections/SkillsSection";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden bg-canvas text-white">
+    <main className="relative min-h-screen w-full overflow-x-hidden bg-canvas text-fg">
       <AnimatedBackground />
       <Navbar />
 
-      <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-14 px-4 pb-16 pt-24 sm:gap-20 sm:px-6 sm:pb-20 md:gap-24 lg:gap-28 lg:px-8 lg:pt-32">
+      <div className="container-page relative flex flex-col gap-14 pb-16 pt-24 sm:gap-20 sm:pb-20 md:gap-24 lg:gap-28 lg:pt-32">
         <HeroSection />
         <AboutSection />
         <SkillsSection />

@@ -1,172 +1,189 @@
 "use client";
 
-import { useRef } from "react";
-import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
 import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  ArrowDownTrayIcon,
-  ArrowUpRightIcon,
-  CodeBracketSquareIcon,
-  SparklesIcon,
-} from "@heroicons/react/24/outline";
-import {
-  heroHighlights,
-  heroSpotlights,
-  personalInfo,
-  socials,
-} from "@/data/portfolio";
+import { ArrowDownTrayIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import Button from "@/components/ui/Button";
+import { personalInfo, socials } from "@/data/portfolio";
+
+gsap.registerPlugin(SplitText);
 
 const ThreeScene = dynamic(() => import("@/components/ThreeScene"), {
   ssr: false,
-  loading: () => (
-    <div className="flex h-[16.5rem] items-center justify-center text-xs uppercase tracking-[0.28em] text-cyan-100 sm:h-[23rem] lg:h-[27rem]">
-      Loading
-    </div>
-  ),
+  loading: () => <div className="h-full w-full" />,
 });
 
 const HeroSection = () => {
   const sectionRef = useRef(null);
+  const rootRef = useRef(null);
+  const headingRef = useRef(null);
+  const [showScene, setShowScene] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"],
   });
+  const visualY = useTransform(scrollYProgress, [0, 1], [0, -22]);
 
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, -18]);
-  const cardRotate = useTransform(scrollYProgress, [0, 1], [0, 1.4]);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const handleChange = () => setShowScene(mediaQuery.matches);
+
+    handleChange();
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      const fadeTargets = gsap.utils.toArray("[data-hero-fade]", rootRef.current);
+
+      if (reduceMotion) {
+        gsap.set(fadeTargets, { opacity: 1, y: 0 });
+        return undefined;
+      }
+
+      gsap.set(fadeTargets, { opacity: 0, y: 20 });
+
+      let split;
+      if (headingRef.current) {
+        split = SplitText.create(headingRef.current, {
+          type: "lines",
+          mask: "lines",
+          autoSplit: true,
+          onSplit(self) {
+            return gsap.from(self.lines, {
+              yPercent: 110,
+              opacity: 0,
+              duration: 0.9,
+              ease: "power3.out",
+              stagger: 0.08,
+            });
+          },
+        });
+      }
+
+      gsap.to(fadeTargets, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
+        stagger: 0.08,
+        delay: 0.45,
+      });
+
+      return () => split?.revert();
+    },
+    { scope: rootRef }
+  );
 
   return (
     <section
       ref={sectionRef}
-      className="section-spacing grid min-w-0 gap-8 overflow-hidden lg:grid-cols-[minmax(0,1fr)_minmax(22rem,0.92fr)] lg:items-center lg:gap-12"
       id="home"
+      className="section-spacing relative flex min-w-0 flex-col justify-center overflow-hidden pb-6 pt-2 lg:min-h-[78vh] lg:pb-12"
     >
-      <motion.div
-        initial={{ opacity: 0, y: 28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="w-full min-w-0 max-w-full space-y-5 overflow-hidden text-center sm:space-y-7 lg:text-left"
+      <div
+        ref={rootRef}
+        className="grid w-full min-w-0 gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12"
       >
-        <div className="section-kicker mx-auto lg:mx-0">
-          <SparklesIcon className="h-4 w-4" />
-          Portfolio
-        </div>
-
-        <div className="space-y-4 sm:space-y-6">
-          <div className="flex flex-wrap justify-center gap-2 text-xs text-slate-300 sm:gap-3 sm:text-sm lg:justify-start">
-            <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 sm:px-4 sm:py-2">
-              Mobile Products
+        <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-col items-center gap-7 text-center lg:mx-0 lg:max-w-none lg:items-start lg:text-left">
+          <div
+            data-hero-fade
+            className="inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-fg-muted"
+          >
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
-            <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1.5 text-cyan-100 sm:px-4 sm:py-2">
-              React Native
-            </span>
-            <span className="rounded-full border border-teal-300/20 bg-teal-300/10 px-3 py-1.5 text-teal-100 sm:px-4 sm:py-2">
-              Backend-connected UI
-            </span>
+            Available for freelance &amp; contract work
           </div>
 
-          <div className="mx-auto max-w-[22rem] space-y-3 sm:max-w-4xl sm:space-y-4 lg:mx-0">
-            <h1 className="section-title text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-              {personalInfo.name}
-            </h1>
-            <p className="text-lg font-semibold leading-tight text-slate-100 sm:text-2xl lg:text-3xl">
-              <span className="text-gradient block break-words">{personalInfo.role}</span>
-            </p>
-          </div>
+          <h1
+            ref={headingRef}
+            className="text-balance w-full font-display text-[clamp(2.75rem,9vw,7rem)] font-medium leading-[0.96] tracking-tight text-fg"
+          >
+            {personalInfo.name}
+          </h1>
 
-          <p className="mx-auto max-w-[22rem] text-sm leading-7 text-slate-300 sm:max-w-2xl sm:text-lg sm:leading-8 lg:mx-0">
+          <p
+            data-hero-fade
+            className="font-display text-[clamp(1.15rem,2.6vw,1.75rem)] font-medium text-accent"
+          >
+            {personalInfo.role} — {personalInfo.specialization}
+          </p>
+
+          <p
+            data-hero-fade
+            className="max-w-xl text-sm leading-7 text-fg-muted sm:text-lg sm:leading-8"
+          >
             {personalInfo.subheadline}
           </p>
 
-          <p className="mx-auto hidden max-w-2xl text-sm leading-7 text-slate-400 sm:block sm:text-base sm:leading-8 lg:mx-0">
-            {personalInfo.intro}
-          </p>
-        </div>
-
-        <div className="hidden max-w-[21rem] gap-3 sm:grid sm:max-w-2xl">
-          {heroHighlights.map((item) => (
-            <motion.div
-              key={item}
-              whileHover={{ x: 4, scale: 1.005 }}
-              className="flex items-start gap-3 rounded-[22px] border border-white/10 bg-white/5 px-4 py-4 text-sm text-slate-200 backdrop-blur-xl"
-            >
-              <CodeBracketSquareIcon className="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" />
-              <span>{item}</span>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mx-auto flex max-w-[22rem] flex-col gap-3 sm:max-w-2xl sm:flex-row sm:flex-wrap lg:mx-0">
-          <Link href="#projects" className="button-primary magnetic w-full sm:w-auto">
-            View Projects
-            <ArrowUpRightIcon className="h-4 w-4" />
-          </Link>
-          <Link href="#contact" className="button-secondary magnetic w-full sm:w-auto">
-            Contact Me
-          </Link>
-          <a href={personalInfo.resumeUrl} className="button-ghost magnetic hidden w-full sm:inline-flex sm:w-auto">
-            <ArrowDownTrayIcon className="h-4 w-4" />
-            Download CV
-          </a>
-        </div>
-
-        <div className="hidden flex-wrap items-center gap-3 text-sm text-slate-300 sm:flex">
-          {socials.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              target={item.href.startsWith("http") ? "_blank" : undefined}
-              rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              className="rounded-full border border-white/10 bg-white/5 px-4 py-2 transition hover:border-cyan-300/40 hover:text-white"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 34 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.15 }}
-        className="relative min-w-0 overflow-hidden lg:overflow-visible"
-      >
-        <div className="pointer-events-none absolute inset-x-[18%] top-10 h-64 rounded-full bg-cyan-400/[0.14] blur-3xl" />
-        <div className="pointer-events-none absolute bottom-10 right-8 h-32 w-32 rounded-full bg-teal-300/[0.12] blur-3xl" />
-
-        <motion.div
-          style={{ y: cardY, rotate: cardRotate }}
-          className="panel-strong relative mx-auto max-w-[38rem] overflow-hidden p-3 sm:p-4 lg:max-w-none"
-        >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(125,211,252,0.18),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(45,212,191,0.12),transparent_30%),linear-gradient(135deg,rgba(168,85,247,0.08),transparent_42%)]" />
-          <div className="relative overflow-hidden rounded-[22px] border border-white/10 bg-slate-950/55">
-            <ThreeScene />
-            <div className="pointer-events-none absolute left-4 top-4 rounded-full border border-cyan-100/15 bg-slate-950/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-100 shadow-soft backdrop-blur-xl">
-              Mobile Stack
-            </div>
+          <div data-hero-fade className="flex flex-wrap items-center justify-center gap-4 pt-2 lg:justify-start">
+            <Button href="#projects" variant="primary" size="lg" magnetic>
+              View Projects
+              <ArrowUpRightIcon className="h-4 w-4" />
+            </Button>
+            <Button href="#contact" variant="secondary" size="lg">
+              Let&apos;s Talk
+            </Button>
           </div>
-        </motion.div>
 
-        <div className="relative mt-6 grid gap-4 sm:grid-cols-3">
-          {heroSpotlights.map((item, index) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.45, delay: 0.3 + index * 0.1 }}
-              className="panel p-5"
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-slate-400">
+          <div
+            data-hero-fade
+            className="text-xs font-medium uppercase tracking-[0.2em] text-fg-dim"
+          >
+            {personalInfo.location}
+            <span className="mx-2" aria-hidden="true">
+              ·
+            </span>
+            {personalInfo.currentCompany}
+          </div>
+
+          <div
+            data-hero-fade
+            className="flex flex-wrap items-center justify-center gap-5 text-sm font-medium text-fg-muted lg:justify-start"
+          >
+            {socials.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                className="border-b border-transparent pb-0.5 transition duration-300 hover:border-accent hover:text-fg"
+              >
                 {item.label}
-              </p>
-              <p className="mt-3 text-lg font-semibold text-white">{item.value}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-400">{item.detail}</p>
-            </motion.div>
-          ))}
+              </a>
+            ))}
+            <a
+              href={personalInfo.resumeUrl}
+              className="inline-flex items-center gap-1.5 border-b border-transparent pb-0.5 transition duration-300 hover:border-accent hover:text-fg"
+            >
+              Resume
+              <ArrowDownTrayIcon className="h-3.5 w-3.5" />
+            </a>
+          </div>
         </div>
-      </motion.div>
+
+        {showScene ? (
+          <motion.div
+            style={{ y: visualY }}
+            className="relative mx-auto hidden aspect-square w-full max-w-md lg:mx-0 lg:block"
+          >
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-full bg-accent/[0.09] blur-3xl" />
+            <ThreeScene />
+          </motion.div>
+        ) : null}
+      </div>
     </section>
   );
 };

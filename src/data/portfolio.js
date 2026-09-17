@@ -20,7 +20,7 @@ export const personalInfo = {
   subheadline:
     "I turn product ideas into polished app flows, reliable integrations, and maintainable interfaces.",
   intro:
-    "My toolkit includes React Native, Flutter, Supabase, Firebase, SQLite, API work, and push notifications.",
+    "React Native and Flutter on the interface, Supabase, Firebase, and SQLite on the data layer, tied together with clean API integrations and push notifications.",
 };
 
 export const navLinks = [
@@ -29,6 +29,7 @@ export const navLinks = [
   { title: "Skills", path: "#skills" },
   { title: "Projects", path: "#projects" },
   { title: "Journey", path: "#experience" },
+  { title: "Education", path: "#education" },
   { title: "Contact", path: "#contact" },
 ];
 

@@ -1,90 +1,102 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import {
   BoltIcon,
   CircleStackIcon,
   CommandLineIcon,
   DevicePhoneMobileIcon,
 } from "@heroicons/react/24/outline";
-import dynamic from "next/dynamic";
-import Reveal from "@/components/ui/Reveal";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionIntro from "@/components/ui/SectionIntro";
+import Card from "@/components/ui/Card";
 import { skillGroups } from "@/data/portfolio";
 
-const icons = [
-  DevicePhoneMobileIcon,
-  BoltIcon,
-  CircleStackIcon,
-  CommandLineIcon,
-];
+gsap.registerPlugin(ScrollTrigger);
 
-const SkillCloud = dynamic(() => import("@/components/SkillCloud"), {
-  ssr: false,
-});
+const icons = [DevicePhoneMobileIcon, BoltIcon, CircleStackIcon, CommandLineIcon];
 
 const SkillsSection = () => {
-  const [showSkillCloud, setShowSkillCloud] = useState(false);
+  const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const handleChange = () => setShowSkillCloud(mediaQuery.matches);
+  useGSAP(
+    () => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const cards = gsap.utils.toArray("[data-skill-card]", sectionRef.current);
+      if (!cards.length) return undefined;
 
-    handleChange();
-    mediaQuery.addEventListener("change", handleChange);
+      if (reduceMotion) {
+        gsap.set(cards, { opacity: 1, y: 0 });
+        return undefined;
+      }
 
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+      gsap.set(cards, { opacity: 0, y: 28 });
+
+      const triggers = ScrollTrigger.batch(cards, {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.1,
+          }),
+      });
+
+      return () => triggers.forEach((trigger) => trigger.kill());
+    },
+    { scope: sectionRef }
+  );
 
   return (
-    <section className="section-spacing min-w-0 space-y-10 overflow-hidden" id="skills">
+    <section ref={sectionRef} className="section-spacing min-w-0" id="skills">
       <SectionIntro
         eyebrow="Skills"
         title="Skills grouped by the job they do in a real product."
         description="From screen structure to service integration, these are the areas I use most when taking a feature from idea to working flow."
       />
 
-      <div className="grid min-w-0 gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-5">
-          {skillGroups.map((group, index) => {
-            const Icon = icons[index % icons.length];
+      <div className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-2">
+        {skillGroups.map((group, index) => {
+          const Icon = icons[index % icons.length];
 
-            return (
-              <Reveal key={group.title} delay={index * 0.06}>
-                <div className="panel group h-full p-5 transition duration-300 hover:-translate-y-1 hover:border-cyan-300/30 sm:p-7">
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-300/20 bg-cyan-300/10 text-cyan-100">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <span className="rounded-full border border-white/10 px-3 py-1 text-xs uppercase tracking-[0.24em] text-slate-400">
-                      Capability
-                    </span>
-                  </div>
-
-                  <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-2xl">{group.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-400">{group.description}</p>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {group.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-slate-200"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+          return (
+            <Card
+              key={group.title}
+              data-skill-card
+              className="p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/30 sm:p-7"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">
+                  <Icon className="h-6 w-6" />
                 </div>
-              </Reveal>
-            );
-          })}
-        </div>
+                <span className="rounded-full border border-line/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-fg-dim">
+                  Capability
+                </span>
+              </div>
 
-        {showSkillCloud ? (
-          <Reveal delay={0.12} className="hidden lg:block">
-            <SkillCloud groups={skillGroups} />
-          </Reveal>
-        ) : null}
+              <h3 className="mt-6 font-display text-xl font-medium text-fg sm:text-2xl">
+                {group.title}
+              </h3>
+              <p className="mt-3 text-sm leading-7 text-fg-muted">{group.description}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {group.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-line/10 bg-fg/[0.04] px-3 py-1.5 text-xs font-medium text-fg-muted"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </Card>
+          );
+        })}
       </div>
     </section>
   );

@@ -1,16 +1,17 @@
+import Badge from "./Badge";
+
 const SectionIntro = ({ eyebrow, title, description, align = "left" }) => {
   const alignment = align === "center" ? "mx-auto text-center" : "text-left";
-  const width = align === "center" ? "max-w-3xl" : "max-w-3xl";
 
   return (
-    <div className={`${alignment} ${width}`}>
-      <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.34em] text-sky-200">
+    <div className={`${alignment} max-w-3xl`}>
+      <Badge variant="accent" size="sm" className={align === "center" ? "mx-auto" : ""}>
         {eyebrow}
-      </p>
-      <h2 className="section-title text-2xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
+      </Badge>
+      <h2 className="text-balance mt-4 font-display text-2xl font-medium leading-tight text-fg sm:text-4xl lg:text-5xl">
         {title}
       </h2>
-      <p className="mt-4 text-sm leading-7 text-slate-400 sm:mt-5 sm:text-lg sm:leading-8">
+      <p className="mt-4 text-sm leading-7 text-fg-muted sm:mt-5 sm:text-lg sm:leading-8">
         {description}
       </p>
     </div>
