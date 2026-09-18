@@ -1,0 +1,53 @@
+---
+title: "Structuring Navigation and State in a React Native App"
+slug: "react-native-navigation-state"
+date: "2026-09-18"
+category: "React Native / Mobile Engineering"
+excerpt: "TODO — one or two sentences framing the problem this post solves for the reader. This text appears on the /writing listing card."
+relatedService: "mobile-app-development"
+draft: true
+---
+
+> **OUTLINE ONLY — NEEDS AWAIS'S REVIEW BEFORE PUBLISHING.**
+> The topic and section structure are a starting proposal, not a finished
+> argument. The technical positions below are deliberately left blank rather
+> than guessed at — fill them in from your own experience, then set
+> `draft: false`.
+
+## Why this keeps coming up
+
+- The symptom: what does a badly structured React Native app actually feel like to work in?
+- State your position in one sentence. The rest of the post defends it.
+
+## Navigation structure
+
+- Separating the authenticated and unauthenticated stacks — why this is worth doing on day one.
+- When a bottom tab navigator is the right container, and when it is not.
+- Where nested navigators start to hurt, in your experience.
+- Code snippet: a navigator setup you would actually ship. (Fenced blocks are styled — use ```tsx.)
+
+## Choosing a state tool
+
+- Context API: where it is genuinely enough.
+- Zustand: what it solves that Context does not.
+- Redux: when the ceremony earns its keep.
+- Be concrete about the decision rule you use. Avoid "it depends" without saying what it depends on.
+
+## Where state should live
+
+- Server data vs. UI state vs. session state — how you keep them apart.
+- What belongs in persisted storage, and what should never go there.
+- A mistake you have actually made here, and what it cost.
+
+## What this looks like in practice
+
+- Walk through one real screen or flow from your own work.
+- Only reference projects you can point at. Link the case study.
+
+## Notes before publishing
+
+- [ ] Confirm the topic is one you want to be known for.
+- [ ] Replace every bullet with your own position.
+- [ ] Verify all code snippets compile against the versions you name.
+- [ ] Write the `excerpt` in the frontmatter.
+- [ ] Set `draft: false`.

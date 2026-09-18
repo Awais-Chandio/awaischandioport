@@ -10,9 +10,11 @@ export const projectCategories = [
   "UI",
 ];
 
-export const projects = [
+const projectRecords = [
   {
     id: "foodapp",
+    featured: false,
+    order: 3,
     title: "FoodApp - Food Ordering & Delivery App",
     status: "In Progress",
     categoryLabel: "Full Stack Mobile App",
@@ -89,6 +91,8 @@ export const projects = [
   },
   {
     id: "safco-e-credit",
+    featured: true,
+    order: 1,
     title: "SAFCO E-Credit App / Safco eCredit",
     status: "Live",
     categoryLabel: "Fintech Microfinance App",
@@ -161,6 +165,8 @@ export const projects = [
   },
   {
     id: "queueless",
+    featured: false,
+    order: 2,
     title: "QueueLess",
     status: "MVP Functional",
     categoryLabel: "Full Stack Mobile App",
@@ -215,6 +221,8 @@ export const projects = [
   },
   {
     id: "ai-saas-dashboard",
+    featured: false,
+    order: 7,
     title: "AI SaaS Dashboard",
     status: "Concept",
     categoryLabel: "SaaS Dashboard",
@@ -256,6 +264,8 @@ export const projects = [
   },
   {
     id: "ecommerce-platform",
+    featured: false,
+    order: 5,
     title: "E-Commerce Platform",
     status: "Completed",
     categoryLabel: "Full Stack",
@@ -297,6 +307,8 @@ export const projects = [
   },
   {
     id: "portfolio-site",
+    featured: false,
+    order: 6,
     title: "Portfolio Website",
     status: "Completed",
     categoryLabel: "Portfolio",
@@ -339,6 +351,8 @@ export const projects = [
   },
   {
     id: "bidbuyy",
+    featured: false,
+    order: 4,
     title: "BidBuyy Auction",
     status: "Completed",
     categoryLabel: "Auction App",
@@ -380,3 +394,29 @@ export const projects = [
     accent: "from-blue-300 via-indigo-300 to-violet-300",
   },
 ];
+
+/**
+ * Display order for the Work section, controlled entirely by the two fields on
+ * each record above:
+ *
+ *   featured: true  — pins the record to the top, ahead of every `order` value.
+ *   order: <number> — sequences the rest, lowest first.
+ *
+ * Ties and gaps are safe: records sharing a value keep their order in this file.
+ * Nothing else reads position — Services and Writing resolve projects by `id` —
+ * so reordering here is the whole change.
+ */
+export const projects = [...projectRecords]
+  .map((project, index) => ({ project, index }))
+  .sort((a, b) => {
+    const featured = Number(b.project.featured === true) - Number(a.project.featured === true);
+    if (featured) return featured;
+
+    // A record with no `order` sorts after every record that has one.
+    const orderA = Number.isFinite(a.project.order) ? a.project.order : Infinity;
+    const orderB = Number.isFinite(b.project.order) ? b.project.order : Infinity;
+    if (orderA !== orderB) return orderA - orderB;
+
+    return a.index - b.index;
+  })
+  .map(({ project }) => project);

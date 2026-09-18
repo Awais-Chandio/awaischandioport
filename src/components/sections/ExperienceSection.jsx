@@ -64,16 +64,16 @@ const ExperienceSection = () => {
       id="experience"
     >
       <SectionIntro
-        eyebrow="Experience / Journey"
-        title="Current work and the learning path behind it."
-        description="A practical mix of product delivery, service integration, interface work, and continuous improvement through shipped features and personal builds."
+        eyebrow="Experience"
+        title="Where I have worked."
+        description="Roles, employers, and dates as they appear on my resume."
       />
 
       <div className="relative">
         <div className="absolute left-4 top-0 hidden h-full w-px bg-line/10 lg:block" />
         <div
           ref={lineRef}
-          className="absolute left-4 top-0 hidden h-full w-px bg-accent/70 shadow-[0_0_20px_rgba(255,91,46,0.5)] lg:block"
+          className="absolute left-4 top-0 hidden h-full w-px bg-accent/70 shadow-glow lg:block"
         />
 
         {experience.map((item, index) => (
@@ -83,7 +83,7 @@ const ExperienceSection = () => {
             className="grid gap-4 border-b border-line/10 py-8 first:pt-0 last:border-b-0 lg:grid-cols-[80px_1fr] lg:items-start"
           >
             <div className="hidden justify-center lg:flex">
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/20 bg-canvas font-display text-sm text-accent shadow-[0_0_28px_rgba(255,91,46,0.18)]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-accent/20 bg-canvas font-display text-sm text-accent shadow-glow-soft">
                 {String(index + 1).padStart(2, "0")}
               </span>
             </div>
@@ -95,18 +95,29 @@ const ExperienceSection = () => {
               <h3 className="mt-3 font-display text-xl font-medium leading-tight text-fg sm:text-2xl">
                 {item.title}
               </h3>
-              <p className="mt-2 text-base font-medium text-accent">{item.company}</p>
+              <p className="mt-2 text-sm font-medium text-accent sm:text-base">
+                {item.company}
+                {item.location ? (
+                  <span className="text-fg-dim"> &middot; {item.location}</span>
+                ) : null}
+              </p>
 
-              <p className="mt-5 text-sm leading-7 text-fg-muted">{item.summary}</p>
+              {/* Summary and bullets are optional: an entry states only what the
+                  resume states for that role, rather than padding it out. */}
+              {item.summary ? (
+                <p className="mt-5 text-sm leading-7 text-fg-muted">{item.summary}</p>
+              ) : null}
 
-              <div className="mt-6 grid gap-3">
-                {item.bullets.map((bullet) => (
-                  <div key={bullet} className="flex gap-3 text-sm leading-7 text-fg-muted">
-                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    <span>{bullet}</span>
-                  </div>
-                ))}
-              </div>
+              {item.bullets?.length ? (
+                <div className="mt-6 grid gap-3">
+                  {item.bullets.map((bullet) => (
+                    <div key={bullet} className="flex gap-3 text-sm leading-7 text-fg-muted">
+                      <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                      <span>{bullet}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </div>
         ))}

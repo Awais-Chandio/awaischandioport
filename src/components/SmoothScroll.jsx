@@ -23,6 +23,9 @@ const SmoothScroll = () => {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       syncTouch: false,
+      // Route in-page anchor clicks through Lenis; otherwise the browser jumps
+      // the real scroll position while Lenis is still animating its own.
+      anchors: { offset: -96 },
     });
 
     // Keep GSAP's ScrollTrigger in sync with Lenis's smoothed scroll position,
@@ -38,6 +41,21 @@ const SmoothScroll = () => {
     return () => {
       gsap.ticker.remove(tick);
       lenis.destroy();
+    };
+  }, []);
+
+  // Orientation changes and mobile URL-bar resizes alter every trigger's start/end.
+  // This runs on all viewports, including the ones where Lenis stays disabled.
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+    const onOrientation = () => window.setTimeout(refresh, 250);
+
+    window.addEventListener("orientationchange", onOrientation);
+    window.addEventListener("resize", refresh);
+
+    return () => {
+      window.removeEventListener("orientationchange", onOrientation);
+      window.removeEventListener("resize", refresh);
     };
   }, []);
 

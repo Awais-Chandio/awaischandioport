@@ -5,28 +5,75 @@ import { AnimatePresence } from "framer-motion";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ProjectRow from "@/components/projects/ProjectRow";
+import ProjectCard from "@/components/projects/ProjectCard";
 import ProjectDetailsModal from "@/components/projects/ProjectDetailsModal";
 import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
 import ProjectFilter from "@/components/ui/ProjectFilter";
-import Badge from "@/components/ui/Badge";
+import SectionIntro from "@/components/ui/SectionIntro";
 import Card from "@/components/ui/Card";
 import { projectCategories, projects } from "@/data/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ProjectsSection = () => {
+const ProjectsSection = ({ postsByProject = {} }) => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProject, setSelectedProject] = useState(null);
   const [isPending, startTransition] = useTransition();
   const deferredCategory = useDeferredValue(activeCategory);
   const listRef = useRef(null);
-  const hasRevealedRef = useRef(false);
+  // useGSAP below runs in a layout effect, so the cards are already hidden by
+  // the time the filter effect runs on mount. Skipping that first pass keeps the
+  // scroll reveal in charge of first paint instead of being cancelled by it.
+  const isFirstFilterPassRef = useRef(true);
+  // Radix restores focus to its trigger when `open` flips to false, but the
+  // dialog is unmounted by AnimatePresence instead, so that never runs. Keep
+  // the opening element and send focus back manually.
+  const triggerRef = useRef(null);
 
   const visibleProjects = useMemo(
     () => projects.filter((project) => project.categories.includes(deferredCategory)),
     [deferredCategory]
   );
+
+  // Deep link: /?project=<id> opens that case study directly, so Services and
+  // Writing can point at a specific project instead of the whole section.
+  // Read from location on mount rather than useSearchParams(), which would opt
+  // this statically rendered page into dynamic rendering.
+  useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get("project");
+    if (!requested) return;
+
+    const match = projects.find((project) => project.id === requested);
+    if (match) setSelectedProject(match);
+  }, []);
+
+  const openProject = (project) => {
+    triggerRef.current = document.activeElement;
+    setSelectedProject(project);
+  };
+
+  // Radix's own restore targets <Dialog.Trigger>, which this dialog does not
+  // use, so closing would otherwise drop focus to <body> — a keyboard visitor
+  // would land back at the top of the document. Deep-linked opens have no
+  // trigger, and a card can be filtered out while the dialog is up; in both
+  // cases there is nothing to return to, so Radix's default is left alone.
+  const restoreTriggerFocus = (event) => {
+    const trigger = triggerRef.current;
+    triggerRef.current = null;
+    if (!trigger?.isConnected) return;
+
+    event.preventDefault();
+    trigger.focus();
+  };
+
+  const closeProject = () => {
+    setSelectedProject(null);
+
+    // Drop the param so a refresh or a shared URL does not reopen the modal.
+    if (new URLSearchParams(window.location.search).has("project")) {
+      window.history.replaceState(null, "", `${window.location.pathname}#projects`);
+    }
+  };
 
   const handleCategoryChange = (nextCategory) => {
     startTransition(() => {
@@ -38,12 +85,11 @@ const ProjectsSection = () => {
   useGSAP(
     () => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const rows = gsap.utils.toArray("[data-project-row]", listRef.current);
+      const rows = gsap.utils.toArray("[data-project-card]", listRef.current);
       if (!rows.length) return undefined;
 
       if (reduceMotion) {
         gsap.set(rows, { opacity: 1, y: 0 });
-        hasRevealedRef.current = true;
         return undefined;
       }
 
@@ -61,8 +107,6 @@ const ProjectsSection = () => {
             stagger: 0.12,
           }),
       });
-      hasRevealedRef.current = true;
-
       return () => triggers.forEach((trigger) => trigger.kill());
     },
     { scope: listRef, dependencies: [] }
@@ -70,10 +114,14 @@ const ProjectsSection = () => {
 
   // Filter changes: the section is already in view, so a direct stagger-in is enough (no scroll trigger needed).
   useEffect(() => {
-    if (!hasRevealedRef.current || isPending) return;
+    if (isPending) return;
+    if (isFirstFilterPassRef.current) {
+      isFirstFilterPassRef.current = false;
+      return;
+    }
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const rows = gsap.utils.toArray("[data-project-row]", listRef.current);
+    const rows = gsap.utils.toArray("[data-project-card]", listRef.current);
     if (!rows.length || reduceMotion) return;
 
     gsap.fromTo(
@@ -85,20 +133,13 @@ const ProjectsSection = () => {
 
   return (
     <section className="section-spacing relative min-w-0" id="projects">
-      <div className="mx-auto max-w-3xl text-center lg:mx-0 lg:text-left">
-        <Badge variant="accent" className="mx-auto lg:mx-0">
-          Projects
-        </Badge>
-        <h2 className="text-balance mt-5 font-display text-3xl font-medium leading-tight text-fg sm:text-5xl">
-          Selected work
-        </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-fg-muted sm:text-lg sm:leading-8 lg:mx-0">
-          {projects.length} builds spanning mobile products, backend integrations, and
-          product-minded interfaces.
-        </p>
-      </div>
+      <SectionIntro
+        eyebrow="Projects"
+        title="Selected work"
+        description={`${projects.length} builds spanning mobile products, backend integrations, and product-minded interfaces.`}
+      />
 
-      <div className="mt-10 flex gap-2 overflow-x-auto pb-2 sm:mt-12 sm:flex-wrap sm:justify-center sm:overflow-visible lg:justify-start">
+      <div className="mt-10 flex gap-2 overflow-x-auto pb-2 sm:mt-12 sm:flex-wrap sm:overflow-visible">
         {projectCategories.map((category) => (
           <ProjectFilter
             key={category}
@@ -109,21 +150,22 @@ const ProjectsSection = () => {
         ))}
       </div>
 
-      <div ref={listRef} className="mt-4 min-w-0 sm:mt-6">
+      {/* Two columns from md up, one below: wide enough for a legible preview,
+          tight enough that the whole shelf can be scanned without scrolling
+          past it. The case study itself opens in a dialog. */}
+      <div
+        ref={listRef}
+        className="mt-6 grid min-w-0 gap-5 sm:mt-8 md:grid-cols-2 lg:gap-6"
+      >
         {isPending ? (
-          Array.from({ length: 3 }).map((_, index) => <ProjectSkeleton key={index} />)
+          Array.from({ length: 4 }).map((_, index) => <ProjectSkeleton key={index} />)
         ) : visibleProjects.length ? (
-          visibleProjects.map((project, index) => (
-            <ProjectRow
-              key={project.id}
-              project={project}
-              index={index}
-              onOpen={setSelectedProject}
-            />
+          visibleProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} onOpen={openProject} />
           ))
         ) : (
-          <Card className="mx-auto max-w-2xl p-8 text-center">
-            <p className="text-2xl font-bold text-fg">No projects in this filter yet.</p>
+          <Card className="p-8 text-center md:col-span-2">
+            <p className="text-xl font-bold text-fg sm:text-2xl">No projects in this filter yet.</p>
             <p className="mt-3 text-sm leading-7 text-fg-muted">
               Try another category to explore the full project library.
             </p>
@@ -136,7 +178,9 @@ const ProjectsSection = () => {
           <ProjectDetailsModal
             key={selectedProject.id}
             project={selectedProject}
-            onClose={() => setSelectedProject(null)}
+            posts={postsByProject[selectedProject.id] || []}
+            onClose={closeProject}
+            onCloseAutoFocus={restoreTriggerFocus}
           />
         ) : null}
       </AnimatePresence>

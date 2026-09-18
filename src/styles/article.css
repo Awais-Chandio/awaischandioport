@@ -1,0 +1,193 @@
+/*
+ * Long-form reading scale for /writing posts.
+ *
+ * This is deliberately NOT the site's display scale: marketing sections are
+ * built to be scanned, an article is built to be read for several minutes. It
+ * reuses the site's font families and colour tokens verbatim (var(--font-sans),
+ * var(--font-display), rgb(var(--fg))...) and changes only measure, size,
+ * leading and rhythm. Plain CSS on purpose — no @apply — so the values that
+ * matter for readability are visible and tunable in one place.
+ */
+
+.article {
+  /* Tuned by measuring rendered characters per line, not by eye: `ch` is the
+     width of "0", which is wider than the average lowercase glyph, so 58ch of
+     General Sans lands at ~66 characters — inside the 45-75 comfort range. */
+  --measure: 58ch;
+  --article-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --article-leading: 1.75;
+  --article-rhythm: 1.6em;
+
+  font-size: var(--article-body);
+  line-height: var(--article-leading);
+  color: rgb(var(--fg) / 0.88);
+}
+
+.article > * {
+  max-width: var(--measure);
+}
+
+.article > p,
+.article > ul,
+.article > ol,
+.article > blockquote,
+.article > pre,
+.article > table {
+  margin-block: var(--article-rhythm);
+}
+
+/* Headings: display face, tight leading, and more space above than below so
+   each one binds visually to the text it introduces. */
+.article h2,
+.article h3,
+.article h4 {
+  font-family: var(--font-display);
+  color: rgb(var(--fg));
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.article h2 {
+  font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+  margin-block: 2.4em 0.75em;
+}
+
+.article h3 {
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  margin-block: 2em 0.6em;
+}
+
+.article h4 {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  margin-block: 1.8em 0.5em;
+}
+
+.article > :first-child {
+  margin-top: 0;
+}
+
+.article strong {
+  color: rgb(var(--fg));
+  font-weight: 600;
+}
+
+.article a {
+  color: rgb(var(--fg));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--accent) / 0.45);
+  text-underline-offset: 4px;
+  transition: color 300ms ease, text-decoration-color 300ms ease;
+}
+
+.article a:hover {
+  color: rgb(var(--accent));
+  text-decoration-color: rgb(var(--accent));
+}
+
+.article ul,
+.article ol {
+  padding-left: 1.4em;
+}
+
+.article li {
+  margin-block: 0.5em;
+}
+
+.article li::marker {
+  color: rgb(var(--accent) / 0.75);
+}
+
+.article blockquote {
+  border-left: 2px solid rgb(var(--accent) / 0.5);
+  padding: 0.25em 0 0.25em 1.25em;
+  color: rgb(var(--fg-muted));
+}
+
+.article blockquote p {
+  margin-block: 0.75em;
+}
+
+.article hr {
+  border: 0;
+  border-top: 1px solid rgb(var(--line) / 0.12);
+  margin-block: 3em;
+}
+
+/* Code: a slightly tighter measure than prose, since snippets read worse when
+   they wrap. Horizontal scroll is preferred over reflow. */
+.article :not(pre) > code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  color: rgb(var(--accent));
+  background: rgb(var(--fg) / 0.06);
+  border: 1px solid rgb(var(--line) / 0.1);
+  border-radius: 6px;
+  padding: 0.15em 0.4em;
+  overflow-wrap: break-word;
+}
+
+.article pre {
+  /* Code sits slightly wider than prose: snippets read worse when they wrap. */
+  max-width: min(100%, 68ch);
+  overflow-x: auto;
+  background: rgb(var(--canvas-soft));
+  border: 1px solid rgb(var(--line) / 0.12);
+  border-radius: 16px;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.article pre code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: rgb(var(--fg) / 0.92);
+  background: none;
+  border: 0;
+  padding: 0;
+  white-space: pre;
+}
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.article th,
+.article td {
+  border-bottom: 1px solid rgb(var(--line) / 0.12);
+  padding: 0.75em 1em 0.75em 0;
+  text-align: left;
+}
+
+.article th {
+  color: rgb(var(--fg));
+  font-weight: 600;
+}
+
+.article img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid rgb(var(--line) / 0.1);
+}
+
+.article input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: rgb(var(--accent));
+}
+
+@media (max-width: 640px) {
+  .article {
+    --article-rhythm: 1.4em;
+  }
+
+  .article pre {
+    border-radius: 12px;
+    padding: 1rem;
+  }
+}

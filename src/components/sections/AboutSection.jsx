@@ -1,12 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionIntro from "@/components/ui/SectionIntro";
-import { aboutParagraphs, aboutPoints, personalInfo } from "@/data/portfolio";
+import { aboutParagraphs } from "@/data/portfolio";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,53 +47,28 @@ const AboutSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="section-spacing grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-start lg:gap-16"
+      // Editorial split rather than a text column beside empty space: heading on
+      // the left, the prose on the right, the same 0.9/1.1 rhythm the Contact
+      // section uses. This is what replaced the removed 3D visual column.
+      className="section-spacing grid min-w-0 gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16"
       id="about"
     >
-      <div data-about-reveal className="order-2 min-w-0 lg:order-1">
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-line/10 bg-canvas-soft">
-          <Image
-            src={personalInfo.aboutImage}
-            alt={`Portrait of ${personalInfo.name}`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 40vw"
-            className="object-cover object-center"
-          />
-        </div>
-        <p className="mt-5 text-sm leading-7 text-fg-muted">
-          {personalInfo.role} &middot; {personalInfo.location}
-          <br />
-          Currently at {personalInfo.currentCompany}
-        </p>
+      <div data-about-reveal className="min-w-0">
+        <SectionIntro
+          eyebrow="About"
+          title="I build app experiences that are clear, connected, and easy to maintain."
+        />
       </div>
 
-      <div className="order-1 min-w-0 lg:order-2">
-        <div data-about-reveal>
-          <SectionIntro
-            eyebrow="About"
-            title="I build app experiences that are clear, connected, and easy to maintain."
-            description="My work sits between interface polish, product logic, and reliable integration with the services behind the app."
-          />
-        </div>
-
-        <div data-about-reveal className="mt-8 space-y-5">
-          {aboutParagraphs.map((paragraph) => (
-            <p key={paragraph} className="text-base leading-8 text-fg-muted sm:text-lg">
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
-        <div data-about-reveal className="mt-10 border-t border-line/10">
-          {aboutPoints.map((item, index) => (
-            <div key={item} className="flex items-start gap-5 border-b border-line/10 py-5">
-              <span className="shrink-0 font-display text-sm text-fg-dim/50 tabular-nums">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <p className="text-sm leading-7 text-fg-muted sm:text-base">{item}</p>
-            </div>
-          ))}
-        </div>
+      <div data-about-reveal className="min-w-0 space-y-5 lg:pt-2">
+        {aboutParagraphs.map((paragraph) => (
+          <p
+            key={paragraph}
+            className="max-w-[60ch] text-base leading-8 text-fg-muted sm:text-lg sm:leading-9"
+          >
+            {paragraph}
+          </p>
+        ))}
       </div>
     </section>
   );

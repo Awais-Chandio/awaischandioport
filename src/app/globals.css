@@ -42,7 +42,22 @@ html {
   max-width: 100%;
   background-color: rgb(var(--canvas));
   scrollbar-width: thin;
-  scrollbar-color: rgb(var(--fg) / 0.15) rgb(var(--canvas));
+  scrollbar-color: rgb(var(--fg) / 0.28) rgb(var(--canvas));
+}
+
+/* Lenis owns the scroll animation while it is mounted, so the native smooth
+   behaviour must step aside or the two fight over the same scroll position. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+html.lenis-stopped {
+  overflow: hidden;
 }
 
 * {
@@ -152,6 +167,7 @@ button {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -159,8 +175,14 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--fg) / 0.15);
+  background: rgb(var(--fg) / 0.28);
+  border: 2px solid rgb(var(--canvas));
   border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background: rgb(var(--fg) / 0.45);
 }
 
 @media (prefers-reduced-motion: reduce) {

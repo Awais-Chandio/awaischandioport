@@ -69,12 +69,16 @@ const EducationSection = () => {
               <AcademicCapIcon className="h-6 w-6" />
             </div>
             <div className="min-w-0">
-              <p className="text-[11px] uppercase tracking-[0.2em] text-fg-dim">Degree</p>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-fg-dim">
+                {item.period || "Degree"}
+              </p>
               <h3 className="mt-3 font-display text-xl font-medium text-fg sm:text-2xl">
                 {item.degree}
               </h3>
-              <p className="mt-2 text-base font-medium text-accent">{item.institution}</p>
-              <p className="mt-4 text-sm leading-7 text-fg-muted">{item.description}</p>
+              <p className="mt-2 text-sm font-medium text-accent sm:text-base">{item.institution}</p>
+              {item.description ? (
+                <p className="mt-4 text-sm leading-7 text-fg-muted">{item.description}</p>
+              ) : null}
             </div>
           </div>
         ))}
@@ -83,7 +87,7 @@ const EducationSection = () => {
           <p className="text-[11px] uppercase tracking-[0.2em] text-fg-dim">
             Profile Alignment
           </p>
-          <p className="mt-3 text-lg font-semibold text-fg">
+          <p className="mt-3 text-base font-semibold text-fg sm:text-lg">
             {personalInfo.degree} supporting a practical focus on mobile product engineering.
           </p>
         </div>

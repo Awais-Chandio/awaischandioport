@@ -1,37 +1,56 @@
 export const personalInfo = {
   name: "Muhammad Awais",
   shortName: "Awais",
-  role: "Mobile App Engineer",
-  specialization: "React Native",
-  location: "Hyderabad, Pakistan",
+  // Exact title as it appears on the resume. Rendered verbatim in the hero.
+  title: "React Native Developer | Mobile Software Engineer",
+  // Short form of the same title, for the places a full two-part title will not
+  // fit: the nav, the footer, the About meta line, and the JSON-LD jobTitle.
+  role: "React Native Developer",
+  location: "Karachi, Pakistan",
   availability:
     "Open to mobile product teams, React Native roles, and focused app feature work.",
   email: "awaischandio827@gmail.com",
   phone: "+92 3163461656",
-  resumeUrl: "/cv.pdf",
+  // Served from /public. `resumeFileName` is what the browser saves the file as,
+  // independent of the path it is served from, so the visitor always gets
+  // "Muhammad-Awais-Resume.pdf" regardless of the URL.
+  //
+  // This is the single definition behind all four CV controls: "View Resume"
+  // and "Download CV" in the hero, and "Download CV" in both the desktop nav
+  // and the mobile menu. Replacing the file at the path below updates them all.
+  resumeUrl: "/resume/resume.pdf",
+  resumeFileName: "Muhammad-Awais-Resume.pdf",
   githubUrl: "https://github.com/Awais-Chandio",
   linkedinUrl: "https://www.linkedin.com/in/muhammad-awais45",
-  heroImage: "/images/profile2.webp",
-  aboutImage: "/images/profile2.webp",
-  currentCompany: "Verge Systems",
-  degree: "BE in Software Engineering",
-  university: "Mehran University of Engineering and Technology",
-  headline: "Mobile App Engineer building practical cross-platform products.",
+  // The hero is the only slot that uses a photo. `aboutImage` used to mirror it
+  // for the About column and went with that column's removal.
+  heroImage: "/images/profile.jpg",
+  currentCompany: "Verge Systems (WebHR)",
+  degree: "B.E. Software Engineering",
+  university: "Mehran University of Engineering and Technology (MUET)",
+  headline:
+    "React Native developer building cross-platform mobile apps for Android and iOS.",
   subheadline:
-    "I turn product ideas into polished app flows, reliable integrations, and maintainable interfaces.",
+    "I build and maintain production mobile apps in React Native and Flutter, shipped to Google Play and wired to Supabase and Firebase.",
   intro:
-    "React Native and Flutter on the interface, Supabase, Firebase, and SQLite on the data layer, tied together with clean API integrations and push notifications.",
+    "React Native and Flutter on the interface, Supabase, Firebase, and SQLite on the data layer, tied together with REST API integration and push notifications.",
 };
 
-export const navLinks = [
-  { title: "Home", path: "#home" },
-  { title: "About", path: "#about" },
-  { title: "Skills", path: "#skills" },
-  { title: "Projects", path: "#projects" },
-  { title: "Journey", path: "#experience" },
-  { title: "Education", path: "#education" },
-  { title: "Contact", path: "#contact" },
+// Primary site navigation. Entries carrying a `sectionId` live on the home page,
+// so the nav renders them as a bare `#anchor` there and as a full `/#anchor` URL
+// from any standalone route. Entries without one are their own routes.
+export const primaryNav = [
+  { title: "Home", href: "/", sectionId: "home" },
+  { title: "Work", href: "/#projects", sectionId: "projects" },
+  { title: "Services", href: "/services" },
+  { title: "Writing", href: "/writing" },
+  { title: "About", href: "/#about", sectionId: "about" },
+  { title: "Work With Me", href: "/work-with-me" },
 ];
+
+// Deliberately outside the primary nav: the casual "just say hi" route, surfaced
+// in the footer next to the social links rather than competing with Work With Me.
+export const contactLink = { title: "Contact", href: "/#contact", sectionId: "contact" };
 
 export const heroHighlights = [
   "Reusable app screens with clear state, navigation, and component structure.",
@@ -57,77 +76,108 @@ export const heroSpotlights = [
   },
 ];
 
+// Two paragraphs, deliberately. A third on AI-assisted tooling was dropped
+// because the Skills section already lists those tools by name, and a numbered
+// summary list under these paragraphs was dropped because every line in it
+// restated a sentence above it.
 export const aboutParagraphs = [
-  "I build mobile product interfaces with an eye for structure, usability, and steady delivery. I like turning rough feature ideas into screens that feel clear and work reliably.",
-  "My background combines current product work at Verge Systems with hands-on projects across commerce, healthcare, auctions, and fitness. I am comfortable with APIs, auth, local storage, notifications, and backend-connected app features.",
+  "I'm a software engineer with production experience building cross-platform mobile apps in React Native and Flutter, for both Android and iOS. The work I care about is the unglamorous part: features that hold up after release.",
+  "I've shipped and maintained apps with thousands of downloads on Google Play, working with Supabase and Firebase for authentication, real-time data, and offline-capable storage. Owning a feature end to end comes naturally to me — from API integration through debugging to production release.",
 ];
 
-export const aboutPoints = [
-  "Shipping clear navigation, reusable UI pieces, and product-ready feature flows.",
-  "Handling auth, API responses, local data, cloud services, and notification paths.",
-  "Improving interface polish through debugging, responsive layouts, and simpler component structure.",
-];
-
+// Categorisation is taken verbatim from the resume so the site and the PDF can
+// never disagree about what is claimed. Order and grouping are the resume's.
 export const skillGroups = [
   {
-    title: "App Architecture",
-    description:
-      "The foundation I use to organize screens, state, navigation, and reusable building blocks.",
-    skills: ["React Native", "JavaScript", "TypeScript", "Components", "Navigation"],
+    title: "Languages",
+    description: "The languages I write day to day across app and data work.",
+    skills: ["JavaScript", "TypeScript", "Dart", "SQL"],
   },
   {
-    title: "Interface Craft",
-    description:
-      "Practical UI skills for readable layouts, smooth flows, and consistent product behavior.",
-    skills: ["Mobile UI", "Cross-platform", "App Screens", "State Handling", "Responsive Layouts"],
+    title: "Mobile Development",
+    description: "Cross-platform app development and the platforms I ship to.",
+    skills: ["React Native", "Flutter", "Android", "iOS"],
   },
   {
-    title: "Data & Services",
-    description:
-      "Service integration skills for sign-in, synced data, persistence, and user updates.",
-    skills: ["Supabase", "Firebase", "SQLite", "Firebase FCM", "APIs", "Auth"],
+    title: "State, Data & Navigation",
+    description: "How I structure state, data fetching, forms, and screen flow.",
+    skills: [
+      "Redux Toolkit",
+      "Zustand",
+      "React Query",
+      "React Navigation",
+      "GetX",
+      "React Hook Form",
+      "Zod",
+    ],
   },
   {
-    title: "Delivery Tools",
-    description:
-      "Daily tooling and extra cross-platform practice that help move features from idea to handoff.",
-    skills: ["Flutter", "Git", "GitHub", "VS Code", "Debugging"],
+    title: "Backend & Data",
+    description: "The services and storage layers I connect apps to.",
+    skills: [
+      "Supabase (Auth, Row-Level Security)",
+      "Firebase (Auth, Firestore, Cloud Messaging)",
+      "SQLite",
+      "REST APIs",
+    ],
+  },
+  {
+    title: "Tools & Practices",
+    description: "Version control, automation, and the process side of delivery.",
+    skills: [
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "CI/CD",
+      "Agile/Scrum",
+      "Code Reviews",
+    ],
+  },
+  {
+    title: "AI-Assisted Development",
+    description: "Tools I use to debug faster and iterate quickly.",
+    skills: ["Claude", "Codex", "Cursor", "Google Antigravity"],
+  },
+  {
+    title: "Professional Skills",
+    description: "How I work alongside the rest of a product team.",
+    skills: [
+      "Cross-Functional Collaboration",
+      "Debugging & Troubleshooting",
+      "Agile Teamwork",
+    ],
   },
 ];
 
+// Roles, employers, locations and dates exactly as the resume states them. The
+// resume lists no per-role responsibilities, so none are given here: the
+// section renders a summary and bullets only when an entry carries them.
 export const experience = [
   {
-    title: "Mobile App Engineer",
-    company: "Verge Systems",
-    period: "Current",
-    summary:
-      "Building product features with attention to usable interfaces, connected workflows, and code that stays easy to work with.",
-    bullets: [
-      "Translating requirements into organized screens, interactions, and reusable pieces.",
-      "Wiring product behavior to APIs and real application data.",
-      "Polishing layouts, fixing edge cases, and simplifying components during implementation.",
-    ],
+    title: "Software Engineer (React Native)",
+    company: "Verge Systems (WebHR)",
+    location: "Karachi",
+    period: "Sep 2025 – Present",
   },
   {
-    title: "Learning & Building Journey",
-    company: "Personal Projects and Practice",
-    period: "Ongoing",
-    summary:
-      "Growing through hands-on products that cover commerce, healthcare, auction, and fitness use cases.",
-    bullets: [
-      "Built feature sets around product browsing, bidding states, appointments, and workout progress.",
-      "Practiced service-backed data flows, authentication, persistence, and notification behavior.",
-      "Currently improving architecture decisions, screen polish, and reliability in app workflows.",
-    ],
+    title: "Software Engineer (React Native & Flutter)",
+    company: "Algorithms Consulting",
+    location: "Karachi",
+    period: "Jan 2025 – Aug 2025",
+  },
+  {
+    title: "Flutter Developer",
+    company: "Bidbuyy",
+    location: "Jamshoro",
+    period: "Dec 2023 – Jan 2024",
   },
 ];
 
 export const education = [
   {
-    degree: "BE in Software Engineering",
-    institution: "Mehran University of Engineering and Technology",
-    description:
-      "Academic foundation in software engineering, application development, and structured problem solving.",
+    degree: "B.E. Software Engineering",
+    institution: "Mehran University of Engineering and Technology (MUET)",
+    period: "Nov 2020 – Nov 2024",
   },
 ];
 

@@ -54,8 +54,11 @@ const Button = ({
     );
   } else {
     const Component = as || "button";
+    // `href` is destructured above, so an explicit `as` (e.g. as="a" for a
+    // download link, which next/link would otherwise intercept) has to have it
+    // forwarded back on deliberately.
     content = (
-      <Component className={classes} {...props}>
+      <Component className={classes} {...(href ? { href } : {})} {...props}>
         {children}
       </Component>
     );

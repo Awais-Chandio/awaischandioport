@@ -11,9 +11,13 @@ const SectionIntro = ({ eyebrow, title, description, align = "left" }) => {
       <h2 className="text-balance mt-4 font-display text-2xl font-medium leading-tight text-fg sm:text-4xl lg:text-5xl">
         {title}
       </h2>
-      <p className="mt-4 text-sm leading-7 text-fg-muted sm:mt-5 sm:text-lg sm:leading-8">
-        {description}
-      </p>
+      {/* Optional: some sections carry their prose in the body instead, and an
+          empty paragraph here would leave a dead gap under the heading. */}
+      {description ? (
+        <p className="mt-4 text-sm leading-7 text-fg-muted sm:mt-5 sm:text-lg sm:leading-8">
+          {description}
+        </p>
+      ) : null}
     </div>
   );
 };

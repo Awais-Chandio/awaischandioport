@@ -1,0 +1,50 @@
+---
+title: "Behind the Build: QueueLess"
+slug: "queueless-behind-the-build"
+date: "2026-09-18"
+category: "Behind the Build"
+excerpt: "TODO — one or two sentences on what QueueLess is and why the build is worth reading about. This text appears on the /writing listing card."
+relatedProject: "queueless"
+relatedService: "mvp-development"
+draft: true
+---
+
+> **OUTLINE ONLY — NOT FOR PUBLICATION.**
+> Every bullet below is a prompt for Awais to replace with the real detail.
+> Nothing here has been verified. Delete this blockquote and set
+> `draft: false` in the frontmatter once the post is written and checked.
+
+## The problem
+
+- What was the actual situation that made QueueLess worth building? Replace the generic version with the specific one.
+- Who was waiting, and for what? Describe the real queue/appointment friction you had in mind.
+- What did you decide was explicitly *out* of scope for a first version?
+
+## Architecture decisions
+
+- Why React Native and TypeScript for this one — what made it the right call over the alternatives you considered?
+- Why Supabase for auth and data rather than Firebase, which you have used elsewhere?
+- How the navigation is split (auth stack vs. app stack, and the bottom tabs) — and what that split bought you.
+- Why Zustand for state instead of Context or Redux. Include the reasoning, not just the name.
+- The table/view design: what each one holds, and any structure you would do differently now.
+
+## Challenges
+
+- Date and time selection on mobile: what specifically was awkward, and what did you land on?
+- Session persistence and profile creation: what broke first, and how did you fix it?
+- Keeping loading, empty, error and refresh states coherent across screens — what rule did you settle on?
+- Add any challenge that cost you real time, even if the fix was unglamorous. These are the parts readers remember.
+
+## Outcome
+
+- Where the project stands now, stated plainly. Do not overstate the status.
+- What you would change if you started again.
+- What you took from this build into later work.
+
+## Notes before publishing
+
+- [ ] Replace every bullet above with real detail.
+- [ ] Add screenshots or code snippets where they carry more than the prose does.
+- [ ] Write the `excerpt` in the frontmatter.
+- [ ] Check every claim against the actual repository.
+- [ ] Set `draft: false`.

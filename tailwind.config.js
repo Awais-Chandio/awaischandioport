@@ -60,6 +60,9 @@ module.exports = {
       boxShadow: {
         soft: "0 25px 70px -20px rgb(0 0 0 / 0.45)",
         lift: "0 30px 90px -30px rgb(0 0 0 / 0.55)",
+        // Accent glows read from the theme token so they retune with light mode.
+        glow: "0 0 20px rgb(var(--accent) / 0.5)",
+        "glow-soft": "0 0 28px rgb(var(--accent) / 0.18)",
       },
       borderRadius: {
         "4xl": "2rem",

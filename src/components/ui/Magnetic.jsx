@@ -11,12 +11,14 @@ const Magnetic = ({ children, strength = 0.35, className = "" }) => {
   const x = useSpring(useMotionValue(0), spring);
   const y = useSpring(useMotionValue(0), spring);
 
-  if (shouldReduceMotion) {
-    return <span className={className}>{children}</span>;
-  }
-
+  // Reduced motion is handled by refusing to move the values, not by rendering a
+  // different element. `useReducedMotion` only has an answer on the client, so
+  // swapping motion.span for a plain span made the server send a `style`
+  // attribute the client's first render did not, and React logged a hydration
+  // mismatch on every visit with the OS setting on. The springs simply stay at
+  // zero here, which is the same visual result without the mismatch.
   const handlePointerMove = (event) => {
-    if (event.pointerType === "touch" || !ref.current) return;
+    if (shouldReduceMotion || event.pointerType === "touch" || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     x.set((event.clientX - rect.left - rect.width / 2) * strength);
     y.set((event.clientY - rect.top - rect.height / 2) * strength);
