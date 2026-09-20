@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import AppToaster from "@/components/AppToaster";
+import BeyondTheCodeProvider from "@/components/beyond/BeyondTheCodeProvider";
 import CommandPaletteProvider from "@/components/command-palette/CommandPaletteProvider";
 import MotionProvider from "@/components/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
@@ -83,11 +84,13 @@ export default function RootLayout({ children }) {
                 these inside would drag the header and the background down with
                 every navigation. Keeping them here also means the nav no longer
                 remounts per route, so its mobile panel can animate closed. */}
-            <CommandPaletteProvider>
-              <AnimatedBackground />
-              <Navbar />
-              {children}
-            </CommandPaletteProvider>
+            <BeyondTheCodeProvider>
+              <CommandPaletteProvider>
+                <AnimatedBackground />
+                <Navbar />
+                {children}
+              </CommandPaletteProvider>
+            </BeyondTheCodeProvider>
             <AppToaster />
           </MotionProvider>
         </ThemeProvider>

@@ -12,7 +12,7 @@ import SectionDivider from "@/components/ui/SectionDivider";
  * divider, so every block a page passes in is separated by the same full
  * section spacing the home page uses.
  */
-const PageShell = ({ eyebrow, title, headingId, lead, children }) => {
+const PageShell = ({ eyebrow, title, headingId, lead, headerExtra, children }) => {
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden text-fg">
       <div className="container-page relative flex min-h-[60vh] flex-col gap-section-half pb-section pt-28 lg:pt-36">
@@ -26,6 +26,7 @@ const PageShell = ({ eyebrow, title, headingId, lead, children }) => {
           {lead ? (
             <p className="mt-6 text-sm leading-7 text-fg-muted sm:text-lg sm:leading-8">{lead}</p>
           ) : null}
+          {headerExtra}
         </header>
 
         <SectionDivider />

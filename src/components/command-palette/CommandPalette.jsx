@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import {
   ArrowDownTrayIcon,
   ArrowTopRightOnSquareIcon,
+  BeakerIcon,
   ChatBubbleLeftRightIcon,
   ClipboardDocumentIcon,
   CodeBracketIcon,
@@ -18,14 +19,16 @@ import {
   MoonIcon,
   PencilSquareIcon,
   RectangleStackIcon,
+  SparklesIcon,
   SunIcon,
   UserGroupIcon,
   UserIcon,
   WrenchScrewdriverIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { useBeyondTheCode } from "@/components/beyond/BeyondTheCodeProvider";
 import { fade, fadeRise } from "@/lib/motion";
-import { personalInfo, primaryNav } from "@/data/portfolio";
+import { labLink, personalInfo, primaryNav } from "@/data/portfolio";
 
 // Icons and extra search terms are keyed by the nav entry's title so the route
 // list itself stays defined once, in data/portfolio.js. `keywords` widen what a
@@ -96,12 +99,14 @@ const CommandPalette = ({ open, onOpenChange }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
+  const { openBeyondTheCode } = useBeyondTheCode();
 
   // Two things have to outlive the click that picks a row, so they live in refs:
   // a same-page scroll that must wait for the dialog to finish leaving, and a
   // flag that stops Radix handing focus back to the trigger once a row has
   // moved the visitor somewhere else.
   const pendingScrollRef = useRef(null);
+  const pendingBeyondRef = useRef(false);
   const skipFocusRestoreRef = useRef(false);
   const returnFocusRef = useRef(null);
 
@@ -139,7 +144,20 @@ const CommandPalette = ({ open, onOpenChange }) => {
     router.push(link.href);
   };
 
+  // "Beyond the Code" is another modal, so it waits for this one to finish
+  // leaving rather than the two trapping focus at once.
+  const openBeyond = () => {
+    close({ restoreFocus: false });
+    pendingBeyondRef.current = true;
+  };
+
   const runPendingScroll = () => {
+    if (pendingBeyondRef.current) {
+      pendingBeyondRef.current = false;
+      openBeyondTheCode();
+      return;
+    }
+
     const id = pendingScrollRef.current;
     pendingScrollRef.current = null;
     if (!id) return;
@@ -275,6 +293,18 @@ const CommandPalette = ({ open, onOpenChange }) => {
                                 />
                               );
                             })}
+                            <Item
+                              icon={BeakerIcon}
+                              label={`Go to ${labLink.title}`}
+                              keywords={["experiments", "practice", "learning", "playground"]}
+                              onSelect={() => goTo(labLink)}
+                            />
+                            <Item
+                              icon={SparklesIcon}
+                              label="Open Beyond the Code"
+                              keywords={["hobbies", "interests", "space", "off duty"]}
+                              onSelect={openBeyond}
+                            />
                           </Command.Group>
 
                           <Command.Group heading="Actions" className={GROUP_CLASS}>

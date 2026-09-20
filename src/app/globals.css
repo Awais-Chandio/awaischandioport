@@ -292,3 +292,22 @@ button {
     transform: translate3d(3%, 2%, 0) scale(1.08);
   }
 }
+
+/* A fixed night sky. The "Beyond the Code" scene needs a dark ground in both
+   themes: bloom is additive light, and additive light on paper-white is just
+   white. This re-declares the dark theme's own tokens (the values in :root
+   above) for everything inside it, so the scene, its caption card and their
+   text all read from the same palette and the accent is still the only colour. */
+.night-scope {
+  --canvas: 10 10 11;
+  --canvas-soft: 16 16 18;
+  --fg: 240 238 232;
+  --fg-muted: 158 156 150;
+  --fg-dim: 132 130 124;
+  --line: 240 238 232;
+  --accent: 255 91 46;
+  --accent-strong: 232 72 28;
+  --accent-soft: 255 91 46;
+  --accent-fg: 10 10 11;
+  color-scheme: dark;
+}

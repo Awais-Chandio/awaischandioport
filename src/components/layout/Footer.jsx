@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { ArrowUpIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import BeyondTrigger from "@/components/beyond/BeyondTrigger";
 import { FooterPaletteHint } from "@/components/command-palette/PaletteHint";
-import { contactLink, personalInfo, primaryNav, socials } from "@/data/portfolio";
+import { contactLink, labLink, personalInfo, primaryNav, socials } from "@/data/portfolio";
 
 // The footer is the one place the casual "Contact" entry stays reachable: it is
 // kept out of the primary nav so it does not compete with Work With Me.
-const footerNav = [...primaryNav, contactLink];
+const footerNav = [...primaryNav, labLink, contactLink];
 
 // No hard top border: the footer fades in from transparent to its own tone over 8rem,
 // so the last section (and the fixed ambient glow behind it) runs into the footer
@@ -63,6 +64,9 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
+              {/* Quieter than the sitemap rows above it, and not a route: it opens
+                  the "Beyond the Code" panel. Also reachable from the palette. */}
+              <BeyondTrigger className="mt-2" />
             </nav>
           </div>
 

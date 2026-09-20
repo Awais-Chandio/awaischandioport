@@ -4,6 +4,7 @@ import ContactSection from "@/components/sections/ContactSection";
 import EducationSection from "@/components/sections/EducationSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import HeroSection from "@/components/sections/HeroSection";
+import NowExploring from "@/components/now/NowExploring";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import SectionDivider from "@/components/ui/SectionDivider";
@@ -32,6 +33,8 @@ export default function Home() {
           one continuous flow instead of stacked blocks. */}
       <div className="container-page relative flex flex-col gap-section-half pb-section pt-28 lg:pt-36">
         <HeroSection />
+        {/* Half a section of gap from the hero, so it reads as attached to it. */}
+        <NowExploring />
         <SectionDivider />
         {/* Work sits directly under the hero: a visiting client's first
             question is what I have built, not who I am. */}

@@ -27,7 +27,7 @@ export const faqItems = [
   {
     question: "Do you work with clients in different timezones?",
     answer:
-      "Yes. I am based in Karachi, Pakistan (Asia/Karachi, UTC+5). Most of the work happens asynchronously, and for calls we can find a time that suits both of us.",
+      "Yes. I am based in Hyderabad, Pakistan (Asia/Karachi, UTC+5). Most of the work happens asynchronously, and for calls we can find a time that suits both of us.",
     status: "fact",
     review:
       "Timezone is factual. Confirm the async-first line and add overlap hours if you want to promise any.",

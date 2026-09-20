@@ -1,3 +1,4 @@
+import { getEntries } from "@/lib/lab";
 import { getPosts } from "@/lib/writing";
 
 const siteUrl =
@@ -18,6 +19,7 @@ export default function sitemap() {
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/work-with-me", priority: 0.9, changeFrequency: "yearly" },
     { path: "/writing", priority: 0.8, changeFrequency: "weekly" },
+    { path: "/lab", priority: 0.6, changeFrequency: "monthly" },
   ].map((route) => ({
     url: `${siteUrl}${route.path}`,
     lastModified: now,
@@ -32,5 +34,12 @@ export default function sitemap() {
     priority: 0.7,
   }));
 
-  return [...routes, ...posts];
+  const labEntries = getEntries().map((entry) => ({
+    url: `${siteUrl}/lab/${entry.slug}`,
+    lastModified: new Date(`${entry.date}T00:00:00Z`),
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
+
+  return [...routes, ...posts, ...labEntries];
 }

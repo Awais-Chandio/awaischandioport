@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { OG_IMAGE } from "@/lib/seo";
 import PageShell from "@/components/layout/PageShell";
 import WritingIndex from "@/components/writing/WritingIndex";
@@ -28,6 +29,17 @@ export default function WritingPage() {
       title="Writing"
       headingId="writing-heading"
       lead="Notes on mobile engineering, breakdowns of things I have built, and what freelance work actually looks like week to week."
+      headerExtra={
+        <p className="mt-4 text-sm text-fg-muted">
+          Also see:{" "}
+          <Link
+            href="/lab"
+            className="inline-flex min-h-[44px] items-center font-medium text-accent transition-colors duration-300 hover:text-fg"
+          >
+            Lab &rarr;
+          </Link>
+        </p>
+      }
     >
       <WritingIndex posts={posts} categories={writingCategories} />
     </PageShell>

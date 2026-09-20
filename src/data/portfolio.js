@@ -6,7 +6,7 @@ export const personalInfo = {
   // Short form of the same title, for the places a full two-part title will not
   // fit: the nav, the footer, the About meta line, and the JSON-LD jobTitle.
   role: "React Native Developer",
-  location: "Karachi, Pakistan",
+  location: "Hyderabad, Pakistan",
   availability:
     "Open to mobile product teams, React Native roles, and focused app feature work.",
   email: "awaischandio827@gmail.com",
@@ -50,6 +50,10 @@ export const primaryNav = [
 
 // Deliberately outside the primary nav: the casual "just say hi" route, surfaced
 // in the footer next to the social links rather than competing with Work With Me.
+// Also outside the primary nav, which is full at six items. Reached from the
+// footer, the command palette and a cross-link on /writing.
+export const labLink = { title: "Lab", href: "/lab" };
+
 export const contactLink = { title: "Contact", href: "/#contact", sectionId: "contact" };
 
 export const heroHighlights = [

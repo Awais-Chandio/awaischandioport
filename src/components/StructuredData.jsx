@@ -35,7 +35,7 @@ const StructuredData = () => {
       alumniOf: { "@type": "CollegeOrUniversity", name: personalInfo.university },
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Karachi",
+        addressLocality: "Hyderabad",
         addressCountry: "PK",
       },
     },
