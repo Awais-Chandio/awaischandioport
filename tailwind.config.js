@@ -67,8 +67,38 @@ module.exports = {
       borderRadius: {
         "4xl": "2rem",
       },
+      // Vertical rhythm, defined once in globals.css and named here so a gap can
+      // be written as `gap-section-half` instead of an arbitrary value:
+      //   section      — between page sections (5 / 6.5 / 8 / 9rem by breakpoint)
+      //   section-half — half of that, for either side of a divider
+      //   block        — a section intro to the content beneath it
+      // Everything smaller uses Tailwind's own 4px scale, kept to 4 / 5 / 6 / 8
+      // for gaps and 7 / 10 for card padding.
+      spacing: {
+        section: "var(--space-section)",
+        "section-half": "calc(var(--space-section) / 2)",
+        block: "var(--space-block)",
+      },
+      // The site's single curve (`--ease-house`, mirrored from lib/motion.js) and
+      // a 300ms default, so a bare `transition` class no longer means a 150ms
+      // stock-curve hover on one element and a 300ms house-curve one beside it.
       transitionTimingFunction: {
-        premium: "cubic-bezier(0.22, 1, 0.36, 1)",
+        DEFAULT: "var(--ease-house)",
+        premium: "var(--ease-house)",
+      },
+      transitionDuration: {
+        DEFAULT: "300ms",
+      },
+      // The availability dot's pulse: a third the speed and a gentler swell than
+      // Tailwind's 1s `ping`, so it idles instead of blinking.
+      keyframes: {
+        "soft-ping": {
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "70%, 100%": { transform: "scale(2.2)", opacity: "0" },
+        },
+      },
+      animation: {
+        "soft-ping": "soft-ping 3.2s var(--ease-house) infinite",
       },
     },
   },

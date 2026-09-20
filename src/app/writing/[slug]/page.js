@@ -3,9 +3,7 @@ import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import AnimatedBackground from "@/components/AnimatedBackground";
 import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
 import Badge from "@/components/ui/Badge";
 import { OG_IMAGE } from "@/lib/seo";
 import { getPost, getPostSlugs, includeDrafts } from "@/lib/writing";
@@ -84,11 +82,9 @@ export default function WritingPostPage({ params }) {
   ].filter(Boolean);
 
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden bg-canvas text-fg">
-      <AnimatedBackground />
-      <Navbar />
-
-      <div className="container-page relative pb-16 pt-24 sm:pb-20 lg:pt-32">
+    <main className="relative min-h-screen w-full overflow-x-hidden text-fg">
+      {/* The background and nav come from the root layout. */}
+      <div className="container-page relative pb-section pt-28 lg:pt-36">
         <article className="mx-auto w-full max-w-3xl">
           <Link
             href="/writing"
@@ -98,7 +94,7 @@ export default function WritingPostPage({ params }) {
             All writing
           </Link>
 
-          <header className="mt-6 border-b border-line/10 pb-8 sm:pb-10">
+          <header className="mt-8 border-b border-line/10 pb-10 sm:pb-12">
             {post.draft ? (
               <p className="mb-5 rounded-2xl border border-accent/25 bg-accent/10 px-4 py-3 text-sm leading-6 text-accent">
                 Draft preview. This post is not published and is not reachable in a
@@ -110,16 +106,16 @@ export default function WritingPostPage({ params }) {
               {post.category}
             </Badge>
 
-            <h1 className="text-balance mt-5 text-fg">{post.title}</h1>
+            <h1 className="text-balance mt-6 text-fg">{post.title}</h1>
 
-            <div className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-dim">
+            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-fg-dim">
               <time dateTime={post.date}>{post.dateLabel}</time>
               <span aria-hidden="true">&middot;</span>
               <span>{post.readingTime} min read</span>
             </div>
           </header>
 
-          <div className="article mt-10 sm:mt-12">
+          <div className="article mt-12 sm:mt-16">
             {/* GFM enables tables, task lists and strikethrough, all of which
                 article.css already styles. */}
             <MDXRemote
@@ -131,7 +127,7 @@ export default function WritingPostPage({ params }) {
           {related.length ? (
             <aside
               aria-label="Related"
-              className="mt-12 border-t border-line/10 pt-8 sm:mt-16 sm:pt-10"
+              className="mt-16 border-t border-line/10 pt-10 sm:mt-20 sm:pt-12"
             >
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-fg-dim">
                 Referenced in this post

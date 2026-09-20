@@ -33,7 +33,7 @@ const ProjectCard = ({ project, onOpen }) => (
       )}
     </div>
 
-    <div className="flex min-w-0 flex-1 flex-col gap-3 p-5 sm:p-6">
+    <div className="flex min-w-0 flex-1 flex-col gap-4 p-6 sm:p-7">
       <div className="flex items-start justify-between gap-4">
         <h3 className="min-w-0 font-display text-lg font-medium leading-snug text-fg transition-colors duration-300 group-hover:text-accent group-focus-within:text-accent sm:text-xl">
           {/* Stretched trigger: the button stays valid phrasing content while its
@@ -58,7 +58,7 @@ const ProjectCard = ({ project, onOpen }) => (
 
       <p className="line-clamp-2 text-sm leading-6 text-fg-muted">{project.description}</p>
 
-      <div className="mt-auto flex flex-wrap gap-2 pt-1">
+      <div className="mt-auto flex flex-wrap gap-2 pt-2">
         {project.stack.slice(0, 3).map((item) => (
           <span
             key={item}

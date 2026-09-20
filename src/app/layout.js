@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import AppToaster from "@/components/AppToaster";
+import CommandPaletteProvider from "@/components/command-palette/CommandPaletteProvider";
 import MotionProvider from "@/components/MotionProvider";
 import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -69,8 +70,10 @@ export default function RootLayout({ children }) {
       className={`${displayFont.variable} ${sansFont.variable} overflow-x-hidden`}
       suppressHydrationWarning
     >
-      {/* `#top` anchors the footer's back-to-top link on every route. */}
-      <body id="top" className="overflow-x-hidden bg-canvas text-fg antialiased">
+      {/* `#top` anchors the footer's back-to-top link on every route. There is no
+          `bg-canvas` here or on <main>: the page colour is painted by <html>, and an
+          opaque body would sit above the fixed ambient layer and hide it. */}
+      <body id="top" className="overflow-x-hidden text-fg antialiased">
         <ThemeProvider>
           <MotionProvider>
             <SmoothScroll />
@@ -80,9 +83,11 @@ export default function RootLayout({ children }) {
                 these inside would drag the header and the background down with
                 every navigation. Keeping them here also means the nav no longer
                 remounts per route, so its mobile panel can animate closed. */}
-            <AnimatedBackground />
-            <Navbar />
-            {children}
+            <CommandPaletteProvider>
+              <AnimatedBackground />
+              <Navbar />
+              {children}
+            </CommandPaletteProvider>
             <AppToaster />
           </MotionProvider>
         </ThemeProvider>

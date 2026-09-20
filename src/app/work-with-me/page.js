@@ -1,5 +1,7 @@
 import { OG_IMAGE } from "@/lib/seo";
 import PageShell from "@/components/layout/PageShell";
+import FaqSection from "@/components/faq/FaqSection";
+import SectionDivider from "@/components/ui/SectionDivider";
 import InquiryForm from "@/components/work-with-me/InquiryForm";
 import { personalInfo } from "@/data/portfolio";
 
@@ -25,12 +27,12 @@ export default function WorkWithMePage() {
       headingId="work-with-me-heading"
       lead="A few questions up front so my first reply can be useful rather than a request for more information. If you would rather just say hello, the links in the footer are the better route."
     >
-      <section className="section-spacing grid min-w-0 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-16">
+      <section className="section-spacing grid min-w-0 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:gap-20">
         <div className="min-w-0">
           <h2 className="font-display text-xl font-medium text-fg sm:text-2xl">
             What happens next
           </h2>
-          <ol className="mt-6 border-t border-line/10">
+          <ol className="mt-8 border-t border-line/10">
             {[
               {
                 title: "You send this form",
@@ -48,7 +50,7 @@ export default function WorkWithMePage() {
                   "A call to agree what is being built, in what order, and what is out of scope.",
               },
             ].map((step, index) => (
-              <li key={step.title} className="flex items-start gap-4 border-b border-line/10 py-5">
+              <li key={step.title} className="flex items-start gap-5 border-b border-line/10 py-7">
                 <span
                   aria-hidden="true"
                   className="font-display text-sm leading-7 text-fg-dim tabular-nums"
@@ -57,13 +59,13 @@ export default function WorkWithMePage() {
                 </span>
                 <div className="min-w-0">
                   <p className="font-medium text-fg">{step.title}</p>
-                  <p className="mt-1 text-sm leading-7 text-fg-muted">{step.detail}</p>
+                  <p className="mt-2 text-sm leading-7 text-fg-muted">{step.detail}</p>
                 </div>
               </li>
             ))}
           </ol>
 
-          <p className="mt-6 text-sm leading-7 text-fg-muted">
+          <p className="mt-8 text-sm leading-7 text-fg-muted">
             Prefer email?{" "}
             <a
               href={`mailto:${personalInfo.email}`}
@@ -78,6 +80,10 @@ export default function WorkWithMePage() {
           <InquiryForm />
         </div>
       </section>
+
+      <SectionDivider />
+
+      <FaqSection />
     </PageShell>
   );
 }

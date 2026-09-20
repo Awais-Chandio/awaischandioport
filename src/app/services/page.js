@@ -1,4 +1,5 @@
 import PageShell from "@/components/layout/PageShell";
+import ProcessSection from "@/components/process/ProcessSection";
 import ServicesSection from "@/components/services/ServicesSection";
 
 export const metadata = {
@@ -15,7 +16,9 @@ export default function ServicesPage() {
       headingId="services-heading"
       lead="Four areas I take on, each one tied to a project already in the Work section so you can check the result before starting a conversation."
     >
-      <ServicesSection />
+      <ServicesSection>
+        <ProcessSection />
+      </ServicesSection>
     </PageShell>
   );
 }

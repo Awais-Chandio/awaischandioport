@@ -14,7 +14,8 @@ import {
   CodeBracketIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { dialogPanel, fade, fadeRise, galleryImage } from "@/lib/motion";
+import { fade, fadeRise } from "@/lib/motion";
+import { architectureDiagrams } from "@/components/projects/diagrams";
 import StatCounter from "@/components/ui/StatCounter";
 import Button from "@/components/ui/Button";
 
@@ -107,9 +108,15 @@ const tabPanels = [
   {
     value: "Architecture",
     className: PANEL_CLASS,
-    render: (project) => (
-      <p className="text-sm leading-7 text-fg-muted">{project.architecture}</p>
-    ),
+    render: (project) => {
+      const Diagram = architectureDiagrams[project.architectureDiagram];
+      return (
+        <>
+          <p className="text-sm leading-7 text-fg-muted">{project.architecture}</p>
+          {Diagram ? <Diagram /> : null}
+        </>
+      );
+    },
   },
 ];
 
@@ -176,6 +183,12 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
             initial="hidden"
             animate="visible"
             exit="exit"
+            // Lenis listens for wheel events on the whole window and scrolls the
+            // page itself, so without this the mouse wheel moved the page behind
+            // the dialog and left the dialog's own scroll area untouched. The
+            // attribute makes Lenis ignore every wheel event that starts inside
+            // this overlay, so the browser scrolls the dialog natively.
+            data-lenis-prevent
             className="fixed inset-0 z-[90] overflow-y-auto overscroll-contain bg-canvas/80 backdrop-blur-2xl sm:p-5"
           >
             {/* Full-bleed sheet on phones (the overlay itself scrolls), centred
@@ -188,7 +201,7 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                 onCloseAutoFocus={onCloseAutoFocus}
               >
                 <motion.div
-                  variants={dialogPanel}
+                  variants={fadeRise}
                   initial="hidden"
                   animate="visible"
                   exit="exit"
@@ -226,7 +239,7 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                               <AnimatePresence mode="wait">
                                 <motion.div
                                   key={gallery[activeImage]}
-                                  variants={galleryImage}
+                                  variants={fade}
                                   initial="hidden"
                                   animate="visible"
                                   exit="exit"

@@ -77,7 +77,7 @@
   text-decoration: underline;
   text-decoration-color: rgb(var(--accent) / 0.45);
   text-underline-offset: 4px;
-  transition: color 300ms ease, text-decoration-color 300ms ease;
+  transition: color 300ms var(--ease-house), text-decoration-color 300ms var(--ease-house);
 }
 
 .article a:hover {

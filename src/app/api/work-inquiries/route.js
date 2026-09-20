@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getSupabaseClient } from "@/lib/supabase/server";
 import { validateInquiry } from "@/lib/workInquiry";
+import { sendOwnerEmail } from "@/lib/notify";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -38,12 +39,15 @@ export async function POST(request) {
     );
   }
 
+  const email = payload.email.trim().toLowerCase();
+  const description = payload.description.trim();
+
   const { error } = await supabase.from(TABLE).insert({
     project_type: payload.projectType,
     budget_range: payload.budgetRange,
     timeline: payload.timeline,
-    description: payload.description.trim(),
-    email: payload.email.trim().toLowerCase(),
+    description,
+    email,
   });
 
   if (error) {
@@ -53,6 +57,21 @@ export async function POST(request) {
       { status: 500 }
     );
   }
+
+  // The enquiry is already stored, so a failed notification is logged inside
+  // sendOwnerEmail and does not fail the visitor's submission.
+  await sendOwnerEmail({
+    subject: `New work inquiry: ${payload.projectType}`,
+    replyTo: email,
+    text: [
+      `Project type: ${payload.projectType}`,
+      `Budget: ${payload.budgetRange}`,
+      `Timeline: ${payload.timeline}`,
+      `Email: ${email}`,
+      "",
+      description,
+    ].join("\n"),
+  });
 
   return NextResponse.json({ ok: true }, { status: 201 });
 }

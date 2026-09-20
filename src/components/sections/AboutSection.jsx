@@ -1,48 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SectionIntro from "@/components/ui/SectionIntro";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { aboutParagraphs } from "@/data/portfolio";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const AboutSection = () => {
   const sectionRef = useRef(null);
 
-  useGSAP(
-    () => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const targets = gsap.utils.toArray("[data-about-reveal]", sectionRef.current);
-      if (!targets.length) return undefined;
-
-      if (reduceMotion) {
-        gsap.set(targets, { opacity: 1, y: 0 });
-        return undefined;
-      }
-
-      gsap.set(targets, { opacity: 0, y: 32 });
-
-      const trigger = ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top 82%",
-        once: true,
-        onEnter: () =>
-          gsap.to(targets, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            stagger: 0.12,
-          }),
-      });
-
-      return () => trigger.kill();
-    },
-    { scope: sectionRef }
-  );
+  useScrollReveal(sectionRef, "[data-about-reveal]");
 
   return (
     <section
@@ -50,7 +16,7 @@ const AboutSection = () => {
       // Editorial split rather than a text column beside empty space: heading on
       // the left, the prose on the right, the same 0.9/1.1 rhythm the Contact
       // section uses. This is what replaced the removed 3D visual column.
-      className="section-spacing grid min-w-0 gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16"
+      className="section-spacing grid min-w-0 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20"
       id="about"
     >
       <div data-about-reveal className="min-w-0">
@@ -60,7 +26,7 @@ const AboutSection = () => {
         />
       </div>
 
-      <div data-about-reveal className="min-w-0 space-y-5 lg:pt-2">
+      <div data-about-reveal className="min-w-0 space-y-6 lg:pt-2">
         {aboutParagraphs.map((paragraph) => (
           <p
             key={paragraph}

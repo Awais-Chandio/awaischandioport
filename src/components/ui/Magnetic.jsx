@@ -3,7 +3,9 @@
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 
-const spring = { stiffness: 300, damping: 20, mass: 0.5 };
+// Heavily damped so the button eases toward the pointer and settles without
+// overshooting — the previous 300/20 spring visibly wobbled past its target.
+const spring = { stiffness: 170, damping: 26, mass: 0.6 };
 
 const Magnetic = ({ children, strength = 0.35, className = "" }) => {
   const ref = useRef(null);

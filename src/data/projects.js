@@ -201,6 +201,9 @@ const projectRecords = [
     ],
     problem:
       "Manual queues and appointment uncertainty waste user time. QueueLess gives customers a simple way to check available services, book a time, and track appointment status before visiting a service center.",
+    // Shown under the Architecture tab. Drawn only from the resume's QueueLess
+    // entry — see the REVIEW note in diagrams/QueueLessRoleDiagram.jsx.
+    architectureDiagram: "queueless-roles",
     architecture:
       "The app uses separate auth and app navigation stacks, bottom tabs for core areas, Supabase for auth and backend tables/views such as profiles, centers, center_services, appointments, and appointments_full, and Zustand stores for auth, centers, appointments, profile, and toast state.",
     challenges: [

@@ -121,7 +121,7 @@ const InquiryForm = () => {
   // 6px rise animate, so neither panel triggers layout while it moves.
   const successPanel = (
     <motion.div key="sent" variants={swap} initial="hidden" animate="visible" exit="exit">
-      <Card className="p-6 text-center sm:p-10">
+      <Card className="p-8 text-center sm:p-12">
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-accent/25 bg-accent/10 text-accent">
           <CheckCircleIcon aria-hidden="true" className="h-7 w-7" />
         </div>
@@ -150,14 +150,14 @@ const InquiryForm = () => {
 
   const formPanel = (
     <motion.div key="form" variants={swap} initial="hidden" animate="visible" exit="exit">
-      <Card className="relative overflow-hidden p-5 sm:p-8">
+      <Card className="relative overflow-hidden p-6 sm:p-10">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full bg-accent/10 blur-3xl"
         />
 
-        <form ref={formRef} noValidate onSubmit={handleSubmit} className="relative space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
+        <form ref={formRef} noValidate onSubmit={handleSubmit} className="relative space-y-6">
+          <div className="grid gap-6 sm:grid-cols-2">
             <Field id={fieldId("projectType")} label="Project type" error={errors.projectType}>
               <select
                 id={fieldId("projectType")}

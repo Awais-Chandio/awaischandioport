@@ -6,6 +6,7 @@ import ExperienceSection from "@/components/sections/ExperienceSection";
 import HeroSection from "@/components/sections/HeroSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
+import SectionDivider from "@/components/ui/SectionDivider";
 import StructuredData from "@/components/StructuredData";
 import { getPostsByProject } from "@/lib/writing";
 
@@ -23,20 +24,29 @@ export default function Home() {
   const postsByProject = getPostsByProject();
 
   return (
-    <main className="relative min-h-screen w-full overflow-x-hidden bg-canvas text-fg">
+    <main className="relative min-h-screen w-full overflow-x-hidden text-fg">
       <StructuredData />
 
-      <div className="container-page relative flex flex-col gap-14 pb-16 pt-24 sm:gap-20 sm:pb-20 md:gap-24 lg:gap-28 lg:pt-32">
+      {/* Sections are separated by `--space-section` (globals.css), split as half a
+          section of gap either side of a hairline divider, so the page reads as
+          one continuous flow instead of stacked blocks. */}
+      <div className="container-page relative flex flex-col gap-section-half pb-section pt-28 lg:pt-36">
         <HeroSection />
+        <SectionDivider />
         {/* Work sits directly under the hero: a visiting client's first
             question is what I have built, not who I am. */}
         <ProjectsSection postsByProject={postsByProject} />
+        <SectionDivider />
         {/* Capabilities follow the proof directly. About and Experience are the
             longer narrative reads, so they come after both. */}
         <SkillsSection />
+        <SectionDivider />
         <AboutSection />
+        <SectionDivider />
         <ExperienceSection />
+        <SectionDivider />
         <EducationSection />
+        <SectionDivider />
         <ContactSection />
       </div>
 

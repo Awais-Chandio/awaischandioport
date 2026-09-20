@@ -8,6 +8,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NavLink from "@/components/ui/NavLink";
 import Button from "@/components/ui/Button";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { MobilePaletteButton, NavPaletteButton } from "@/components/command-palette/PaletteHint";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { fade, menuItem, menuPanel } from "@/lib/motion";
 import { primaryNav, personalInfo } from "@/data/portfolio";
@@ -88,6 +89,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden items-center gap-2 lg:flex xl:gap-3">
+          <NavPaletteButton />
           <ThemeToggle />
           <Button
             as="a"
@@ -110,6 +112,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
+          <MobilePaletteButton />
           <ThemeToggle />
           <button
             ref={toggleRef}
@@ -154,6 +157,7 @@ const Navbar = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            data-lenis-prevent
             className="mx-auto mt-3 max-h-[calc(100vh-7.5rem)] w-full max-w-7xl overflow-y-auto overscroll-contain rounded-[28px] border border-line/10 bg-canvas/95 p-4 shadow-soft backdrop-blur-2xl lg:hidden"
           >
             <div className="flex flex-col gap-2">

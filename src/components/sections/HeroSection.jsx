@@ -12,6 +12,8 @@ import {
   DocumentTextIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/ui/Button";
+import { STAGGER } from "@/lib/motion";
+import { hideForReveal, prefersReducedMotion, revealTargets } from "@/lib/gsapMotion";
 import { personalInfo, socials } from "@/data/portfolio";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
@@ -24,15 +26,9 @@ const HeroSection = () => {
 
   useGSAP(
     () => {
-      const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-      const fadeTargets = gsap.utils.toArray("[data-hero-fade]", rootRef.current);
+      if (prefersReducedMotion()) return undefined;
 
-      if (reduceMotion) {
-        gsap.set(fadeTargets, { opacity: 1, y: 0 });
-        return undefined;
-      }
+      const copyTargets = gsap.utils.toArray("[data-hero-fade]", rootRef.current);
 
       // Portrait parallax. This used to be a Framer `useTransform` on the same
       // element GSAP fades in, so both libraries wrote the element's transform
@@ -51,34 +47,30 @@ const HeroSection = () => {
         },
       });
 
-      gsap.set(fadeTargets, { opacity: 0, y: 20 });
+      hideForReveal(copyTargets);
 
+      // One sequence, one focal point at a time: the name lands first and the rest
+      // of the copy follows it down the page. The name is split into lines only so
+      // a wrapped name rises line by line; it moves exactly like everything else
+      // (fade plus `DISTANCE`, house ease).
+      //
+      // The portrait is deliberately NOT part of it. It is already painted by the
+      // server HTML, so hiding it here would make it disappear the moment the page
+      // hydrates and fade back ~0.75s later — a photo that vanishes after loading,
+      // and the page's largest image at that. It only gets the scroll parallax below.
       let split;
       if (headingRef.current) {
         split = SplitText.create(headingRef.current, {
           type: "lines",
-          mask: "lines",
           autoSplit: true,
           onSplit(self) {
-            return gsap.from(self.lines, {
-              yPercent: 110,
-              opacity: 0,
-              duration: 0.9,
-              ease: "power3.out",
-              stagger: 0.08,
-            });
+            hideForReveal(self.lines);
+            return revealTargets(self.lines, { stagger: STAGGER.hero });
           },
         });
       }
 
-      gsap.to(fadeTargets, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        stagger: 0.08,
-        delay: 0.45,
-      });
+      revealTargets(copyTargets, { delay: 0.35, stagger: STAGGER.hero });
 
       return () => {
         parallax.scrollTrigger?.kill();
@@ -93,13 +85,13 @@ const HeroSection = () => {
     <section
       ref={sectionRef}
       id="home"
-      className="section-spacing relative flex min-w-0 flex-col justify-center overflow-hidden pb-6 pt-2 lg:min-h-[78vh] lg:pb-12"
+      className="section-spacing relative flex min-w-0 flex-col justify-center overflow-hidden pb-6 pt-2 lg:min-h-[78vh] lg:pb-8"
     >
       <div
         ref={rootRef}
-        className="grid w-full min-w-0 gap-10 sm:gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-12"
+        className="grid w-full min-w-0 gap-14 sm:gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-16"
       >
-        <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-col items-center gap-5 text-center sm:gap-6 lg:mx-0 lg:max-w-none lg:items-start lg:gap-7 lg:text-left">
+        <div className="mx-auto flex w-full max-w-2xl min-w-0 flex-col items-center gap-6 text-center sm:gap-7 lg:mx-0 lg:max-w-none lg:items-start lg:gap-8 lg:text-left">
           <div
             data-hero-fade
             className="max-w-full text-center text-[11px] font-semibold uppercase leading-5 tracking-[0.18em] text-fg-muted sm:text-xs sm:tracking-[0.2em] lg:text-left"
@@ -107,7 +99,7 @@ const HeroSection = () => {
             {/* The dot flows inline with the label so it stays attached to the first
                 word when the line wraps on narrow phones. */}
             <span className="relative mr-2.5 inline-flex h-1.5 w-1.5 align-middle">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="absolute inline-flex h-full w-full animate-soft-ping rounded-full bg-accent opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
             Available for freelance &amp; contract work
@@ -134,7 +126,7 @@ const HeroSection = () => {
             {personalInfo.subheadline}
           </p>
 
-          <div data-hero-fade className="flex w-full flex-wrap items-center justify-center gap-3 pt-2 sm:w-auto sm:gap-4 lg:justify-start">
+          <div data-hero-fade className="flex w-full flex-wrap items-center justify-center gap-4 pt-3 sm:w-auto sm:gap-5 lg:justify-start">
             <Button href="#projects" variant="primary" size="lg" magnetic>
               View Projects
               <ArrowUpRightIcon className="h-4 w-4" />
@@ -194,7 +186,6 @@ const HeroSection = () => {
         </div>
 
         <div
-          data-hero-fade
           className="relative mx-auto w-full max-w-[17rem] sm:max-w-xs lg:mx-0 lg:max-w-sm"
         >
           <div ref={visualRef} className="relative">

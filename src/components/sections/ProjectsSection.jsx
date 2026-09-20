@@ -2,18 +2,16 @@
 
 import { useDeferredValue, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { AnimatePresence } from "framer-motion";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectCard from "@/components/projects/ProjectCard";
 import ProjectDetailsModal from "@/components/projects/ProjectDetailsModal";
 import ProjectSkeleton from "@/components/projects/ProjectSkeleton";
 import ProjectFilter from "@/components/ui/ProjectFilter";
 import SectionIntro from "@/components/ui/SectionIntro";
 import Card from "@/components/ui/Card";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { prefersReducedMotion, replayReveal } from "@/lib/gsapMotion";
 import { projectCategories, projects } from "@/data/projects";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const ProjectsSection = ({ postsByProject = {} }) => {
   const [activeCategory, setActiveCategory] = useState("All");
@@ -21,7 +19,7 @@ const ProjectsSection = ({ postsByProject = {} }) => {
   const [isPending, startTransition] = useTransition();
   const deferredCategory = useDeferredValue(activeCategory);
   const listRef = useRef(null);
-  // useGSAP below runs in a layout effect, so the cards are already hidden by
+  // The scroll reveal below runs in a layout effect, so the cards are already hidden by
   // the time the filter effect runs on mount. Skipping that first pass keeps the
   // scroll reveal in charge of first paint instead of being cancelled by it.
   const isFirstFilterPassRef = useRef(true);
@@ -81,38 +79,11 @@ const ProjectsSection = ({ postsByProject = {} }) => {
     });
   };
 
-  // Scroll reveal: rows fade/slide in the first time the list enters the viewport.
-  useGSAP(
-    () => {
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const rows = gsap.utils.toArray("[data-project-card]", listRef.current);
-      if (!rows.length) return undefined;
+  // Scroll reveal: cards rise in the first time the list enters the viewport.
+  useScrollReveal(listRef, "[data-project-card]", { batch: true });
 
-      if (reduceMotion) {
-        gsap.set(rows, { opacity: 1, y: 0 });
-        return undefined;
-      }
-
-      gsap.set(rows, { opacity: 0, y: 36 });
-
-      const triggers = ScrollTrigger.batch(rows, {
-        start: "top 88%",
-        once: true,
-        onEnter: (batchTargets) =>
-          gsap.to(batchTargets, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out",
-            stagger: 0.12,
-          }),
-      });
-      return () => triggers.forEach((trigger) => trigger.kill());
-    },
-    { scope: listRef, dependencies: [] }
-  );
-
-  // Filter changes: the section is already in view, so a direct stagger-in is enough (no scroll trigger needed).
+  // Filter changes: the section is already in view, so the same reveal replays
+  // directly (no scroll trigger needed).
   useEffect(() => {
     if (isPending) return;
     if (isFirstFilterPassRef.current) {
@@ -120,15 +91,10 @@ const ProjectsSection = ({ postsByProject = {} }) => {
       return;
     }
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const rows = gsap.utils.toArray("[data-project-card]", listRef.current);
-    if (!rows.length || reduceMotion) return;
+    if (!rows.length || prefersReducedMotion()) return;
 
-    gsap.fromTo(
-      rows,
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.06 }
-    );
+    replayReveal(rows);
   }, [visibleProjects, isPending]);
 
   return (
@@ -139,7 +105,7 @@ const ProjectsSection = ({ postsByProject = {} }) => {
         description={`${projects.length} builds spanning mobile products, backend integrations, and product-minded interfaces.`}
       />
 
-      <div className="mt-10 flex gap-2 overflow-x-auto pb-2 sm:mt-12 sm:flex-wrap sm:overflow-visible">
+      <div className="mt-block flex gap-3 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible">
         {projectCategories.map((category) => (
           <ProjectFilter
             key={category}
@@ -155,7 +121,7 @@ const ProjectsSection = ({ postsByProject = {} }) => {
           past it. The case study itself opens in a dialog. */}
       <div
         ref={listRef}
-        className="mt-6 grid min-w-0 gap-5 sm:mt-8 md:grid-cols-2 lg:gap-6"
+        className="mt-8 grid min-w-0 gap-6 sm:mt-10 md:grid-cols-2 lg:gap-8"
       >
         {isPending ? (
           Array.from({ length: 4 }).map((_, index) => <ProjectSkeleton key={index} />)
@@ -164,7 +130,7 @@ const ProjectsSection = ({ postsByProject = {} }) => {
             <ProjectCard key={project.id} project={project} onOpen={openProject} />
           ))
         ) : (
-          <Card className="p-8 text-center md:col-span-2">
+          <Card className="p-10 text-center md:col-span-2">
             <p className="text-xl font-bold text-fg sm:text-2xl">No projects in this filter yet.</p>
             <p className="mt-3 text-sm leading-7 text-fg-muted">
               Try another category to explore the full project library.
