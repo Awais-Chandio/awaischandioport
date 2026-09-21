@@ -44,7 +44,7 @@ export const primaryNav = [
   { title: "Work", href: "/#projects", sectionId: "projects" },
   { title: "Services", href: "/services" },
   { title: "Writing", href: "/writing" },
-  { title: "About", href: "/#about", sectionId: "about" },
+  { title: "Experience", href: "/#experience", sectionId: "experience" },
   { title: "Work With Me", href: "/work-with-me" },
 ];
 

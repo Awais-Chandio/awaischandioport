@@ -1,5 +1,4 @@
 import Footer from "@/components/layout/Footer";
-import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
 import EducationSection from "@/components/sections/EducationSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
@@ -9,7 +8,8 @@ import ProjectsSection from "@/components/sections/ProjectsSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import SectionDivider from "@/components/ui/SectionDivider";
 import StructuredData from "@/components/StructuredData";
-import { getPostsByProject } from "@/lib/writing";
+import WritingSection from "@/components/sections/WritingSection";
+import { getPosts, getPostsByProject, includeDrafts } from "@/lib/writing";
 
 export const metadata = {
   // Home keeps the full descriptive title, so it opts out of the "%s | Muhammad
@@ -23,6 +23,9 @@ export const metadata = {
 export default function Home() {
   // Published posts only; drafts never appear as a case-study cross-link.
   const postsByProject = getPostsByProject();
+  // Newest first. Drafts show up in `next dev` only, so the section can be
+  // previewed; in production it renders nothing until a post is published.
+  const latestPosts = getPosts({ withDrafts: includeDrafts }).slice(0, 3);
 
   return (
     <main className="relative min-h-screen w-full overflow-x-hidden text-fg">
@@ -40,16 +43,20 @@ export default function Home() {
             question is what I have built, not who I am. */}
         <ProjectsSection postsByProject={postsByProject} />
         <SectionDivider />
-        {/* Capabilities follow the proof directly. About and Experience are the
-            longer narrative reads, so they come after both. */}
-        <SkillsSection />
-        <SectionDivider />
-        <AboutSection />
-        <SectionDivider />
+        {/* Experience follows the proof directly: where the work was done.
+            Skills come after as the supporting detail. */}
         <ExperienceSection />
+        <SectionDivider />
+        <SkillsSection />
         <SectionDivider />
         <EducationSection />
         <SectionDivider />
+        {latestPosts.length ? (
+          <>
+            <WritingSection posts={latestPosts} />
+            <SectionDivider />
+          </>
+        ) : null}
         <ContactSection />
       </div>
 

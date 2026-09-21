@@ -2,17 +2,30 @@
 
 import { useRef } from "react";
 import {
-  BoltIcon,
   CircleStackIcon,
+  CodeBracketIcon,
   CommandLineIcon,
+  CpuChipIcon,
   DevicePhoneMobileIcon,
+  Squares2X2Icon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import SectionIntro from "@/components/ui/SectionIntro";
 import Card from "@/components/ui/Card";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { skillGroups } from "@/data/portfolio";
 
-const icons = [DevicePhoneMobileIcon, BoltIcon, CircleStackIcon, CommandLineIcon];
+// Keyed by group title so each group keeps a distinct, fitting icon; cycling
+// through a short list repeated icons across unrelated groups.
+const iconsByGroup = {
+  Languages: CodeBracketIcon,
+  "Mobile Development": DevicePhoneMobileIcon,
+  "State, Data & Navigation": Squares2X2Icon,
+  "Backend & Data": CircleStackIcon,
+  "Tools & Practices": CommandLineIcon,
+  "AI-Assisted Development": CpuChipIcon,
+  "Professional Skills": UserGroupIcon,
+};
 
 const SkillsSection = () => {
   const sectionRef = useRef(null);
@@ -29,13 +42,18 @@ const SkillsSection = () => {
 
       <div className="mt-block grid gap-6 sm:grid-cols-2 sm:gap-8">
         {skillGroups.map((group, index) => {
-          const Icon = icons[index % icons.length];
+          const Icon = iconsByGroup[group.title] || CodeBracketIcon;
+          // An odd group count would leave the last card alone in its row, so it
+          // spans both columns instead.
+          const isLoneLast = index === skillGroups.length - 1 && skillGroups.length % 2 === 1;
 
           return (
             <Card
               key={group.title}
               data-skill-card
-              className="p-7 transition duration-300 hover:-translate-y-1 hover:border-accent/30 sm:p-9"
+              className={`p-7 transition duration-300 hover:-translate-y-1 hover:border-accent/30 sm:p-9 ${
+                isLoneLast ? "sm:col-span-2" : ""
+              }`}
             >
               <div className="flex items-center justify-between gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/20 bg-accent/10 text-accent">

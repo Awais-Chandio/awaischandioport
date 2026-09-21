@@ -116,21 +116,21 @@ const ProjectsSection = ({ postsByProject = {} }) => {
         ))}
       </div>
 
-      {/* Two columns from md up, one below: wide enough for a legible preview,
-          tight enough that the whole shelf can be scanned without scrolling
-          past it. The case study itself opens in a dialog. */}
+      {/* Three columns on desktop, two on tablet, one below: compact enough that
+          the whole shelf can be scanned without scrolling past it. The case
+          study itself opens in a dialog. */}
       <div
         ref={listRef}
-        className="mt-8 grid min-w-0 gap-6 sm:mt-10 md:grid-cols-2 lg:gap-8"
+        className="mt-8 grid min-w-0 gap-5 sm:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6"
       >
         {isPending ? (
-          Array.from({ length: 4 }).map((_, index) => <ProjectSkeleton key={index} />)
+          Array.from({ length: 6 }).map((_, index) => <ProjectSkeleton key={index} />)
         ) : visibleProjects.length ? (
           visibleProjects.map((project) => (
             <ProjectCard key={project.id} project={project} onOpen={openProject} />
           ))
         ) : (
-          <Card className="p-10 text-center md:col-span-2">
+          <Card className="p-10 text-center md:col-span-full">
             <p className="text-xl font-bold text-fg sm:text-2xl">No projects in this filter yet.</p>
             <p className="mt-3 text-sm leading-7 text-fg-muted">
               Try another category to explore the full project library.

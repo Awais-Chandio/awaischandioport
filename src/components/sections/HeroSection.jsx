@@ -138,13 +138,15 @@ const HeroSection = () => {
 
           <div
             data-hero-fade
-            className="text-[11px] font-medium uppercase tracking-[0.18em] text-fg-dim sm:text-xs sm:tracking-[0.2em]"
+            // Stacked on phones, one line with a separator from sm up, so neither
+            // item is ever split mid-phrase like "(WebHR)" on its own line.
+            className="flex flex-col items-center gap-1 text-[11px] font-medium uppercase tracking-[0.18em] text-fg-dim sm:flex-row sm:justify-center sm:gap-0 sm:text-xs sm:tracking-[0.2em] lg:justify-start"
           >
-            {personalInfo.location}
-            <span className="mx-2" aria-hidden="true">
+            <span className="whitespace-nowrap">{personalInfo.location}</span>
+            <span className="mx-2 hidden sm:inline" aria-hidden="true">
               ·
             </span>
-            {personalInfo.currentCompany}
+            <span className="whitespace-nowrap">{personalInfo.currentCompany}</span>
           </div>
 
           <div

@@ -19,7 +19,7 @@ const ProjectCard = ({ project, onOpen }) => (
           src={project.image}
           alt={`${project.title} preview`}
           fill
-          sizes="(max-width: 767px) 100vw, (max-width: 1279px) 46vw, 36rem"
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 46vw, 24rem"
           className="object-cover object-top transition-transform duration-700 ease-premium group-hover:scale-[1.04] group-focus-within:scale-[1.04]"
         />
       ) : (
@@ -33,9 +33,9 @@ const ProjectCard = ({ project, onOpen }) => (
       )}
     </div>
 
-    <div className="flex min-w-0 flex-1 flex-col gap-4 p-6 sm:p-7">
+    <div className="flex min-w-0 flex-1 flex-col gap-3 p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
-        <h3 className="min-w-0 font-display text-lg font-medium leading-snug text-fg transition-colors duration-300 group-hover:text-accent group-focus-within:text-accent sm:text-xl">
+        <h3 className="line-clamp-2 min-h-[2.75em] min-w-0 font-display text-base font-medium leading-snug text-fg transition-colors duration-300 group-hover:text-accent group-focus-within:text-accent sm:text-lg">
           {/* Stretched trigger: the button stays valid phrasing content while its
               ::before overlay makes the whole card clickable. */}
           <button
@@ -50,7 +50,7 @@ const ProjectCard = ({ project, onOpen }) => (
 
         <span
           aria-hidden="true"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line/10 text-fg-muted transition-all duration-300 group-hover:border-accent/40 group-hover:bg-accent group-hover:text-accent-fg group-focus-within:border-accent/40 group-focus-within:bg-accent group-focus-within:text-accent-fg"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line/10 text-fg-muted transition-all duration-300 group-hover:border-accent/40 group-hover:bg-accent group-hover:text-accent-fg group-focus-within:border-accent/40 group-focus-within:bg-accent group-focus-within:text-accent-fg"
         >
           <ArrowUpRightIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-focus-within:translate-x-0.5 group-focus-within:-translate-y-0.5" />
         </span>
@@ -58,7 +58,9 @@ const ProjectCard = ({ project, onOpen }) => (
 
       <p className="line-clamp-2 text-sm leading-6 text-fg-muted">{project.description}</p>
 
-      <div className="mt-auto flex flex-wrap gap-2 pt-2">
+      {/* One row of tags, fixed height: a tag that would wrap drops out of view
+          instead of making this card taller than its neighbours. */}
+      <div className="mt-auto flex h-7 flex-wrap gap-2 overflow-hidden">
         {project.stack.slice(0, 3).map((item) => (
           <span
             key={item}

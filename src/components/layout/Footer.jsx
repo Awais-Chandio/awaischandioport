@@ -14,7 +14,7 @@ const footerNav = [...primaryNav, labLink, contactLink];
 const Footer = () => {
   return (
     <footer className="[background:linear-gradient(to_bottom,transparent,rgb(var(--canvas-soft))_8rem)]">
-      <div className="container-page pb-16 pt-24 sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-32">
+      <div className="container-page pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-14">
         {/* Closing call to action: the email is the single loudest thing in the footer. */}
         <div className="flex flex-col gap-8 border-b border-line/10 pb-12 sm:gap-10 sm:pb-16 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">

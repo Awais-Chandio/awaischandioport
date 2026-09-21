@@ -6,7 +6,7 @@ const siteUrl =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 /**
- * Routes only. Home-page sections (#about, #projects, #contact) are deliberately
+ * Routes only. Home-page sections (#projects, #experience, #contact) are deliberately
  * absent: they are fragments of one document, and listing them would offer the
  * same page several times over. Draft posts are excluded because getPosts()
  * filters them by default.

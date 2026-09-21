@@ -11,6 +11,7 @@ import {
   ArrowDownTrayIcon,
   ArrowTopRightOnSquareIcon,
   BeakerIcon,
+  BriefcaseIcon,
   ChatBubbleLeftRightIcon,
   ClipboardDocumentIcon,
   CodeBracketIcon,
@@ -22,7 +23,6 @@ import {
   SparklesIcon,
   SunIcon,
   UserGroupIcon,
-  UserIcon,
   WrenchScrewdriverIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -39,7 +39,7 @@ const navMeta = {
   Work: { icon: RectangleStackIcon, keywords: ["projects", "portfolio", "case studies", "apps"] },
   Services: { icon: WrenchScrewdriverIcon, keywords: ["offer", "hire", "freelance", "pricing"] },
   Writing: { icon: PencilSquareIcon, keywords: ["blog", "posts", "articles", "essays"] },
-  About: { icon: UserIcon, keywords: ["bio", "skills", "experience", "education"] },
+  Experience: { icon: BriefcaseIcon, keywords: ["jobs", "roles", "career", "resume", "skills", "education"] },
   "Work With Me": { icon: ChatBubbleLeftRightIcon, keywords: ["hire", "contact", "inquiry", "project", "quote"] },
 };
 
@@ -282,7 +282,13 @@ const CommandPalette = ({ open, onOpenChange }) => {
 
                           <Command.Group heading="Navigation" className={GROUP_CLASS}>
                             {primaryNav.map((link) => {
-                              const meta = navMeta[link.title];
+                              // A nav entry added or renamed in portfolio.js without a
+                              // matching navMeta row still renders, with a neutral icon,
+                              // instead of taking the whole palette down.
+                              const meta = navMeta[link.title] || {
+                                icon: ArrowTopRightOnSquareIcon,
+                                keywords: [],
+                              };
                               return (
                                 <Item
                                   key={link.href}
