@@ -2,15 +2,15 @@ export const personalInfo = {
   name: "Muhammad Awais",
   shortName: "Awais",
   // Exact title as it appears on the resume. Rendered verbatim in the hero.
-  title: "React Native Developer | Mobile Software Engineer",
+  title: "React Native Developer | Mobile & Web — Next.js · TypeScript · Supabase",
   // Short form of the same title, for the places a full two-part title will not
   // fit: the nav, the footer, the About meta line, and the JSON-LD jobTitle.
   role: "React Native Developer",
-  location: "Hyderabad, Pakistan",
+  location: "Karachi, Pakistan",
   availability:
-    "Open to mobile product teams, React Native roles, and focused app feature work.",
+    "Open to relocation and remote work (UTC+5), for React Native, Next.js and full-stack product roles.",
   email: "awaischandio827@gmail.com",
-  phone: "+92 3163461656",
+  phone: "+92 316 3461656",
   // Served from /public. `resumeFileName` is what the browser saves the file as,
   // independent of the path it is served from, so the visitor always gets
   // "Muhammad-Awais-Resume.pdf" regardless of the URL.
@@ -31,7 +31,7 @@ export const personalInfo = {
   headline:
     "React Native developer building cross-platform mobile apps for Android and iOS.",
   subheadline:
-    "I build and maintain production mobile apps in React Native and Flutter, shipped to Google Play and wired to Supabase and Firebase.",
+    "I build and maintain production apps in React Native and Flutter, now shipping web with Next.js, on Supabase and Firebase.",
   intro:
     "React Native and Flutter on the interface, Supabase, Firebase, and SQLite on the data layer, tied together with REST API integration and push notifications.",
 };
@@ -85,8 +85,8 @@ export const heroSpotlights = [
 // summary list under these paragraphs was dropped because every line in it
 // restated a sentence above it.
 export const aboutParagraphs = [
-  "I'm a software engineer with production experience building cross-platform mobile apps in React Native and Flutter, for both Android and iOS. The work I care about is the unglamorous part: features that hold up after release.",
-  "I've shipped and maintained apps with thousands of downloads on Google Play, working with Supabase and Firebase for authentication, real-time data, and offline-capable storage. Owning a feature end to end comes naturally to me — from API integration through debugging to production release.",
+  "I'm a software engineer with 2 years of professional experience building cross-platform apps in React Native and Flutter, for both Android and iOS, and now shipping web with Next.js. The work I care about is the unglamorous part: features that hold up after release.",
+  "I maintain Safco eCredit, a live fintech app with 5,000+ Google Play downloads, and built MediQ, a multi-clinic SaaS on Supabase and PostgreSQL, on my own. I work with Supabase and Firebase for authentication, real-time data, and offline-capable storage. Owning a feature end to end comes naturally to me — from API integration through debugging to production release.",
 ];
 
 // Categorisation is taken verbatim from the resume so the site and the PDF can
@@ -95,85 +95,103 @@ export const skillGroups = [
   {
     title: "Languages",
     description: "The languages I write day to day across app and data work.",
-    skills: ["JavaScript", "TypeScript", "Dart", "SQL"],
+    skills: ["TypeScript", "JavaScript", "Dart", "SQL (PostgreSQL, PL/pgSQL)"],
   },
   {
-    title: "Mobile Development",
+    title: "Mobile",
     description: "Cross-platform app development and the platforms I ship to.",
-    skills: ["React Native", "Flutter", "Android", "iOS"],
+    skills: [
+      "React Native (CLI)",
+      "Flutter",
+      "Android",
+      "iOS",
+      "React Navigation",
+      "Reanimated",
+    ],
   },
   {
-    title: "State, Data & Navigation",
-    description: "How I structure state, data fetching, forms, and screen flow.",
+    title: "Web",
+    description: "The web side of the products I build.",
+    skills: ["Next.js (App Router)", "React", "Tailwind CSS"],
+  },
+  {
+    title: "State & Forms",
+    description: "How I structure state, data fetching, and forms.",
     skills: [
       "Redux Toolkit",
       "Zustand",
-      "React Query",
-      "React Navigation",
-      "GetX",
+      "TanStack React Query",
       "React Hook Form",
       "Zod",
+      "GetX",
     ],
   },
   {
     title: "Backend & Data",
     description: "The services and storage layers I connect apps to.",
     skills: [
-      "Supabase (Auth, Row-Level Security)",
-      "Firebase (Auth, Firestore, Cloud Messaging)",
+      "Supabase (Auth, RLS, RPC functions, Realtime, pg_cron)",
+      "Firebase (Auth, Firestore, FCM)",
       "SQLite",
       "REST APIs",
     ],
   },
   {
-    title: "Tools & Practices",
-    description: "Version control, automation, and the process side of delivery.",
+    title: "Testing & Delivery",
+    description: "Tests, version control, and getting builds out the door.",
     skills: [
+      "Jest",
+      "Playwright",
+      "pgTAP",
       "Git",
-      "GitHub",
       "GitHub Actions",
       "CI/CD",
+      "Play Console",
       "Agile/Scrum",
       "Code Reviews",
     ],
   },
   {
+    // From the resume's summary rather than its skills list.
     title: "AI-Assisted Development",
-    description: "Tools I use to debug faster and iterate quickly.",
-    skills: ["Claude", "Codex", "Cursor", "Google Antigravity"],
-  },
-  {
-    title: "Professional Skills",
-    description: "How I work alongside the rest of a product team.",
-    skills: [
-      "Cross-Functional Collaboration",
-      "Debugging & Troubleshooting",
-      "Agile Teamwork",
-    ],
+    description: "Tools I use to debug and test faster, reviewing every change that ships.",
+    skills: ["Claude Code", "Cursor", "Codex", "Google Antigravity"],
   },
 ];
 
-// Roles, employers, locations and dates exactly as the resume states them. The
-// resume lists no per-role responsibilities, so none are given here: the
-// section renders a summary and bullets only when an entry carries them.
+// Roles, employers, locations, dates and bullets exactly as the resume states
+// them, so the site and the PDF never disagree.
 export const experience = [
   {
     title: "Software Engineer (React Native)",
     company: "Verge Systems (WebHR)",
     location: "Karachi",
     period: "Sep 2025 – Present",
+    bullets: [
+      "Ship and maintain Safco eCredit, Safco Support Foundation's loan-servicing app on Google Play (loans, repayments, history).",
+      "Built loan form workflows and field-level case-revert logic on SQLite so loan data stays available without a network connection.",
+      "Own Redux Toolkit state management and REST API integration that connect mobile features to backend business logic.",
+      "Fix Android build and Gradle issues and manage Play Console releases, working in Agile sprints with design and backend.",
+    ],
   },
   {
     title: "Software Engineer (React Native & Flutter)",
     company: "Algorithms Consulting",
     location: "Karachi",
     period: "Jan 2025 – Aug 2025",
+    bullets: [
+      "Turned product requirements and UI designs into reusable components for cross-platform React Native and Flutter apps.",
+      "Integrated backend APIs and state management, fixed device-specific Android/iOS issues, and validated builds via CI/CD.",
+    ],
   },
   {
-    title: "Flutter Developer",
+    title: "Flutter Developer (Contract)",
     company: "Bidbuyy",
     location: "Jamshoro",
     period: "Dec 2023 – Jan 2024",
+    bullets: [
+      "Built a bidding app with Firebase Auth, real-time Firestore data, GetX state, REST APIs and FCM push notifications.",
+    ],
   },
 ];
 

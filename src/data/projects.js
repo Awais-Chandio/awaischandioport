@@ -10,6 +10,11 @@ export const projectCategories = [
   "UI",
 ];
 
+// Thumbnail sections for the MediQ case study.
+const MEDIQ_WEB = "Clinic web app · desktop";
+const MEDIQ_PATIENT = "Patient pages · phone browser, no install";
+const MEDIQ_APP = "Android app · doctors, owners, reception";
+
 const projectRecords = [
   {
     id: "foodapp",
@@ -20,7 +25,8 @@ const projectRecords = [
     categoryLabel: "Full Stack Mobile App",
     description:
       "A React Native food ordering and delivery app where customers browse restaurants, manage cart and checkout flows, and admins manage restaurants, menu items, and users from the same mobile product.",
-    image: "/images/projects/foodapp/01-home.png",
+    // Card cover: marketing banner built from the app's own screens.
+    image: "/images/projects/foodapp/cover.jpg",
     screenshots: [
       "/images/projects/foodapp/01-home.png",
       "/images/projects/foodapp/03-restaurant-detail.png",
@@ -98,7 +104,8 @@ const projectRecords = [
     categoryLabel: "Fintech Microfinance App",
     description:
       "A live React Native customer self-service app for SAFCO/SSF customers to securely view loan information, apply for new loans, track repayments, submit complaints, and manage profile details.",
-    image: "/images/projects/safco/02-dashboard.jpeg",
+    // Card cover: marketing banner built from the app's own screens.
+    image: "/images/projects/safco/cover.jpg",
     screenshots: [
       "/images/projects/safco/02-dashboard.jpeg",
       "/images/projects/safco/03-personal-details.jpeg",
@@ -136,7 +143,7 @@ const projectRecords = [
       "Dynamic payment gateway list with JazzCash, EasyPaisa, HBL Connect, and PayPro screens plus WebView payment redirects",
       "Profile update, profile picture upload, complaint add/view flow, feedback, multilingual terms screens, language switching, and light/dark theme",
       "30 exported service methods backed by SAFCO APIs for user, profile, loan, installment, payment gateway, complaint, feedback, language, and theme models",
-      "Published live on Google Play as Safco eCredit with 1K+ downloads",
+      "Published live on Google Play as Safco eCredit with 5,000+ downloads",
     ],
     stats: [
       { label: "Screens", value: 28, suffix: "" },
@@ -164,63 +171,97 @@ const projectRecords = [
     accent: "from-emerald-300 via-cyan-300 to-indigo-400",
   },
   {
-    id: "queueless",
+    id: "mediq",
     featured: false,
     order: 2,
-    title: "QueueLess",
-    status: "MVP Functional",
-    categoryLabel: "Full Stack Mobile App",
+    title: "MediQ - Multi-Clinic SaaS for Appointments & Live Queues",
+    status: "Coming Soon",
+    categoryLabel: "Full Stack SaaS (Web + Mobile)",
     description:
-      "A React Native appointment booking and queue management app where users can browse service centers, select services, schedule appointments, and track queue status.",
-    image: null,
-    placeholder: "QueueLess",
-    categories: ["All", "Mobile Apps", "Full Stack", "Supabase", "UI"],
+      "Clinic queues without the crowded waiting room. Patients scan a QR code at the door, get a token on their phone and walk in when it's their turn, while reception, doctors, the waiting-room TV and the clinic owner all see the same live queue.",
+    // Card cover: the marketing banner (public/demos/mediq/og-image.png)
+    // extended to the card's 16:10 shape.
+    image: "/images/projects/mediq/cover.jpg",
+    // Objects rather than plain paths (both work): `device` picks the browser
+    // or phone frame, `tall` pages scroll inside the frame instead of shrinking
+    // to fit, and `group` sections the thumbnails (kept contiguous, since the
+    // arrows step through the array in order).
+    screenshots: [
+      { src: "/images/projects/mediq/web-10-reception-now-serving.jpg", group: MEDIQ_WEB, device: "desktop", label: "Reception desk: live queue per doctor" },
+      { src: "/images/projects/mediq/web-08-reception-new-walk-in.jpg", group: MEDIQ_WEB, device: "desktop", label: "Walk-in token with fee" },
+      { src: "/images/projects/mediq/web-16-reception-verify-payment.jpg", group: MEDIQ_WEB, device: "desktop", label: "Verify an online payment" },
+      { src: "/images/projects/mediq/web-25-reception-urdu.jpg", group: MEDIQ_WEB, device: "desktop", label: "Same desk in Urdu (right to left)" },
+      { src: "/images/projects/mediq/web-23-records.jpg", group: MEDIQ_WEB, device: "desktop", tall: true, label: "Records and cash closing" },
+      { src: "/images/projects/mediq/web-24-plans.jpg", group: MEDIQ_WEB, device: "desktop", label: "Plans per clinic" },
+      { src: "/images/projects/mediq/web-12-patient-join-english.jpg", group: MEDIQ_PATIENT, device: "phone", label: "Scan the QR, get a token" },
+      { src: "/images/projects/mediq/web-13-patient-pay-fee.jpg", group: MEDIQ_PATIENT, device: "phone", label: "Pay the fee" },
+      { src: "/images/projects/mediq/web-17-patient-in-line.jpg", group: MEDIQ_PATIENT, device: "phone", tall: true, label: "Live place in line" },
+      { src: "/images/projects/mediq/web-20-patient-almost-turn.jpg", group: MEDIQ_PATIENT, device: "phone", label: "You're next" },
+      { src: "/images/projects/mediq/web-21-patient-your-turn.jpg", group: MEDIQ_PATIENT, device: "phone", label: "It's your turn" },
+      { src: "/images/projects/mediq/app-12-doctor-dashboard.jpg", group: MEDIQ_APP, device: "phone", label: "Doctor: dashboard" },
+      { src: "/images/projects/mediq/app-14-doctor-now-serving.jpg", group: MEDIQ_APP, device: "phone", label: "Doctor: now serving" },
+      { src: "/images/projects/mediq/app-15-doctor-prescription.jpg", group: MEDIQ_APP, device: "phone", label: "Doctor: notes and prescription" },
+      { src: "/images/projects/mediq/app-16-doctor-schedule.jpg", group: MEDIQ_APP, device: "phone", label: "Doctor: schedule" },
+      { src: "/images/projects/mediq/app-05-owner-today.jpg", group: MEDIQ_APP, device: "phone", label: "Owner: today's numbers" },
+      { src: "/images/projects/mediq/app-07-reception-now-serving.jpg", group: MEDIQ_APP, device: "phone", label: "Reception: desk on a phone" },
+    ],
+    categories: ["All", "Mobile Apps", "SaaS", "Full Stack", "Supabase", "Admin", "UI"],
     stack: [
-      "React Native",
+      "React Native 0.84",
+      "Next.js 16",
       "TypeScript",
       "Supabase",
-      "React Navigation",
+      "Postgres RLS",
+      "Supabase Realtime",
+      "Edge Functions",
+      "TanStack Query",
       "Zustand",
-      "React Hook Form",
-      "Zod",
-      "Async Storage",
-      "DateTimePicker",
+      "Tailwind CSS 4",
+      "Firebase Messaging",
+      "Playwright",
     ],
     features: [
-      "Email/password login, signup, and automatic Supabase auth session restore",
-      "Service center listing with city, address, available services, duration, and price details",
-      "Appointment booking with service selection, native date picker, and native time picker",
-      "My Appointments screen with pull-to-refresh, appointment detail screens, status badges, and queue status tracking",
-      "Profile view/edit support with loading, empty, error, and toast UI states",
-      "Separate auth and app navigation stacks with bottom tabs for Home, Centers, My Appointments, Profile, and Settings",
+      "Self-serve clinic onboarding: owner account, clinic details, doctors with rooms and fees, receptionist email invite, and a printable bilingual QR poster",
+      "Patients scan the QR to get a token in the browser with no app install, in Urdu by default with English one tap away",
+      "Fee before joining the line: cash at the counter or online via Easypaisa, bank or Raast with a transaction ID that reception verifies in one click",
+      "Live patient token page showing people ahead, estimated wait, now serving, and \"you're next\" / \"it's your turn\" alerts",
+      "Reception desk with one queue per doctor, walk-in tokens with fee and payment method, call next, skip, no-show, break and running-late controls, plus N / W keyboard shortcuts",
+      "Waiting-room TV display with now serving and next up for every doctor, a chime, and no patient names on screen",
+      "Android app for doctors (dashboard, queue, now serving, diagnosis and prescription, schedule and time off) and for owners and reception (today's numbers, desk on a phone)",
+      "Records with every visit and payment by day, week or month, per-receptionist cash closing, CSV export, and trial and monthly plans per clinic",
+      "1,600+ automated tests: 962 pgTAP database tests, 641 Jest tests and 57 Playwright E2E tests, including Urdu/English RTL layout checks on phone and desktop widths",
     ],
     stats: [
-      { label: "Screens", value: 13, suffix: "" },
-      { label: "Flows", value: 6, suffix: "" },
-      { label: "Stores", value: 5, suffix: "" },
+      { label: "Tables (RLS)", value: 37, suffix: "" },
+      { label: "RPCs", value: 80, suffix: "" },
+      { label: "Tests", value: 1600, suffix: "+" },
     ],
     problem:
-      "Manual queues and appointment uncertainty waste user time. QueueLess gives customers a simple way to check available services, book a time, and track appointment status before visiting a service center.",
-    // Shown under the Architecture tab. Drawn only from the resume's QueueLess
-    // entry — see the REVIEW note in diagrams/QueueLessRoleDiagram.jsx.
-    architectureDiagram: "queueless-roles",
+      "In most clinics patients take a slip, then sit on a crowded bench for hours because nobody knows when their turn will come. MediQ puts the queue on everyone's phone: patients can wait outside, at the pharmacy or at home and walk in on time, and the front desk stops being a crowd.",
+    // Shown under the Architecture tab; see diagrams/MediQRoleDiagram.jsx.
+    architectureDiagram: "mediq-roles",
     architecture:
-      "The app uses separate auth and app navigation stacks, bottom tabs for core areas, Supabase for auth and backend tables/views such as profiles, centers, center_services, appointments, and appointments_full, and Zustand stores for auth, centers, appointments, profile, and toast state.",
+      "One Supabase backend serves two clients: a Next.js web app (staff desk, settings, records, the public QR join and token pages, and the TV display) and a React Native app for doctors, owners and reception. Clinics are organizations with org_members in owner, receptionist or doctor roles, and Row-Level Security is on all 37 tables. 126 SQL functions (80 of them client-callable RPCs) across 34 migrations carry the queue, join and payment logic, and 5 pg_cron jobs handle notifications, token expiry and the plan lifecycle. The reception desk and TV board subscribe to Supabase Realtime, and Edge Functions send queue notifications from a notification outbox.",
     challenges: [
-      "Handling appointment date and time selection clearly on mobile",
-      "Maintaining Supabase session persistence and profile auto-creation",
-      "Keeping loading, error, empty, refresh, and appointment status states understandable",
+      "Keeping the TV, the patient's phone, the doctor's app and the reception desk in step when a patient is called",
+      "Online fees without a payment gateway: unpaid QR tokens stay out of the line, expire after a set time, and never expire while reception is checking a transaction ID",
+      "Making the whole staff side and patient pages work in Urdu, right to left, as well as English",
+      "Catching bugs the database tests missed: E2E tests found an UPDATE without a WHERE and a Next.js Suspense build failure, and a backfill migration test stopped a bug that would have cut Pro clinics' doctor limit from 10 to 3",
     ],
     optimizations: [
-      "Reusable common components and centralized theme tokens",
-      "Lightweight Zustand stores and Supabase query helpers",
-      "Pull-to-refresh appointments and indexed scheduled_at migration for faster appointment ordering",
+      "Realtime subscriptions instead of polling on the reception desk and TV display",
+      "Role checks and queue rules enforced in the database through RLS and RPCs, so web and mobile share the same guarantees",
+      "Append-only payment ledger (refunds are new rows) and atomic slot-locking RPCs that prevent double-booking",
+      "Phased delivery: security lockdown, multi-clinic SaaS, QR join, reception, plans and payments, each backed by pgTAP, Jest and Playwright tests",
     ],
     responsiveness:
-      "Built for Android and iOS with a safe-area wrapper, scrollable lists, native date/time picker controls, and mobile-first appointment layouts.",
+      "The reception desk and records are built for desktop, patient join and token pages are phone-first web pages with no install, the TV board fills a 1920x1080 screen, and doctors and owners use the native Android app.",
     gitUrl: "https://github.com/Awais-Chandio/QueueLess",
-    liveUrl: "",
-    accent: "from-cyan-300 via-sky-400 to-indigo-400",
+    // Not on the stores yet, so the live link is the click-through product
+    // tour served from public/demos/mediq (copied from the app's marketing kit).
+    liveUrl: "/demos/mediq/index.html",
+    liveLabel: "Interactive Tour",
+    accent: "from-teal-300 via-cyan-300 to-sky-400",
   },
   {
     id: "ai-saas-dashboard",

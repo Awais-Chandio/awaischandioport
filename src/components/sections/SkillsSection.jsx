@@ -7,8 +7,8 @@ import {
   CommandLineIcon,
   CpuChipIcon,
   DevicePhoneMobileIcon,
+  GlobeAltIcon,
   Squares2X2Icon,
-  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import SectionIntro from "@/components/ui/SectionIntro";
 import Card from "@/components/ui/Card";
@@ -19,12 +19,12 @@ import { skillGroups } from "@/data/portfolio";
 // through a short list repeated icons across unrelated groups.
 const iconsByGroup = {
   Languages: CodeBracketIcon,
-  "Mobile Development": DevicePhoneMobileIcon,
-  "State, Data & Navigation": Squares2X2Icon,
+  Mobile: DevicePhoneMobileIcon,
+  Web: GlobeAltIcon,
+  "State & Forms": Squares2X2Icon,
   "Backend & Data": CircleStackIcon,
-  "Tools & Practices": CommandLineIcon,
+  "Testing & Delivery": CommandLineIcon,
   "AI-Assisted Development": CpuChipIcon,
-  "Professional Skills": UserGroupIcon,
 };
 
 const SkillsSection = () => {

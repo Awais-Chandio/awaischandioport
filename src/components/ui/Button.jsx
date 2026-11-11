@@ -39,7 +39,10 @@ const Button = ({
   ...props
 }) => {
   const classes = cn(buttonStyles({ variant, size }), className);
-  const isExternal = typeof href === "string" && href.startsWith("http");
+  // Static HTML pages in public/ (e.g. a product tour) aren't app routes, so
+  // next/link can't navigate to them; they open in a new tab like external links.
+  const isExternal =
+    typeof href === "string" && (href.startsWith("http") || /\.html?($|[?#])/.test(href));
 
   let content;
   if (href && !as) {

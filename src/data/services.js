@@ -17,7 +17,7 @@ export const resolveProof = (proof) => {
 
   const href = project.liveUrl || project.gitUrl || "/#projects";
   let source = "Work section";
-  if (project.liveUrl) source = "Google Play";
+  if (project.liveUrl) source = project.liveLabel || "Google Play";
   else if (project.gitUrl) source = "GitHub";
 
   return {
@@ -60,10 +60,10 @@ export const services = [
       "Founders validating an idea who need something functional to test with, rather than a click-through mock.",
     proofs: [
       {
-        id: "queueless",
-        label: "QueueLess",
+        id: "mediq",
+        label: "MediQ",
         note:
-          "Built to a functional MVP: 13 screens covering service center browsing, booking, appointment tracking and profile, on Supabase auth and tables.",
+          "Taken from idea to a launch-ready product: self-serve clinic onboarding, QR tokens, online fee checks, a live TV board, trial and monthly plans, and a doctor app, on one Supabase backend.",
       },
     ],
   },
@@ -84,10 +84,10 @@ export const services = [
           "A service layer of 30 methods against the SAFCO APIs, with JazzCash, EasyPaisa, HBL Connect and PayPro payment flows through WebView redirects.",
       },
       {
-        id: "queueless",
-        label: "QueueLess",
+        id: "mediq",
+        label: "MediQ",
         note:
-          "Supabase auth with automatic session restore, over profiles, centers, center_services and appointments tables.",
+          "A Next.js web app and a React Native app on one Supabase backend: role-checked RLS, RPCs for queue and payment actions, Realtime for the desk and TV, and Edge Functions for notifications.",
       },
     ],
   },

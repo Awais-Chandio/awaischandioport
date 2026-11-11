@@ -16,7 +16,7 @@ const StatCounter = ({ value, suffix = "", prefix = "", duration = 2, className 
     return (
       <span className={className}>
         {prefix}
-        {numericValue}
+        {numericValue.toLocaleString("en-US")}
         {suffix}
       </span>
     );
@@ -28,6 +28,7 @@ const StatCounter = ({ value, suffix = "", prefix = "", duration = 2, className 
       duration={duration}
       prefix={prefix}
       suffix={suffix}
+      separator=","
       enableScrollSpy
       scrollSpyOnce
       scrollSpyDelay={100}
