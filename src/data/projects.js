@@ -268,7 +268,7 @@ const projectRecords = [
     featured: false,
     order: 4,
     title: "NaviGo - Navigation App",
-    status: "In Progress",
+    status: "Released v1.0.0",
     categoryLabel: "Mobile App · Open Map Data",
     description:
       "NaviGo is a React Native turn-by-turn navigation app built only on open map data: MapLibre vector maps, Photon/Nominatim search, Overpass nearby places and OSRM routing, with no paid map APIs or keys. It shows how much of a Google Maps-style experience (live GPS tracking, route alternatives, voice guidance, rerouting and offline map packs) can be built on free OpenStreetMap services.",
@@ -296,7 +296,7 @@ const projectRecords = [
       "react-native-tts",
       "AsyncStorage",
       "Jest",
-      "GitHub Actions",
+      "GitHub Actions (CI)",
     ],
     features: [
       "Live GPS location on a MapLibre vector map, with an accuracy circle and a follow / recenter camera",
@@ -307,9 +307,10 @@ const projectRecords = [
       "Automatic rerouting after the user stays off the route long enough to confirm it",
       "Offline map downloads for a 10 km area or a named city, with a coverage map and region manager",
       "Saved Home and Work places, plus recent searches",
+      "Released v1.0.0 as a signed Android APK. Every push runs CI on GitHub Actions: TypeScript, ESLint, 137 Jest tests, Android lint and a full Gradle build",
     ],
     stats: [
-      { label: "Tests", value: 130, suffix: "" },
+      { label: "Jest tests", value: 137, suffix: "" },
       { label: "Open map APIs", value: 5, suffix: "" },
       { label: "Lines of TS", value: 17355, suffix: "" },
     ],
@@ -330,9 +331,14 @@ const projectRecords = [
       "Requests use timeouts, AbortController cancellation and small bounded caches (nearby results 60 s, map tile cache 50 MB).",
     ],
     responsiveness:
-      "Android and iOS projects are both set up (Android minSdk 24, targetSdk 36). On Android the app needs precise foreground location and handles 'denied' and 'blocked' permission states. iOS uses only the 'When In Use' location permission. Layouts use react-native-safe-area-context, and an error boundary catches crashes. Only Android was run for these captures.",
+      "Android and iOS projects are both set up (Android minSdk 24, targetSdk 36). On Android the app needs precise foreground location and handles 'denied' and 'blocked' permission states. iOS uses only the 'When In Use' location permission. Layouts use react-native-safe-area-context, and an error boundary catches crashes. Only Android was run for these captures, and the v1.0.0 release ships as a signed Android APK.",
     gitUrl: "https://github.com/Awais-Chandio/NaviGo",
-    liveUrl: "",
+    // Not on Google Play yet, so the primary link is the signed APK from the
+    // GitHub release; releaseUrl adds a button for the version and notes.
+    liveUrl: "https://github.com/Awais-Chandio/NaviGo/releases/latest/download/NaviGo-v1.0.0.apk",
+    liveLabel: "Download APK",
+    releaseUrl: "https://github.com/Awais-Chandio/NaviGo/releases/latest",
+    releaseLabel: "Release Notes",
     accent: "from-sky-300 via-blue-400 to-indigo-400",
   },
   {

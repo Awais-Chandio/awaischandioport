@@ -6,6 +6,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import * as Tabs from "@radix-ui/react-tabs";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  ArrowDownTrayIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
   ArrowsPointingOutIcon,
@@ -775,10 +776,20 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                               GitHub
                             </Button>
                           ) : null}
+                          {project.releaseUrl ? (
+                            <Button variant="secondary" href={project.releaseUrl}>
+                              {project.releaseLabel || "Release"}
+                              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                            </Button>
+                          ) : null}
                           {project.liveUrl ? (
                             <Button variant="primary" href={project.liveUrl}>
                               {project.liveLabel || "Live Demo"}
-                              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                              {/\.apk($|[?#])/.test(project.liveUrl) ? (
+                                <ArrowDownTrayIcon className="h-4 w-4" />
+                              ) : (
+                                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                              )}
                             </Button>
                           ) : null}
                         </div>
