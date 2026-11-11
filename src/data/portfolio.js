@@ -2,7 +2,7 @@ export const personalInfo = {
   name: "Muhammad Awais",
   shortName: "Awais",
   // Exact title as it appears on the resume. Rendered verbatim in the hero.
-  title: "React Native Developer | Mobile & Web — Next.js · TypeScript · Supabase",
+  title: "React Native Developer | Mobile & Web Engineer",
   // Short form of the same title, for the places a full two-part title will not
   // fit: the nav, the footer, the About meta line, and the JSON-LD jobTitle.
   role: "React Native Developer",
@@ -168,10 +168,10 @@ export const experience = [
     location: "Karachi",
     period: "Sep 2025 – Present",
     bullets: [
-      "Ship and maintain Safco eCredit, Safco Support Foundation's loan-servicing app on Google Play (loans, repayments, history).",
-      "Built loan form workflows and field-level case-revert logic on SQLite so loan data stays available without a network connection.",
-      "Own Redux Toolkit state management and REST API integration that connect mobile features to backend business logic.",
-      "Fix Android build and Gradle issues and manage Play Console releases, working in Agile sprints with design and backend.",
+      "Ship and maintain Safco eCredit (5,000+ downloads), Safco Support Foundation's loan-servicing app on Google Play.",
+      "Own the Redux Toolkit state layer and REST API integration that connect app screens to backend loan logic.",
+      "Built offline-first loan forms and field-level case-revert logic on SQLite, so work continues without internet.",
+      "Own Google Play Console rollouts and fix Android/Gradle build failures to keep production releases stable.",
     ],
   },
   {
@@ -180,8 +180,8 @@ export const experience = [
     location: "Karachi",
     period: "Jan 2025 – Aug 2025",
     bullets: [
-      "Turned product requirements and UI designs into reusable components for cross-platform React Native and Flutter apps.",
-      "Integrated backend APIs and state management, fixed device-specific Android/iOS issues, and validated builds via CI/CD.",
+      "Built client app features in React Native and Flutter, turning requirements and UI designs into reusable components.",
+      "Integrated REST APIs and state management, fixed device-specific Android/iOS bugs, and validated builds through CI/CD.",
     ],
   },
   {
@@ -190,7 +190,7 @@ export const experience = [
     location: "Jamshoro",
     period: "Dec 2023 – Jan 2024",
     bullets: [
-      "Built a bidding app with Firebase Auth, real-time Firestore data, GetX state, REST APIs and FCM push notifications.",
+      "Built a bidding app with Firebase Auth, real-time Firestore data, FCM push notifications, GetX state and REST APIs.",
     ],
   },
 ];
