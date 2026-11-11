@@ -264,178 +264,66 @@ const projectRecords = [
     accent: "from-teal-300 via-cyan-300 to-sky-400",
   },
   {
-    id: "ai-saas-dashboard",
-    featured: false,
-    order: 7,
-    title: "AI SaaS Dashboard",
-    status: "Concept",
-    categoryLabel: "SaaS Dashboard",
-    description:
-      "A modern analytics dashboard concept for AI usage, billing, workspaces, prompt activity, and product-level insights.",
-    image: null,
-    placeholder: "AI SaaS",
-    categories: ["All", "SaaS", "Full Stack", "UI"],
-    stack: ["Next.js", "Tailwind CSS", "Charts", "Auth", "API Routes"],
-    features: [
-      "Usage analytics, workspace cards, activity feed, and billing overview",
-      "Admin-style interface with filters and responsive data panels",
-      "Dark SaaS layout inspired by Vercel, Linear, and Framer",
-    ],
-    stats: [
-      { label: "Widgets", value: 9, suffix: "" },
-      { label: "Views", value: 5, suffix: "" },
-      { label: "API Areas", value: 4, suffix: "" },
-    ],
-    problem:
-      "SaaS teams need a clean way to understand product usage, AI costs, team activity, and workspace health.",
-    architecture:
-      "A Next.js dashboard structure with reusable panels, metrics, charts, server-ready API boundaries, and auth-friendly page composition.",
-    challenges: [
-      "Keeping dense product data easy to scan",
-      "Balancing executive metrics with operational details",
-      "Designing responsive dashboard layouts without clutter",
-    ],
-    optimizations: [
-      "Reusable dashboard cards",
-      "Responsive grid tracks",
-      "Low-noise dark interface for repeated daily use",
-    ],
-    responsiveness:
-      "Desktop-first for data density, with tablet and mobile layouts collapsing into readable stacked panels.",
-    gitUrl: "",
-    liveUrl: "",
-    accent: "from-violet-300 via-fuchsia-400 to-cyan-300",
-  },
-  {
-    id: "ecommerce-platform",
-    featured: false,
-    order: 5,
-    title: "E-Commerce Platform",
-    status: "Completed",
-    categoryLabel: "Full Stack",
-    description:
-      "Commerce storefront concept with product discovery, cart state, checkout-ready flow, admin inventory thinking, and responsive product cards.",
-    image: null,
-    placeholder: "Commerce",
-    categories: ["All", "Full Stack", "Admin", "UI"],
-    stack: ["Next.js", "Tailwind CSS", "Stripe-ready", "Database Models"],
-    features: [
-      "Product grid, filters, cart summary, and checkout-ready structure",
-      "Admin-friendly inventory and product management model",
-      "Responsive storefront UI with clean product hierarchy",
-    ],
-    stats: [
-      { label: "Modules", value: 6, suffix: "" },
-      { label: "Models", value: 5, suffix: "" },
-      { label: "Breakpoints", value: 4, suffix: "" },
-    ],
-    problem:
-      "Small commerce brands need a polished storefront that makes browsing, cart review, and checkout feel fast and trustworthy.",
-    architecture:
-      "A modular storefront architecture with product data, cart state, checkout boundaries, and admin-ready product models.",
-    challenges: [
-      "Making product cards informative without becoming busy",
-      "Keeping cart state visible and easy to understand",
-      "Preparing the UI for real checkout and inventory data",
-    ],
-    optimizations: [
-      "Image-first product cards",
-      "Reusable filter controls",
-      "Responsive grid composition",
-    ],
-    responsiveness:
-      "Optimized for storefront browsing across mobile, tablet, and desktop with flexible product grids.",
-    gitUrl: "",
-    liveUrl: "",
-    accent: "from-emerald-300 via-teal-300 to-lime-300",
-  },
-  {
-    id: "portfolio-site",
-    featured: false,
-    order: 6,
-    title: "Portfolio Website",
-    status: "Completed",
-    categoryLabel: "Portfolio",
-    description:
-      "A dark, animated developer portfolio with section reveals, modern project presentation, responsive navigation, and recruiter-focused content.",
-    image: "/images/projects/1.png",
-    screenshots: ["/images/projects/1.png"],
-    screenLabels: ["Portfolio preview"],
-    categories: ["All", "SaaS", "UI"],
-    stack: ["Next.js 13", "Tailwind CSS", "Framer Motion", "Three.js"],
-    features: [
-      "Animated sections, responsive layout, and dark glass UI",
-      "Reusable portfolio data and project components",
-      "Interactive visual polish for recruiter and client review",
-    ],
-    stats: [
-      { label: "Sections", value: 7, suffix: "" },
-      { label: "Components", value: 20, suffix: "+" },
-      { label: "Motion", value: 10, suffix: "+" },
-    ],
-    problem:
-      "A developer portfolio needs to communicate skill, taste, project thinking, and contact paths quickly.",
-    architecture:
-      "A Next.js App Router page with data-driven sections, Tailwind component classes, Framer Motion reveals, and reusable UI components.",
-    challenges: [
-      "Keeping animations smooth without distracting from content",
-      "Making project details easy to scan",
-      "Preserving responsive spacing across every section",
-    ],
-    optimizations: [
-      "Static rendering",
-      "Image optimization through Next Image",
-      "Data-driven sections for easy updates",
-    ],
-    responsiveness:
-      "Fully responsive across mobile, tablet, and desktop with compact nav and adaptive project grids.",
-    gitUrl: "https://github.com/Awais-Chandio",
-    liveUrl: "",
-    accent: "from-sky-300 via-cyan-300 to-teal-300",
-  },
-  {
-    id: "bidbuyy",
+    id: "navigo",
     featured: false,
     order: 4,
-    title: "BidBuyy Auction",
-    status: "Completed",
-    categoryLabel: "Auction App",
+    title: "NaviGo - Navigation App",
+    status: "In Progress",
+    categoryLabel: "Mobile App",
     description:
-      "A Flutter auction app concept focused on bidding interactions, product states, and Firebase-backed realtime update patterns.",
-    image: "/images/projects/7.jpeg",
-    screenshots: ["/images/projects/7.jpeg"],
-    screenLabels: ["Auction overview"],
-    categories: ["All", "Mobile Apps", "Firebase"],
-    stack: ["Flutter", "Firebase", "Realtime State"],
+      "A Google Maps-style navigation app with live GPS tracking, place search and real-time routing, built on an open-source map stack instead of Google Maps.",
+    // Card cover only for now; screenshots and fuller details to follow.
+    image: "/images/projects/navigo/cover.jpg",
+    categories: ["All", "Mobile Apps", "UI"],
+    stack: ["React Native CLI", "TypeScript", "MapLibre", "OSRM"],
     features: [
-      "Auction product listing screens",
-      "Realtime bidding states",
-      "Firebase-backed data updates",
+      "Live GPS tracking of the user's position on the map",
+      "Place search to find a destination",
+      "Real-time routing from the current location to the chosen place",
+      "Open-source map stack: MapLibre renders the map and OSRM calculates routes",
     ],
-    stats: [
-      { label: "Screens", value: 6, suffix: "+" },
-      { label: "States", value: 4, suffix: "" },
-      { label: "Backend", value: 1, suffix: "" },
-    ],
+    stats: [],
     problem:
-      "Auction products need fast state changes and a UI that makes bid activity easy to understand.",
+      "Navigation apps usually depend on Google Maps and its paid APIs. NaviGo delivers the same core experience, tracking, search and turn-by-turn routes, on an open-source stack.",
     architecture:
-      "Flutter screens are structured around product listings, item details, bidding states, and Firebase-backed updates.",
-    challenges: [
-      "Communicating active bidding state clearly",
-      "Designing screens for fast product comparison",
-      "Keeping realtime update patterns simple enough to maintain",
-    ],
-    optimizations: [
-      "Compact listing UI",
-      "Reusable product card patterns",
-      "Firebase-ready bid state flow",
-    ],
-    responsiveness:
-      "Mobile-first Flutter layout with readable cards and touch-friendly bidding actions.",
-    gitUrl: "https://github.com/Awais-Chandio/BidBuyy",
+      "A React Native CLI app in TypeScript. MapLibre draws the map and the user's live GPS position, and OSRM returns the route between the current location and the searched place.",
+    challenges: [],
+    optimizations: [],
+    responsiveness: "",
+    gitUrl: "https://github.com/Awais-Chandio/NaviGo",
     liveUrl: "",
-    accent: "from-blue-300 via-indigo-300 to-violet-300",
+    accent: "from-sky-300 via-blue-400 to-indigo-400",
+  },
+  {
+    id: "orbisol",
+    featured: false,
+    order: 5,
+    title: "Orbisol - NASA Space Apps Challenge 2026",
+    status: "Building Nov 14–15, 2026",
+    categoryLabel: "Hackathon · Team Lead",
+    description:
+      "A decision-support app for the Field Shift: Adapting Farms with NASA Data challenge, helping farmers plan crop rotations that improve soil health under a changing climate.",
+    // Built during the hackathon weekend; screenshots come after.
+    image: "/images/projects/orbisol/cover.jpg",
+    categories: ["All", "Mobile Apps"],
+    stack: ["React Native (Android)", "TypeScript", "NASA POWER API"],
+    features: [
+      "Combines NASA POWER daily climate data (rainfall, temperature, solar) with local soil and crop data",
+      "Ranks crop rotations by how well they protect soil health under the expected climate",
+      "Built for the official Field Shift: Adapting Farms with NASA Data challenge",
+      "Leading a two-person team as Team Owner: app architecture, NASA data integration and submission",
+    ],
+    stats: [],
+    problem:
+      "Farmers have to choose crop rotations without an easy view of how rainfall, heat and sunlight are shifting. Orbisol puts NASA climate data next to local soil and crop data so the choice is based on evidence.",
+    architecture:
+      "A React Native Android app in TypeScript that pulls daily climate data from the NASA POWER API and scores candidate crop rotations against local soil and crop data.",
+    challenges: [],
+    optimizations: [],
+    responsiveness: "",
+    gitUrl: "",
+    liveUrl: "",
+    accent: "from-emerald-300 via-teal-300 to-sky-400",
   },
 ];
 

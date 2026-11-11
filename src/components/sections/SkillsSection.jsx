@@ -2,12 +2,12 @@
 
 import { useRef } from "react";
 import {
+  AcademicCapIcon,
   CircleStackIcon,
   CodeBracketIcon,
   CommandLineIcon,
   CpuChipIcon,
   DevicePhoneMobileIcon,
-  GlobeAltIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 import SectionIntro from "@/components/ui/SectionIntro";
@@ -18,12 +18,11 @@ import { skillGroups } from "@/data/portfolio";
 // Keyed by group title so each group keeps a distinct, fitting icon; cycling
 // through a short list repeated icons across unrelated groups.
 const iconsByGroup = {
-  Languages: CodeBracketIcon,
-  Mobile: DevicePhoneMobileIcon,
-  Web: GlobeAltIcon,
-  "State & Forms": Squares2X2Icon,
+  "Mobile & Web": DevicePhoneMobileIcon,
+  "State & UI": Squares2X2Icon,
   "Backend & Data": CircleStackIcon,
   "Testing & Delivery": CommandLineIcon,
+  "Currently Learning": AcademicCapIcon,
   "AI-Assisted Development": CpuChipIcon,
 };
 

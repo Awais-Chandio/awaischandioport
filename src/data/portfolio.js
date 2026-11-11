@@ -93,44 +93,39 @@ export const aboutParagraphs = [
 // never disagree about what is claimed. Order and grouping are the resume's.
 export const skillGroups = [
   {
-    title: "Languages",
-    description: "The languages I write day to day across app and data work.",
-    skills: ["TypeScript", "JavaScript", "Dart", "SQL (PostgreSQL, PL/pgSQL)"],
-  },
-  {
-    title: "Mobile",
-    description: "Cross-platform app development and the platforms I ship to.",
+    title: "Mobile & Web",
+    description: "The platforms and languages I build products with.",
     skills: [
       "React Native (CLI)",
-      "Flutter",
+      "TypeScript",
+      "JavaScript",
+      "Next.js (App Router)",
+      "React",
       "Android",
       "iOS",
-      "React Navigation",
-      "Reanimated",
+      "Tailwind CSS",
+      "Flutter (Dart)",
     ],
   },
   {
-    title: "Web",
-    description: "The web side of the products I build.",
-    skills: ["Next.js (App Router)", "React", "Tailwind CSS"],
-  },
-  {
-    title: "State & Forms",
-    description: "How I structure state, data fetching, and forms.",
+    title: "State & UI",
+    description: "How I structure state, data fetching, forms, navigation and motion.",
     skills: [
       "Redux Toolkit",
       "Zustand",
       "TanStack React Query",
       "React Hook Form",
       "Zod",
-      "GetX",
+      "React Navigation",
+      "Reanimated",
     ],
   },
   {
     title: "Backend & Data",
     description: "The services and storage layers I connect apps to.",
     skills: [
-      "Supabase (Auth, RLS, RPC functions, Realtime, pg_cron)",
+      "Supabase (Auth, RLS, RPC, Realtime, pg_cron)",
+      "PostgreSQL",
       "Firebase (Auth, Firestore, FCM)",
       "SQLite",
       "REST APIs",
@@ -146,16 +141,20 @@ export const skillGroups = [
       "Git",
       "GitHub Actions",
       "CI/CD",
-      "Play Console",
+      "Google Play Console",
       "Agile/Scrum",
-      "Code Reviews",
     ],
+  },
+  {
+    title: "Currently Learning",
+    description: "What I'm adding next, on the backend and infrastructure side.",
+    skills: ["Node.js", "Express.js", "Prisma ORM", "Docker", "DevOps"],
   },
   {
     // From the resume's summary rather than its skills list.
     title: "AI-Assisted Development",
-    description: "Tools I use to debug and test faster, reviewing every change that ships.",
-    skills: ["Claude Code", "Cursor", "Codex", "Google Antigravity"],
+    description: "Tools I use to ship faster, reviewing every change that ships.",
+    skills: ["Claude Code", "Cursor", "Codex", "Antigravity"],
   },
 ];
 
@@ -200,256 +199,6 @@ export const education = [
     degree: "B.E. Software Engineering",
     institution: "Mehran University of Engineering and Technology (MUET)",
     period: "Nov 2020 – Nov 2024",
-  },
-];
-
-export const projectCategories = [
-  "All",
-  "Mobile Apps",
-  "Flutter",
-  "Firebase",
-  "Data / Auth",
-  "Admin",
-  "UI",
-];
-
-export const projects = [
-  {
-    id: 1,
-    title: "Food Delivery App",
-    subtitle: "Full food ordering app with customer, admin, Firebase, and SQLite flows",
-    description:
-      "A full-featured React Native food ordering and delivery app with authentication, restaurant browsing, menu management, cart functionality, order tracking, and admin controls.",
-    image: "/images/projects/foodapp/01-home.png",
-    previewLabel: "User + Admin Flow",
-    type: "Featured Mobile Case Study",
-    status: "Functional mobile app with admin panel",
-    platform: "React Native for Android and iOS",
-    role: "Mobile app development, screen flow, Firebase integration, SQLite caching, admin forms",
-    overview:
-      "FoodApp is a complete food ordering and delivery platform built with React Native. Users can sign up, browse nearby and popular restaurants, search restaurants or menu items, open restaurant details, add dishes to cart, manage quantities, and track orders. The app also includes admin-side screens for managing restaurants, menu items, and users, making it a strong real-world mobile project with both customer and management workflows.",
-    metrics: [
-      { label: "Screens", value: "12+" },
-      { label: "Flows", value: "Customer + Admin" },
-      { label: "Database", value: "SQLite + Firebase" },
-      { label: "Services", value: "5 Firebase" },
-    ],
-    integrations: [
-      "Firebase Authentication for email/password login and signup",
-      "Firestore for real-time restaurant, user, cart, and order data",
-      "Firebase Storage for restaurant and menu images",
-      "Firebase Messaging and Analytics service coverage",
-      "SQLite and AsyncStorage for offline/local app data",
-      "React Navigation for tabs, stacks, and auth/admin flows",
-    ],
-    featureGroups: [
-      {
-        title: "Customer App",
-        items: [
-          "Login, register, browse, search, menu detail, cart, profile, and tracking screens",
-          "Restaurant categories, filters, quantity controls, and checkout summary",
-        ],
-      },
-      {
-        title: "Admin Panel",
-        items: [
-          "Protected admin access for restaurant, menu item, and user management",
-          "Add/edit screens connected to the app's database structure",
-        ],
-      },
-      {
-        title: "Backend & Storage",
-        items: [
-          "Firebase Auth, Firestore, Storage, Messaging, Analytics, SQLite, and AsyncStorage",
-          "Reusable components, Context API state, custom hooks, and smooth navigation",
-        ],
-      },
-    ],
-    databaseSchema: [
-      "users",
-      "restaurants",
-      "menu_items",
-      "cart",
-      "admin_users",
-    ],
-    galleryTitle: "Food app screen flow",
-    screenLabels: [
-      "Home discovery",
-      "Restaurant detail",
-      "Cart summary",
-      "Search results",
-      "Menu items",
-      "Login",
-      "Register",
-      "Add restaurant",
-      "Edit menu item",
-      "Checkout state",
-    ],
-    screenshots: [
-      "/images/projects/foodapp/01-home.png",
-      "/images/projects/foodapp/03-restaurant-detail.png",
-      "/images/projects/foodapp/05-cart.png",
-      "/images/projects/foodapp/02-search.png",
-      "/images/projects/foodapp/04-menu.png",
-      "/images/projects/foodapp/06-login.png",
-      "/images/projects/foodapp/07-register.png",
-      "/images/projects/foodapp/08-admin-add-resturant.png",
-      "/images/projects/foodapp/09-admin-edit-item.png",
-      "/images/projects/foodapp/00-current.png",
-    ],
-    categories: ["All", "Mobile Apps", "Data / Auth", "Admin", "UI"],
-    stack: [
-      "React Native",
-      "Firebase Auth",
-      "Firestore",
-      "Firebase Storage",
-      "SQLite",
-      "AsyncStorage",
-      "React Navigation",
-      "Context API",
-      "Reanimated",
-    ],
-    features: [
-      "Customer auth, onboarding, home, search, restaurant detail, menu, cart, profile, and order tracking flows",
-      "Admin dashboard, manage restaurants, manage menu items, and manage users screens",
-      "Firebase backend services with SQLite local storage for a full-stack mobile structure",
-      "Modern food-ordering UI with gradients, theme support, loading states, and smooth navigation",
-    ],
-    problem:
-      "Food ordering apps need a clear path from discovery to checkout while still giving admins a way to manage live restaurant and menu data.",
-    architecture:
-      "React Native screens are organized around auth, customer tabs, restaurant detail, cart, and admin flows. Firebase handles auth, realtime data, image storage, notifications, and analytics, while SQLite and AsyncStorage support local app data.",
-    challenges: [
-      "Keeping customer and admin flows understandable without making navigation feel heavy",
-      "Designing cart and checkout state so totals, delivery, discounts, and quantities remain clear",
-      "Balancing realtime Firebase data with local SQLite caching patterns",
-    ],
-    optimizations: [
-      "Reusable UI components for buttons, search, empty states, headers, and loading cards",
-      "Local persistence for faster repeat access and smoother app startup behavior",
-      "Lean screen-specific data so mobile views stay responsive",
-    ],
-    responsiveness:
-      "Built for mobile-first Android and iOS layouts with bottom tabs, stack transitions, large touch targets, and clean spacing across compact screens.",
-    gitUrl: "",
-    liveUrl: "",
-  },
-  {
-    id: 2,
-    title: "BidBuyy Auction",
-    description:
-      "A mobile auction app concept focused on bidding interactions, dynamic product states, and realtime update patterns.",
-    image: "/images/projects/7.jpeg",
-    categories: ["All", "Mobile Apps", "Flutter", "Firebase", "Data / Auth"],
-    stack: ["Flutter", "Firebase", "Realtime"],
-    integrations: [
-      "Firebase-backed data flow for products and bidding states",
-      "Authentication-ready user access pattern",
-      "Realtime update pattern for active auctions",
-    ],
-    features: [
-      "Auction listing screens",
-      "Realtime bidding states",
-      "Firebase-backed updates",
-    ],
-    screenshots: ["/images/projects/7.jpeg"],
-    screenLabels: ["Auction overview"],
-    problem:
-      "Auction products need fast state changes and a UI that makes bid activity easy to understand.",
-    architecture:
-      "Flutter screens are structured around product listings, item details, bidding states, and Firebase-backed updates.",
-    challenges: [
-      "Communicating active bidding state clearly",
-      "Designing screens for fast product comparison",
-      "Keeping realtime update patterns simple enough to maintain",
-    ],
-    optimizations: [
-      "Compact listing UI for quick scanning",
-      "Reusable product card patterns",
-      "Firebase-ready state flow for bid updates",
-    ],
-    responsiveness:
-      "Designed as a mobile-first Flutter experience with readable product cards and touch-friendly bidding actions.",
-    gitUrl: "https://github.com/Awais-Chandio/BidBuyy",
-    liveUrl: "",
-  },
-  {
-    id: 3,
-    title: "Medical Care App",
-    description:
-      "A healthcare mobile interface designed around readable content, structured navigation, and accessible appointment-style flows.",
-    image: "/images/projects/5.png",
-    categories: ["All", "Mobile Apps", "Flutter", "UI"],
-    stack: ["Flutter", "Healthcare", "Mobile UX"],
-    integrations: [
-      "Structured healthcare service data layout",
-      "Appointment-style navigation flow",
-      "Reusable mobile UI components",
-    ],
-    features: [
-      "Healthcare service screens",
-      "Simple navigation structure",
-      "Readable mobile UI",
-    ],
-    screenshots: ["/images/projects/5.png"],
-    screenLabels: ["Healthcare interface"],
-    problem:
-      "Healthcare apps need calm, readable interfaces where users can understand services and move through appointment-style flows quickly.",
-    architecture:
-      "Flutter UI screens are grouped around service discovery, healthcare content, and simple navigation patterns.",
-    challenges: [
-      "Keeping medical content readable on small screens",
-      "Creating a simple navigation structure",
-      "Making the interface feel trustworthy and accessible",
-    ],
-    optimizations: [
-      "Readable spacing and typography",
-      "Focused screens with low visual noise",
-      "Reusable mobile interface sections",
-    ],
-    responsiveness:
-      "Built around mobile layouts with clear hierarchy, readable content blocks, and comfortable spacing.",
-    gitUrl: "https://github.com/Awais-Chandio/MadProject",
-    liveUrl: "",
-  },
-  {
-    id: 4,
-    title: "Workout Companion",
-    description:
-      "A fitness-oriented mobile product concept with workout screens, progress-oriented flows, and clear interaction patterns.",
-    image: "/images/projects/9.jpeg",
-    categories: ["All", "Mobile Apps", "Flutter", "UI"],
-    stack: ["Flutter", "Fitness", "Product UI"],
-    integrations: [
-      "Workout and progress screen structure",
-      "Reusable exercise-card UI patterns",
-      "Mobile-first fitness product navigation",
-    ],
-    features: [
-      "Workout flow screens",
-      "Progress-focused interface",
-      "Mobile product layout",
-    ],
-    screenshots: ["/images/projects/9.jpeg"],
-    screenLabels: ["Fitness product UI"],
-    problem:
-      "Fitness apps need motivating screens that make workout progress and next actions easy to follow.",
-    architecture:
-      "Flutter screens organize workout content, progress-style UI, and repeated exercise card patterns.",
-    challenges: [
-      "Making progress information easy to scan",
-      "Keeping workout cards visually consistent",
-      "Designing for repeated daily use",
-    ],
-    optimizations: [
-      "Reusable exercise card layouts",
-      "Progress-focused visual hierarchy",
-      "Mobile-first spacing and action placement",
-    ],
-    responsiveness:
-      "Designed for handheld use with compact cards, clear headings, and touch-friendly workout flow controls.",
-    gitUrl: "https://github.com/Awais-Chandio/Workout-Application",
-    liveUrl: "",
   },
 ];
 

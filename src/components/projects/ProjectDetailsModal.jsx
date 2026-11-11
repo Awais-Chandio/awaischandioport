@@ -29,24 +29,30 @@ const tabPanels = [
   {
     value: "Overview",
     className: `${PANEL_CLASS} space-y-5`,
+    has: (project) => Boolean(project.problem || project.responsiveness),
     render: (project) => (
       <>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent">Problem Solved</p>
-          <p className="mt-3 text-sm leading-7 text-fg-muted">{project.problem}</p>
-        </div>
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent">
-            Mobile Responsiveness
-          </p>
-          <p className="mt-3 text-sm leading-7 text-fg-muted">{project.responsiveness}</p>
-        </div>
+        {project.problem ? (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent">Problem Solved</p>
+            <p className="mt-3 text-sm leading-7 text-fg-muted">{project.problem}</p>
+          </div>
+        ) : null}
+        {project.responsiveness ? (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent">
+              Mobile Responsiveness
+            </p>
+            <p className="mt-3 text-sm leading-7 text-fg-muted">{project.responsiveness}</p>
+          </div>
+        ) : null}
       </>
     ),
   },
   {
     value: "Features",
     className: PANEL_CLASS,
+    has: (project) => Boolean(project.features?.length),
     render: (project) => (
       <ul className="space-y-3 text-sm leading-7 text-fg-muted">
         {project.features.map((feature) => (
@@ -61,6 +67,7 @@ const tabPanels = [
   {
     value: "Tech Stack",
     className: PANEL_CLASS,
+    has: (project) => Boolean(project.stack?.length),
     render: (project) => (
       <div className="flex flex-wrap gap-2">
         {project.stack.map((item) => (
@@ -77,8 +84,10 @@ const tabPanels = [
   {
     value: "Challenges",
     className: `${PANEL_CLASS} grid gap-5 lg:grid-cols-2`,
+    has: (project) => Boolean(project.challenges?.length || project.optimizations?.length),
     render: (project) => (
       <>
+        {project.challenges?.length ? (
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-fg">Challenges</p>
           <ul className="mt-4 space-y-3 text-sm leading-7 text-fg-muted">
@@ -90,6 +99,8 @@ const tabPanels = [
             ))}
           </ul>
         </div>
+        ) : null}
+        {project.optimizations?.length ? (
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent">
             Performance Optimizations
@@ -103,12 +114,14 @@ const tabPanels = [
             ))}
           </ul>
         </div>
+        ) : null}
       </>
     ),
   },
   {
     value: "Architecture",
     className: PANEL_CLASS,
+    has: (project) => Boolean(project.architecture),
     render: (project) => {
       const Diagram = architectureDiagrams[project.architectureDiagram];
       return (
@@ -121,7 +134,20 @@ const tabPanels = [
   },
 ];
 
-const PlaceholderPreview = ({ project }) => (
+// No screenshots yet: show the card cover if there is one, else a sketch.
+const PlaceholderPreview = ({ project }) =>
+  project.image ? (
+    <div className="relative mx-auto aspect-[16/10] w-full max-w-4xl overflow-hidden rounded-[28px] border border-line/10 bg-canvas">
+      <Image
+        src={project.image}
+        alt={`${project.title} cover`}
+        fill
+        sizes="(max-width: 1024px) 100vw, 56rem"
+        quality={90}
+        className="object-cover"
+      />
+    </div>
+  ) : (
   <div className="relative flex h-[20rem] items-center sm:h-[26rem] justify-center overflow-hidden rounded-[28px] border border-line/10 bg-canvas-soft">
     <div className={`absolute inset-0 bg-gradient-to-br ${project.accent} opacity-[0.18]`} />
     <div className="relative w-[82%] max-w-xl overflow-hidden rounded-3xl border border-line/15 bg-canvas/65 p-5 shadow-lift">
@@ -240,7 +266,13 @@ const groupShots = (gallery) =>
 
 const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus }) => {
   const [activeImage, setActiveImage] = useState(0);
-  const [activeTab, setActiveTab] = useState(tabPanels[0].value);
+  // Only tabs that have content for this project; a newer project with no
+  // challenges or stats yet shows fewer tabs rather than empty panels.
+  const panels = useMemo(
+    () => (project ? tabPanels.filter((panel) => panel.has(project)) : []),
+    [project]
+  );
+  const [activeTab, setActiveTab] = useState(panels[0]?.value);
   const [fullSize, setFullSize] = useState(false);
   const gallery = useMemo(
     () => (project?.screenshots ?? []).map((entry, index) => toShot(entry, index, project.screenLabels)),
@@ -654,6 +686,7 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                         {project.description}
                       </Dialog.Description>
 
+                      {project.stats?.length ? (
                       <div className="grid grid-cols-3 gap-3">
                         {project.stats.map((metric) => (
                           <div key={metric.label} className="rounded-2xl border border-line/10 bg-fg/[0.04] p-4">
@@ -666,10 +699,11 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                           </div>
                         ))}
                       </div>
+                      ) : null}
 
                       <Tabs.Root value={activeTab} onValueChange={setActiveTab}>
                         <Tabs.List className="flex min-w-0 max-w-full gap-2 overflow-x-auto pb-2 [scrollbar-width:none]">
-                          {tabPanels.map((panel) => (
+                          {panels.map((panel) => (
                             <Tabs.Trigger
                               key={panel.value}
                               value={panel.value}
@@ -685,7 +719,7 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                             change animates. `mode="wait"` avoids overlapping two
                             panels of different heights. */}
                         <AnimatePresence mode="wait" initial={false}>
-                          {tabPanels
+                          {panels
                             .filter((panel) => panel.value === activeTab)
                             .map((panel) => (
                               <Tabs.Content key={panel.value} value={panel.value} asChild forceMount>
@@ -732,28 +766,23 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                         </div>
                       ) : null}
 
-                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                        <Button
-                          variant="secondary"
-                          href={project.gitUrl || undefined}
-                          as={!project.gitUrl ? "span" : undefined}
-                          className={!project.gitUrl ? "pointer-events-none opacity-50" : ""}
-                          aria-disabled={!project.gitUrl}
-                        >
-                          <CodeBracketIcon className="h-4 w-4" />
-                          GitHub
-                        </Button>
-                        <Button
-                          variant="primary"
-                          href={project.liveUrl || undefined}
-                          as={!project.liveUrl ? "span" : undefined}
-                          className={!project.liveUrl ? "pointer-events-none opacity-50" : ""}
-                          aria-disabled={!project.liveUrl}
-                        >
-                          {project.liveLabel || "Live Demo"}
-                          <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-                        </Button>
-                      </div>
+                      {/* Only links that exist; a disabled, faded button reads as broken. */}
+                      {project.gitUrl || project.liveUrl ? (
+                        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                          {project.gitUrl ? (
+                            <Button variant="secondary" href={project.gitUrl}>
+                              <CodeBracketIcon className="h-4 w-4" />
+                              GitHub
+                            </Button>
+                          ) : null}
+                          {project.liveUrl ? (
+                            <Button variant="primary" href={project.liveUrl}>
+                              {project.liveLabel || "Live Demo"}
+                              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                            </Button>
+                          ) : null}
+                        </div>
+                      ) : null}
 
                       <div className="rounded-[24px] border border-accent/20 bg-accent/[0.06] p-5">
                         <p className="text-sm leading-7 text-fg-muted">
