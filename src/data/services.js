@@ -65,6 +65,12 @@ export const services = [
         note:
           "Taken from idea to a launch-ready product: self-serve clinic onboarding, QR tokens, online fee checks, a live TV board, trial and monthly plans, and a doctor app, on one Supabase backend.",
       },
+      {
+        id: "orbisol",
+        label: "Orbisol",
+        note:
+          "Built solo in 36 hours for NASA Space Apps 2026, where it placed 5th: a live offline-first PWA on six NASA datasets with a 76-test TypeScript engine.",
+      },
     ],
   },
   {

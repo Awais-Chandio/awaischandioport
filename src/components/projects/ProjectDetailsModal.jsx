@@ -16,6 +16,7 @@ import {
   CodeBracketIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { PlayIcon } from "@heroicons/react/24/solid";
 import { fade, fadeRise } from "@/lib/motion";
 import { architectureDiagrams } from "@/components/projects/diagrams";
 import StatCounter from "@/components/ui/StatCounter";
@@ -179,7 +180,8 @@ const PlaceholderPreview = ({ project }) =>
 );
 
 // A screenshot is either a plain path (labels from `screenLabels`) or
-// `{ src, label, device, tall, group }`; everything below reads the object form.
+// `{ src, label, device, tall, group, video }`; everything below reads the
+// object form. With `video` (desktop frames only), `src` is the poster image.
 // Plain paths are phone screens, which is what every project without
 // `device` ships.
 const toShot = (entry, index, labels) =>
@@ -211,18 +213,50 @@ const BrowserFrame = ({ shot, alt, title, compact = false }) => (
       }
       data-lenis-prevent
     >
-      <Image
-        src={shot.src}
-        alt={alt}
-        width={0}
-        height={0}
-        sizes="(max-width: 1200px) 100vw, 1100px"
-        quality={90}
-        priority
-        className="block h-auto w-full"
-      />
+      {shot.video ? (
+        // A screen recording: `src` is its poster (also the thumbnail), so the
+        // frame has the right size before the video loads. Muted and looping,
+        // with controls to pause, scrub or go full screen.
+        <video
+          key={shot.video}
+          src={shot.video}
+          poster={shot.src}
+          aria-label={alt}
+          controls
+          muted
+          loop
+          autoPlay
+          playsInline
+          preload="metadata"
+          className="block h-auto w-full bg-black"
+        />
+      ) : (
+        <Image
+          src={shot.src}
+          alt={alt}
+          width={0}
+          height={0}
+          sizes="(max-width: 1200px) 100vw, 1100px"
+          quality={90}
+          priority
+          className="block h-auto w-full"
+        />
+      )}
     </div>
   </div>
+);
+
+// Marks a thumbnail whose entry is a video rather than a still.
+const PlayBadge = ({ small = false }) => (
+  <span aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center">
+    <span
+      className={`flex items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm ${
+        small ? "h-5 w-5" : "h-9 w-9"
+      }`}
+    >
+      <PlayIcon className={small ? "ml-px h-3 w-3" : "ml-0.5 h-4 w-4"} />
+    </span>
+  </span>
 );
 
 // Phone screens get a slim device bezel at a fixed, phone-like width. The
@@ -471,6 +505,7 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                                 aria-current={index === activeImage ? "true" : undefined}
                               >
                                 <Image src={item.src} alt="" fill sizes="6rem" className="object-cover object-top" />
+                                {item.video ? <PlayBadge small /> : null}
                               </button>
                             ))}
                           </div>
@@ -615,7 +650,10 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                                       {group.name ?? "All screenshots"}
                                     </p>
                                     <p className="shrink-0 text-xs font-semibold text-fg-dim">
-                                      {group.items.length} {group.items.length === 1 ? "screen" : "screens"}
+                                      {group.items.length}{" "}
+                                      {group.items.every((item) => item.video)
+                                        ? group.items.length === 1 ? "video" : "videos"
+                                        : group.items.length === 1 ? "screen" : "screens"}
                                     </p>
                                   </div>
                                   <div
@@ -658,6 +696,7 @@ const ProjectDetailsModal = ({ project, posts = [], onClose, onCloseAutoFocus })
                                               sizes={isWide(item) ? "(max-width: 640px) 50vw, 12rem" : "(max-width: 640px) 33vw, 8rem"}
                                               className="object-cover object-top"
                                             />
+                                            {item.video ? <PlayBadge /> : null}
                                           </span>
                                           <span
                                             className={`mt-2 line-clamp-2 block text-[11px] leading-snug sm:text-xs ${

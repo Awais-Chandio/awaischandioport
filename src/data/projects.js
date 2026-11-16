@@ -15,11 +15,16 @@ const MEDIQ_WEB = "Clinic web app · desktop";
 const MEDIQ_PATIENT = "Patient pages · phone browser, no install";
 const MEDIQ_APP = "Android app · doctors, owners, reception";
 
+// Thumbnail sections for the Orbisol case study.
+const ORBISOL_VIDEO = "Walkthrough · video";
+const ORBISOL_WEB = "Web app · desktop";
+const ORBISOL_PHONE = "Same PWA · phone";
+
 const projectRecords = [
   {
     id: "foodapp",
     featured: false,
-    order: 3,
+    order: 5,
     title: "FoodApp - Food Ordering & Delivery App",
     status: "In Progress",
     categoryLabel: "Full Stack Mobile App",
@@ -344,33 +349,91 @@ const projectRecords = [
   {
     id: "orbisol",
     featured: false,
-    order: 5,
-    title: "Orbisol - NASA Space Apps Challenge 2026",
-    status: "Building Nov 14–15, 2026",
-    categoryLabel: "Hackathon · Team Lead",
+    order: 3,
+    title: "Orbisol - NASA Space Apps 2026 (5th Place)",
+    status: "Live · 5th Place",
+    categoryLabel: "Hackathon · Solo · Offline-first PWA",
     description:
-      "A decision-support app for the Field Shift: Adapting Farms with NASA Data challenge, helping farmers plan crop rotations that improve soil health under a changing climate.",
-    // Built during the hackathon weekend; screenshots come after.
+      "Orbisol (from orbit to soil) helps farmers compare crop rotations using NASA Earth data. Built solo in 36 hours for NASA Space Apps Challenge 2026 in Hyderabad, where it placed 5th. Pin a field and it shows, in plain words, how this season compares with 30 years of NASA climate records, when the soil lies bare in the hottest months, and two alternative rotations ranked on water saving, bare-soil days and canal-turn fit. Every number names its NASA source and date.",
     image: "/images/projects/orbisol/cover.jpg",
-    categories: ["All", "Mobile Apps"],
-    stack: ["React Native (Android)", "TypeScript", "NASA POWER API"],
-    features: [
-      "Combines NASA POWER daily climate data (rainfall, temperature, solar) with local soil and crop data",
-      "Ranks crop rotations by how well they protect soil health under the expected climate",
-      "Built for the official Field Shift: Adapting Farms with NASA Data challenge",
-      "Leading a two-person team as Team Owner: app architecture, NASA data integration and submission",
+    // Captured from the live app (orbisol.earth) with the demo farm near Tando
+    // Jam, Hyderabad pinned: cotton -> wheat, priorities Save water then Fodder.
+    // Desktop at 1440x900, phone at 390x844. The video is the app's own
+    // 60-second guided tour followed by the NDVI time-lapse on the field map.
+    screenshots: [
+      { src: "/images/projects/orbisol/walkthrough-poster.jpg", video: "/images/projects/orbisol/walkthrough.mp4", group: ORBISOL_VIDEO, device: "desktop", label: "Guided tour and greenness time-lapse (55 s)" },
+      { src: "/images/projects/orbisol/web-01-field.jpg", group: ORBISOL_WEB, device: "desktop", label: "Pin a field on NASA satellite imagery" },
+      { src: "/images/projects/orbisol/web-02-greenness-map.jpg", group: ORBISOL_WEB, device: "desktop", label: "Greenness (NDVI) map, month by month" },
+      { src: "/images/projects/orbisol/web-03-overview.jpg", group: ORBISOL_WEB, device: "desktop", tall: true, label: "Field at a glance: warming stripes and findings" },
+      { src: "/images/projects/orbisol/web-04-rotations.jpg", group: ORBISOL_WEB, device: "desktop", tall: true, label: "Current rotation vs two ranked options" },
+      { src: "/images/projects/orbisol/web-05-calendar.jpg", group: ORBISOL_WEB, device: "desktop", label: "Crop calendar with the MODIS bare-soil dip" },
+      { src: "/images/projects/orbisol/web-06-season.jpg", group: ORBISOL_WEB, device: "desktop", label: "This season vs the 1991–2020 normal" },
+      { src: "/images/projects/orbisol/web-07-farm.jpg", group: ORBISOL_WEB, device: "desktop", label: "My farm: rotation, priorities, canal turn, soil" },
+      { src: "/images/projects/orbisol/web-08-field-report.jpg", group: ORBISOL_WEB, device: "desktop", tall: true, label: "Printable one-page field report" },
+      { src: "/images/projects/orbisol/phone-01-field.jpg", group: ORBISOL_PHONE, device: "phone", label: "Pin your field" },
+      { src: "/images/projects/orbisol/phone-02-overview.jpg", group: ORBISOL_PHONE, device: "phone", tall: true, label: "Overview" },
+      { src: "/images/projects/orbisol/phone-03-rotations.jpg", group: ORBISOL_PHONE, device: "phone", label: "Compare rotations" },
+      { src: "/images/projects/orbisol/phone-04-calendar.jpg", group: ORBISOL_PHONE, device: "phone", tall: true, label: "Seasonal calendar" },
+      { src: "/images/projects/orbisol/phone-05-season.jpg", group: ORBISOL_PHONE, device: "phone", label: "Season vs normal" },
+      { src: "/images/projects/orbisol/phone-06-farm.jpg", group: ORBISOL_PHONE, device: "phone", label: "My farm" },
     ],
-    stats: [],
+    categories: ["All", "Mobile Apps", "Full Stack", "UI"],
+    stack: [
+      "React 19",
+      "TypeScript",
+      "PWA (Vite)",
+      "MapLibre GL",
+      "Zustand",
+      "TanStack Query",
+      "Zod",
+      "Dexie (IndexedDB)",
+      "Recharts",
+      "Vitest",
+      "Python data pipeline",
+      "NASA POWER · MODIS · GPM IMERG · SRTM · NEX-GDDP-CMIP6 · GIBS",
+      "Vercel",
+    ],
+    features: [
+      "Pin a field by GPS, map tap, coordinates or an offline place search (GeoNames, about 150,000 places in Pakistan), with two one-tap demos: a Hyderabad case study and Faisalabad on live NASA data",
+      "Overview with four plain-language findings (bare soil in the hottest months, best option for your priorities, this season vs normal, hot days around 2050), each tagged with its NASA source and dates, a Listen button that reads them aloud, and warming stripes for 1990–2025",
+      "Your current rotation plus two alternatives ranked on your own priorities (save water, fodder, nitrogen, less bare soil, soil organic matter, market), with FAO-56 crop water need, trade-offs, salty-soil ratings and risks to check locally",
+      "Water Fit against the farmer's canal turn (warabandi), with a what-if slider that recomputes the month-by-month fit live",
+      "Seasonal calendar showing bare-field and hottest months next to the MODIS greenness (NDVI) curve for 2001–2020, where the bare-soil dip is visible from orbit",
+      "This season vs the 1991–2020 normal for heat, water, soil and greenness, and frost, plus Season Twins (similar past years) with a Confidence Meter and a 2041–2060 hot-day outlook from NASA climate models",
+      "Field map with NASA GIBS true-colour imagery and a MODIS NDVI greenness layer, a month slider and a January-to-December time-lapse",
+      "60-second guided tour for first-time visitors and a print-ready one-page A4 field report",
+      "Offline-first PWA: works without internet after the first visit; 76 Vitest unit tests on the pure TypeScript engine",
+    ],
+    stats: [
+      { label: "NASA datasets", value: 6, suffix: "" },
+      { label: "Unit tests", value: 76, suffix: "" },
+      { label: "Hours, solo", value: 36, suffix: "" },
+    ],
     problem:
-      "Farmers have to choose crop rotations without an easy view of how rainfall, heat and sunlight are shifting. Orbisol puts NASA climate data next to local soil and crop data so the choice is based on evidence.",
+      "In canal-irrigated Sindh the common cotton → wheat rotation leaves fields bare for 44 days in April, May and June, the hottest months, when sun and wind take the topsoil, and water arrives only on a fixed canal turn. The Field Shift: Adapting Farms with NASA Data challenge asked for a tool that helps farmers adapt with NASA data. Orbisol turns that data into plain sentences a farmer can act on, shows where every number comes from, and supports rather than replaces the farmer's own judgment.",
     architecture:
-      "A React Native Android app in TypeScript that pulls daily climate data from the NASA POWER API and scores candidate crop rotations against local soil and crop data.",
-    challenges: [],
-    optimizations: [],
-    responsiveness: "",
-    gitUrl: "",
-    liveUrl: "",
-    accent: "from-emerald-300 via-teal-300 to-sky-400",
+      "One static PWA on Vercel, a pure TypeScript engine and an offline Python pipeline, organised MVC-style. Zod models parse every API and JSON payload and keep { source, kind, date } on each number. Services fetch live NASA POWER for any pin, fall back to precomputed JSON when it is slow or down, and cache the last good result in IndexedDB with Dexie. Controllers are TanStack Query hooks and the only bridge between views and services. Zustand stores the field pin, rotation, priorities and canal turn. The @orbisol/core package (no network, DOM or React) holds season statistics, FAO-56 evapotranspiration, Season Twins analog-year matching, rotation scoring, the confidence meter and a baseline backtest. Python scripts precompute MODIS NDVI, GPM IMERG monthly rain, SRTM slope and NEX-GDDP-CMIP6 heat into static JSON. Built with AI assistance (Claude), logged in the repo's docs/ai-usage.md.",
+    challenges: [
+      "NASA POWER does not model canal irrigation, so its evapotranspiration runs high for irrigated Sindh. Orbisol compares with normal rather than presenting exact amounts, and says so on screen. POWER's own model ET was tested and rejected (about 2 mm over 90 days for Hyderabad).",
+      "The first demo pin was in Hyderabad city (313 urban vs 25 cropland pixels within 5 km). It was moved to a farm point with 77% cropland within 2 km on MODIS land cover, in the same NASA POWER grid cell.",
+      "On flat plains, SRTM noise gave a 3.15% median slope where the ground varies only about ±2.5 m. Elevation is averaged into 270 m blocks before computing slope, giving 0.35% (FAO class 'Level').",
+      "Some NASA GIBS requests returned HTTP 500s and opaque black tiles. Adding the time segment fixed the imagery; the label layers stayed empty, so an offline GeoNames place search replaced them.",
+    ],
+    optimizations: [
+      "Fallback chain of live NASA POWER, then precomputed JSON, then an IndexedDB cache, so the app keeps working offline and when NASA APIs are slow",
+      "Heavy NASA datasets are precomputed by the Python pipeline into static JSON instead of being requested from NASA servers in the browser",
+      "The 3D globe (about 14 kB) lazy-loads after first paint, stops animating once settled, and falls back to an SVG under reduced motion or without WebGL",
+      "A pure, dependency-free engine keeps the 76 unit tests under a second",
+    ],
+    responsiveness:
+      "Mobile-first: bottom navigation on phones, top navigation on desktop, and layouts checked at 360 px and 1440 px. Installable as a PWA, respects reduced motion, and designed to WCAG AA. English only for now.",
+    gitUrl: "https://github.com/Awais-Chandio/orbisol",
+    liveUrl: "https://www.orbisol.earth",
+    liveLabel: "Live App",
+    // The secondary button, used here for the official challenge brief.
+    releaseUrl: "https://www.spaceappschallenge.org/2026/challenges/adapting-farms-with-nasa-data/",
+    releaseLabel: "NASA Challenge",
+    accent: "from-blue-400 via-sky-300 to-lime-300",
   },
 ];
 
